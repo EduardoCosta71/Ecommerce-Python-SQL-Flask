@@ -1,0 +1,146 @@
+.container{
+    width:90%;
+    margin:50px auto;
+}
+
+.titulo{
+    margin-bottom:40px;
+}
+
+.titulo h2{
+    font-size:38px;
+    color:#0f172a;
+}
+
+.titulo p{
+    color:#666;
+}
+
+.carrinho{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:40px;
+}
+
+.lista-produtos{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.produto{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    display:grid;
+    grid-template-columns:120px 1fr 120px 150px 70px;
+    align-items:center;
+    gap:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.produto img{
+    width:100px;
+    height:100px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.info h3{
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.info p{
+    color:#666;
+    margin-bottom:10px;
+}
+
+.quantidade{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+}
+
+.quantidade a{
+    background:#2563eb;
+    color:white;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-decoration:none;
+    font-size:20px;
+}
+
+.quantidade span{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.subtotal{
+    color:#2563eb;
+    font-size:22px;
+    text-align:center;
+}
+
+.remover a{
+    color:red;
+    font-size:24px;
+}
+
+.resumo{
+    background:white;
+    border-radius:15px;
+    padding:30px;
+    height:fit-content;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.resumo h3{
+    margin-bottom:20px;
+}
+
+.resumo hr{
+    margin:20px 0;
+}
+
+.resumo h2{
+    margin:20px 0;
+    color:#2563eb;
+    font-size:34px;
+}
+
+.btn-finalizar{
+    display:block;
+    background:#2563eb;
+    color:white;
+    padding:15px;
+    text-align:center;
+    border-radius:10px;
+    margin-top:20px;
+    font-weight:bold;
+}
+
+.btn-finalizar:hover{
+    background:#1d4ed8;
+}
+
+.btn-continuar{
+    display:block;
+    margin-top:15px;
+    text-align:center;
+    border:2px solid #2563eb;
+    color:#2563eb;
+    padding:15px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.btn-continuar:hover{
+    background:#2563eb;
+    color:white;
+}

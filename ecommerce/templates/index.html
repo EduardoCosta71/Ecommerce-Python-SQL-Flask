@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <title>Home</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <!-- Cabeçalho-->
+    <header>
+
+        <div class="logo">
+            <h1>DuTech</h1>
+        </div>
+
+        <div class="pesquisa">
+            <input type="text" placeholder="Pesquisar produtos...">
+            <button>Buscar</button>
+        </div>
+
+      <div class="usuario">
+        <a href="/usuarios/login">Entrar</a>
+        <a href="/carrinho">🛒 Carrinho</a>
+    </div>
+
+    </header>
+
+    <!-- Conteúdo principal -->
+    <nav>
+        <ul>
+            <li><a href="/home">Início</a></li>
+            
+            <li><a href="/produtos">Produtos</a></li>
+            
+            <li><a href="#">Categorias</a></li>
+            
+            <li><a href="#">Ofertas</a></li>
+
+            <li><a href="#">Contato</a></li>
+        </ul>
+    </nav>
+
+    <!-- Banner -->
+
+    <section class="banner">
+        <div class="banner-texto">
+
+        <h2>As melhores ofertas</h2>
+        
+        <p>Encontre os melhores produtos de tecnologia aqui.</p>
+
+        <a href="/produtos" class="btn-banner">
+             Comprar Agora
+        </a>
+
+        </div>
+    </section>    
+    
+    <!-- Seção de produtos -->
+    <section class="produtos">
+
+        <h2>Produtos em Destaque</h2>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <img src="" alt="Produto">
+                
+                <h3>Nome do Produto</h3>
+                <p>Descrição do produto.</p>
+                <p>Preço: R$ 99,99</p>
+                <button>Adicionar ao Carrinho</button>
+
+            </div>
+
+            <div class="card">
+
+                <img src="" alt="Produto">
+                
+                <h3>Nome do Produto</h3>
+                <p>Descrição do produto.</p>
+                <p>Preço: R$ 99,99</p>
+                <button>Adicionar ao Carrinho</button>
+
+            </div>
+
+            <div class="card">
+
+                <img src="" alt="Produto">
+                
+                <h3>Nome do Produto</h3>
+                <p>Descrição do produto.</p>
+                <p>Preço: R$ 99,99</p>
+                <button>Adicionar ao Carrinho</button>
+
+
+            </div>
+
+            <div class="card">
+
+                <img src="" alt="Produto">
+                
+                <h3>Nome do Produto</h3>
+                <p>Descrição do produto.</p>
+                <p>Preço: R$ 99,99</p>
+                <button>Adicionar ao Carrinho</button>
+            
+        </div>
+
+    </section>
+
+    <!-- Categorias-->
+    <section class="categorias">
+
+        <h2>Categorias</h2>
+        
+        <div class="categorias-lista">
+
+            <div>Informatica</div>
+            <div>Celulares</div>
+            <div>Eletronicos</div>
+            <div>Audio</div>
+            <div>Smartwatch</div>
+
+        </div>
+
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+
+        <p>&copy; 2026 DuTech. Todos os direitos reservados.</p>
+
+    </footer>
+
+</body>
+</html>

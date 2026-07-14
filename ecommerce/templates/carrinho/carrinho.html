@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrinho | DuTech</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/carrinho.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+
+    <div class="logo">
+        <h1>DuTech</h1>
+    </div>
+
+    <form class="pesquisa">
+        <input type="text" placeholder="Pesquisar produtos...">
+        <button>Buscar</button>
+    </form>
+
+    <div class="usuario">
+        <a href="/usuarios/login">Entrar</a>
+        <a href="/carrinho">🛒 Carrinho</a>
+    </div>
+
+</header>
+
+<nav>
+    <ul>
+        <li><a href="/home">Início</a></li>
+        <li><a href="/produtos">Produtos</a></li>
+        <li><a href="#">Categorias</a></li>
+        <li><a href="#">Ofertas</a></li>
+        <li><a href="#">Contato</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+
+    <div class="titulo">
+        <h2>🛒 Meu Carrinho</h2>
+        <p>Confira seus produtos antes de finalizar a compra.</p>
+    </div>
+
+    <div class="carrinho">
+
+        <div class="lista-produtos">
+
+            {% for item in itens %}
+
+            <div class="produto">
+
+                <img src="{{ url_for('static', filename='uploads/' + item.Imagem) }}" alt="{{ item.Nome }}">
+
+                <div class="info">
+
+                    <h3>{{ item.Nome }}</h3>
+
+                    <p>{{ item.Descricao }}</p>
+
+                    <span>Preço: <strong>R$ {{ "%.2f"|format(item.Preco) }}</strong></span>
+
+                </div>
+
+                <div class="quantidade">
+
+                    <a href="/carrinho/diminuir/{{ item.Id }}">−</a>
+
+                    <span>{{ item.Quantidade }}</span>
+
+                    <a href="/carrinho/aumentar/{{ item.Id }}">+</a>
+
+                </div>
+
+                <div class="subtotal">
+
+                    <strong>
+
+                        R$ {{ "%.2f"|format(item.Preco * item.Quantidade) }}
+
+                    </strong>
+
+                </div>
+
+                <div class="remover">
+
+                    <a href="/carrinho/remover/{{ item.Id }}">
+                        🗑️
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="resumo">
+
+            <h3>Resumo do Pedido</h3>
+
+            <hr>
+
+            <p>Total de Produtos</p>
+
+            <h2>R$ {{ "%.2f"|format(total) }}</h2>
+
+            <a href="/checkout" class="btn-finalizar">
+
+                Finalizar Compra
+
+            </a>
+
+            <a href="/produtos" class="btn-continuar">
+
+                Continuar Comprando
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+
+    <p>© 2026 DuTech - Todos os direitos reservados.</p>
+
+</footer>
+
+</body>
+</html>

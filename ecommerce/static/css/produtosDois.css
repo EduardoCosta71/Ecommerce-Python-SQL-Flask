@@ -1,0 +1,160 @@
+/* Área dos produtos */
+
+.topo-produtos{
+
+    width:90%;
+    margin:40px auto;
+
+}
+
+.caminho{
+
+    color:#777;
+    margin-bottom:20px;
+
+}
+
+.topo-produtos h2{
+
+    font-size:38px;
+    margin-bottom:30px;
+
+}
+
+.filtros{
+
+    display:flex;
+    gap:20px;
+    margin-bottom:40px;
+
+}
+
+.filtros input,
+.filtros select{
+
+    padding:14px;
+    border-radius:10px;
+    border:1px solid #ddd;
+    font-size:16px;
+
+}
+
+.filtros input{
+
+    width:350px;
+
+}
+
+/* GRID DOS PRODUTOS */
+
+.produtos-grid{
+    width: 90%;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
+    gap: 30px;
+}
+
+
+/* CARD */
+
+.card{
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+    transition: .3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover{
+    transform: translateY(-8px);
+}
+
+
+/* IMAGEM */
+
+.card img{
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+
+/* CONTEÚDO */
+
+.card h3{
+    font-size: 24px;
+    margin: 15px;
+    color: #222;
+}
+
+.card .descricao{
+    margin: 0 15px;
+    color: #666;
+    font-size: 15px;
+    min-height: 45px;
+}
+
+.card .preco{
+    margin: 15px;
+    font-size: 30px;
+    color: #2563eb;
+    font-weight: bold;
+}
+
+.card .estoque{
+    margin: 0 15px 20px;
+    color: green;
+    font-weight: 600;
+}
+
+
+/* BOTÕES */
+
+.botoes{
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    margin-top: auto;
+}
+
+.btn-carrinho,
+.btn-comprar{
+    flex: 1;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+
+.btn-carrinho{
+    background: #0f172a;
+}
+
+.btn-carrinho:hover{
+    background: #1e293b;
+}
+
+.btn-comprar{
+    background: #2563eb;
+}
+
+.btn-comprar:hover{
+    background: #1d4ed8;
+}
+
+.btn-carrinho:hover{
+
+    background:#1e293b;
+
+}
+
+footer{
+
+    margin-top:80px;
+
+}

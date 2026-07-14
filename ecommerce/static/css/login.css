@@ -1,0 +1,167 @@
+/* Reset */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Roboto',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#0f172a,#1e3a8a);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Container */
+
+.login-container{
+    width:1000px;
+    height:600px;
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    display:flex;
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
+}
+
+/* Lado esquerdo */
+
+.login-left{
+    width:45%;
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:50px;
+    text-align:center;
+}
+
+.login-left h1{
+    font-size:42px;
+    margin-bottom:30px;
+}
+
+.login-left p{
+    font-size:18px;
+    line-height:30px;
+    color:#e5e7eb;
+}
+
+/* Lado direito */
+
+.login-right{
+    width:55%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:60px;
+}
+
+.login-right h2{
+    font-size:35px;
+    color:#1e293b;
+    margin-bottom:10px;
+}
+
+.login-right p{
+    color:#64748b;
+    margin-bottom:30px;
+}
+
+/* Formulário */
+
+form{
+    display:flex;
+    flex-direction:column;
+}
+
+label{
+    margin-bottom:8px;
+    font-weight:500;
+    color:#334155;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    margin-bottom:20px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    font-size:15px;
+    transition:.3s;
+}
+
+input:focus{
+    outline:none;
+    border-color:#2563eb;
+    box-shadow:0 0 8px rgba(37,99,235,.3);
+}
+
+/* Botão */
+
+button{
+    padding:15px;
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#1d4ed8;
+    transform:translateY(-2px);
+}
+
+/* Link cadastro */
+
+.login-right a{
+    color:#2563eb;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.login-right a:hover{
+    text-decoration:underline;
+}
+
+/* Último parágrafo */
+
+.login-right form + p{
+    margin-top:25px;
+    text-align:center;
+}
+
+/* Responsivo */
+
+@media(max-width:900px){
+
+    .login-container{
+        width:95%;
+        height:auto;
+        flex-direction:column;
+    }
+
+    .login-left,
+    .login-right{
+        width:100%;
+        height:auto;
+    }
+
+    .login-left{
+        padding:40px;
+    }
+
+    .login-right{
+        padding:40px;
+    }
+
+}

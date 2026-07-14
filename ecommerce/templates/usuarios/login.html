@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <title>DuTech Login</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="login-container">
+
+        <div class="login-left">
+
+            <h1>Bem-vindo ao DuTech</h1>
+
+            <p>Faça login para acessar sua conta e aproveitar nossas ofertas exclusivas.</p>
+        
+        </div>
+
+        <div class="login-right">
+    
+        <h2>Login</h2>
+
+        <p>Faça login para acessar sua conta.</p>
+
+        <form method="POST" action="{{ url_for('usuarios') }}">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required>
+
+            <button type="submit">Entrar</button>
+        </form>
+        <p>Não tem uma conta? <a href="/usuarios/cadastro">Cadastre-se</a></p>
+    </div>
+
+</div>
+    
+</body>
+</html>

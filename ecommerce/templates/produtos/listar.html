@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Produtos | DuTech</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/produtosDois.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+
+    <div class="logo">
+        <h1>DuTech</h1>
+    </div>
+
+    <form class="pesquisa">
+        <input type="text" placeholder="Pesquisar produtos...">
+        <button>Buscar</button>
+    </form>
+
+    <div class="usuario">
+        <a href="/usuarios/login">Entrar</a>
+        <a href="/carrinho">🛒 Carrinho</a>
+    </div>
+
+</header>
+
+<nav>
+
+    <ul>
+
+        <li><a href="/home">Início</a></li>
+        <li><a href="/produtos">Produtos</a></li>
+        <li><a href="#">Categorias</a></li>
+        <li><a href="#">Ofertas</a></li>
+        <li><a href="#">Contato</a></li>
+
+    </ul>
+
+</nav>
+
+<section class="topo-produtos">
+
+    <p class="caminho">
+        <a href="/home">Home</a> >
+        Produtos
+    </p>
+
+    <h2>Nossos Produtos</h2>
+
+    <div class="filtros">
+
+        <input type="text" placeholder="Pesquisar...">
+
+        <select>
+            <option>Todas categorias</option>
+            <option>Notebooks</option>
+            <option>Celulares</option>
+            <option>Monitores</option>
+            <option>Periféricos</option>
+        </select>
+
+        <select>
+            <option>Ordenar por</option>
+            <option>Menor preço</option>
+            <option>Maior preço</option>
+            <option>Mais vendidos</option>
+        </select>
+
+    </div>
+
+</section>
+
+<section class="produtos-grid">
+
+{% for produto in produtos %}
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='uploads/' + produto.Imagem) }}" alt="{{ produto.Nome }}">
+
+<h3>{{ produto.Nome }}</h3>
+
+<p class="descricao">{{ produto.Descricao }}</p>
+
+<p class="preco">
+R$ {{ "%.2f"|format(produto.Preco) }}
+</p>
+
+<p class="estoque">
+Estoque: {{ produto.Estoque }}
+</p>
+
+<div class="botoes">
+
+<a href="{{ url_for ('adicionar_carrinho', produto_id=produto.Id) }}" class="btn-carrinho">
+    Adicionar ao Carrinho
+</a>
+
+<a href="/produtos/{{ produto.Id }}" class="btn-comprar">
+Comprar
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</section>
+
+<footer>
+
+<p>© 2026 DuTech - Todos os direitos reservados.</p>
+
+</footer>
+
+</body>
+</html>
