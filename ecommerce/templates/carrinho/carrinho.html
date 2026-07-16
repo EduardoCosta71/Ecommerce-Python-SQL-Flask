@@ -68,11 +68,11 @@
 
                 <div class="quantidade">
 
-                    <a href="/carrinho/diminuir/{{ item.Id }}">−</a>
+                    <a href="{{ url_for('diminuir_carrinho', item_id=item.Id) }}">−</a>
 
                     <span>{{ item.Quantidade }}</span>
 
-                    <a href="/carrinho/aumentar/{{ item.Id }}">+</a>
+                    <a href="{{ url_for('aumentar_carrinho', item_id=item.Id) }}">+</a>
 
                 </div>
 

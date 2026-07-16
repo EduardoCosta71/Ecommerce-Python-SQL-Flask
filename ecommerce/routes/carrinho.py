@@ -48,15 +48,12 @@ def carrinho_registrar(app):
         total = 0
 
         for item in itens:
+            
             total += item.Preco * item.Quantidade
 
         conn.close()
 
-        return render_template(
-            "carrinho/carrinho.html",
-            itens=itens,
-            total=total
-        )
+        return render_template("carrinho/carrinho.html", itens=itens, total=total)
 
 
     @app.route('/carrinho/adicionar/<int:produto_id>')
@@ -126,6 +123,109 @@ def carrinho_registrar(app):
         conn.close()
 
         return redirect(url_for('carrinho'))
+    
+
+    @app.route('/carrinho/remover/<int:item_id>')
+    def remover_carrinho(item_id):
+
+        if 'usuario_id' not in session:
+            return redirect(url_for('usuarios'))
+
+        usuario_id = session['usuario_id']
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute('DELETE FROM ItensCarrinho WHERE Id = ?', (item_id,))
+
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for('carrinho'))
+    
+    @app.route('/carrinho/diminuir/<int:item_id>')
+    def diminuir_carrinho(item_id):
+
+        if 'usuario_id' not in session:
+            return redirect(url_for('usuarios'))
+
+        usuario_id = session['usuario_id']
+
+        
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""SELECT Quantidade
+                       FROM ItensCarrinho
+                       WHERE Id = ?
+                       """, (item_id,))
+
+        item = cursor.fetchone()
+
+        if not item:
+
+            conn.close()
+            return redirect(url_for('carrinho'))
+
+        if item.Quantidade > 1:
+
+            cursor.execute(""" UPDATE ItensCarrinho
+                           SET Quantidade = Quantidade - 1
+                           WHERE Id = ?
+                           """, (item_id,))
+            
+        else: 
+            
+            cursor.execute(""" DELETE FROM ItensCarrinho
+                           WHERE Id = ?
+                           """, (item_id,))
+            
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for('carrinho'))
+    
+
+    @app.route('/carrinho/aumentar/<item_id>')
+    def aumentar_carrinho(item_id):
+
+        if 'usuario_id' not in session:
+            return redirect(url_for('usuarios'))
+
+        usuario_id = session['usuario_id']
+        
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute(""" SELECT IC.Quantidade, P.Estoque
+                       FROM ItensCarrinho IC
+                       INNER JOIN Produtos P
+                       ON IC.ProdutoId = P.Id
+                       WHERE IC.Id = ?
+                       """, (item_id,))
+        
+        item = cursor.fetchone()
+
+    # Verifica se ainda há estoque
+        if not item:
+            conn.close()
+            return redirect(url_for('carrinho'))
+        
+        if item.Quantidade >= item.Estoque:
+            conn.close()
+            return redirect(url_for('carrinho'))
+        
+    
+        cursor.execute(""" UPDATE ItensCarrinho
+                        SET Quantidade = Quantidade + 1
+                        WHERE Id = ?
+                        """, (item_id,))
+        
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for('carrinho'))
+
 
 
     
