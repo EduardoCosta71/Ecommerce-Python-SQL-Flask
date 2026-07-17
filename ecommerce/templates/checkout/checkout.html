@@ -1,11 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>DuTech - Checkout</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/checkout.css') }}">
 </head>
 <body>
-    
+
+<div class="container">
+
+    <div class="titulo">
+        <h1>Checkout</h1>
+        <p>Confira seu pedido antes de finalizar.</p>
+    </div>
+
+    <div class="checkout">
+
+        <!-- Produtos -->
+        <div class="produtos">
+
+            {% for item in itens %}
+
+            <div class="produto">
+
+                <img src="{{ item.Imagem }}" alt="{{ item.Nome }}">
+
+                <div class="info">
+                    <h3>{{ item.Nome }}</h3>
+
+                    <p>Quantidade: {{ item.Quantidade }}</p>
+
+                    <p>Preço: R$ {{ "%.2f"|format(item.Preco) }}</p>
+                </div>
+
+                <div class="subtotal">
+                    R$ {{ "%.2f"|format(item.Subtotal) }}
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- Resumo -->
+
+        <div class="resumo">
+
+            <h2>Resumo do Pedido</h2>
+
+            <hr>
+
+            <div class="linha">
+                <span>Total:</span>
+                <strong>R$ {{ "%.2f"|format(total) }}</strong>
+            </div>
+
+            <button class="btn-finalizar">
+                Finalizar Compra
+            </button>
+
+            <a href="/carrinho" class="btn-voltar">
+                Voltar ao Carrinho
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
 </body>
 </html>
