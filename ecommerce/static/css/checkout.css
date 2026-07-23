@@ -113,3 +113,101 @@ body{
     background:#2563eb;
     color:#fff;
 }
+
+
+
+/* ===========================
+   ENDEREÇO DE ENTREGA
+=========================== */
+
+.endereco{
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.08);
+}
+
+.endereco h2{
+    color:#0f172a;
+    margin-bottom:25px;
+    font-size:28px;
+}
+
+.endereco form{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.campo{
+    display:flex;
+    flex-direction:column;
+}
+
+.campo label{
+    font-weight:600;
+    color:#333;
+    margin-bottom:8px;
+}
+
+.campo input{
+    width:100%;
+    padding:14px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    font-size:16px;
+    transition:.3s;
+    outline:none;
+}
+
+.campo input:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 8px rgba(37,99,235,.2);
+}
+
+.linha{
+    display:flex;
+    gap:20px;
+}
+
+.linha .campo{
+    flex:1;
+}
+
+.btn-salvar{
+    margin-top:15px;
+    padding:15px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-salvar:hover{
+    background:#1d4ed8;
+    transform:translateY(-2px);
+}
+
+/* Responsividade */
+
+@media(max-width:768px){
+
+    .linha{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .endereco{
+        padding:20px;
+    }
+
+    .endereco h2{
+        font-size:24px;
+    }
+
+}

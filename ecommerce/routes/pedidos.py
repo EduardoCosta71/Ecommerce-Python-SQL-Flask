@@ -12,6 +12,7 @@ def get_db_connection():
 
 def pedidos_registrar(app):
 
+    #Parte de Checkout dos Produtos comprados.
     @app.route('/checkout')
     def checkout():
 
@@ -46,6 +47,55 @@ def pedidos_registrar(app):
         for item in itens:
             total += item.Subtotal
 
+
+        # Buscar endereço
+        cursor.execute(""" SELECT * FROM Enderecos WHERE UsuarioId = ? """, (usuario_id))
+
+        endereco = cursor.fetchone()
+
         conn.close()
 
         return render_template("checkout/checkout.html", itens=itens, total=total)
+    
+
+#Metodo para salvar endereço do cliente
+
+    @app.route('/checkout/endereco', methods=['POST'])
+    def salvar_endereco():
+
+        if 'usuario_id' not in session:
+            return redirect(url_for('usuarios'))
+
+
+        usuario_id = session['usuario_id']
+
+        cep = request.form['cep']
+        rua = request.form['rua']
+        numero = request.form['numero']
+        complemento = request.form['complemento']
+        bairro = request.form['bairro']
+        cidade = request.form['cidade']
+        estado = request.form['estado']
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+        INSERT INTO Enderecos
+        (UsuarioId, Cep, Rua, Numero, Complemento, Bairro, Cidade, Estado)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            usuario_id,
+            cep,
+            rua,
+            numero,
+            complemento,
+            bairro,
+            cidade,
+            estado
+        ))
+
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for('checkout'))
