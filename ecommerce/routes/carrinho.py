@@ -54,8 +54,10 @@ def carrinho_registrar(app):
         conn.close()
 
         return render_template("carrinho/carrinho.html", itens=itens, total=total)
+    
 
-
+    #Rota para o produto ser adicionado no carrinho.
+    #É feito os calculos dos produtos também.
     @app.route('/carrinho/adicionar/<int:produto_id>')
     def adicionar_carrinho(produto_id):
 
@@ -124,7 +126,8 @@ def carrinho_registrar(app):
 
         return redirect(url_for('carrinho'))
     
-
+    #Rota para excluir produto do carrinho de compras.
+    #Foi adicionado uma verificação para só usuarios logado.
     @app.route('/carrinho/remover/<int:item_id>')
     def remover_carrinho(item_id):
 
@@ -142,7 +145,9 @@ def carrinho_registrar(app):
         conn.close()
 
         return redirect(url_for('carrinho'))
-    
+
+
+    #Rota para diminiuir a quantidade de itens do carrinho.
     @app.route('/carrinho/diminuir/<int:item_id>')
     def diminuir_carrinho(item_id):
 
@@ -185,7 +190,7 @@ def carrinho_registrar(app):
 
         return redirect(url_for('carrinho'))
     
-
+    #Rota para aumentar os itens do carrinho.
     @app.route('/carrinho/aumentar/<item_id>')
     def aumentar_carrinho(item_id):
 

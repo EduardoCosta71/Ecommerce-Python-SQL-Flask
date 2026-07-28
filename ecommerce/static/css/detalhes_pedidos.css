@@ -1,0 +1,89 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:40px auto;
+}
+
+.topo{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:35px;
+}
+
+.topo h1{
+    color:#0f172a;
+}
+
+.btn-voltar{
+    text-decoration:none;
+    background:#2563eb;
+    color:white;
+    padding:12px 22px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.btn-voltar:hover{
+    background:#1d4ed8;
+}
+
+.lista-produtos{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.produto{
+    background:white;
+    border-radius:15px;
+    display:grid;
+    grid-template-columns:130px 1fr 180px;
+    align-items:center;
+    gap:25px;
+    padding:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.produto img{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.info h2{
+    margin-bottom:15px;
+    color:#0f172a;
+}
+
+.info p{
+    margin-bottom:8px;
+    color:#555;
+}
+
+.subtotal{
+    text-align:right;
+}
+
+.subtotal h3{
+    color:#64748b;
+    margin-bottom:10px;
+}
+
+.subtotal span{
+    font-size:28px;
+    color:#2563eb;
+    font-weight:bold;
+}

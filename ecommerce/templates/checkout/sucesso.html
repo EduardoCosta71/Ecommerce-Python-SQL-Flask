@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Realizado</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sucesso.css') }}">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="sucesso">
+
+            <div class="icone">
+                ✔
+            </div>
+
+            <h1>Pedido realizado com sucesso!</h1>
+
+            <p>
+                Obrigado pela sua compra.
+            </p>
+
+            <p>
+                Seu pedido foi registrado e em breve será preparado para envio.
+            </p>
+
+            <div class="botoes">
+
+                <a href="{{ url_for('home') }}" class="btn">
+                    Voltar para Home
+                </a>
+
+                <a href="{{ url_for('produtos') }}" class="btn btn-secundario">
+                    Continuar Comprando
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

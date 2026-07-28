@@ -15,7 +15,7 @@ def get_db_connection():
 
 def usuarios_registrar(app):
 
-
+    #Verificações de emails, tipos, senhas etc.
     def validar_email(email):
 
         # Função para validar o formato do email usando regex
@@ -41,9 +41,10 @@ def usuarios_registrar(app):
 
 #================================================================================   
 
+    #Rota responsavel por verificar cadastro realizado pelo cliente e fazer login.
     @app.route('/usuarios/login', methods=['GET', 'POST'])
     def usuarios():
-
+        
         #Verificar se o metodo da requisição é POST
         if request.method == 'POST':
 
@@ -72,6 +73,7 @@ def usuarios_registrar(app):
         return render_template('usuarios/login.html') 
 
 
+    #Rota responsavel por salvar o cadastro dos clientess.
     @app.route('/usuarios/cadastro', methods=['GET', 'POST'])
     def cadastro():
 

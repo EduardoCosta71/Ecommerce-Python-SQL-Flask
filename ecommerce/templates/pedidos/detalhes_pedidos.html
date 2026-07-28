@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Pedido</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/detalhes_pedidos.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="topo">
+
+        <h1>Pedido #{{ pedido_id }}</h1>
+
+        <a href="{{ url_for('meus_pedidos') }}" class="btn-voltar">
+            ← Meus Pedidos
+        </a>
+
+    </div>
+
+    <div class="lista-produtos">
+
+        {% for item in itens %}
+
+        <div class="produto">
+
+            <img src="{{ item.Imagem }}" alt="{{ item.Nome }}">
+
+            <div class="info">
+
+                <h2>{{ item.Nome }}</h2>
+
+                <p>
+                    Quantidade:
+                    <strong>{{ item.Quantidade }}</strong>
+                </p>
+
+                <p>
+                    Preço Unitário:
+                    <strong>R$ {{ "%.2f"|format(item.PrecoUnitario) }}</strong>
+                </p>
+
+            </div>
+
+            <div class="subtotal">
+
+                <h3>Subtotal</h3>
+
+                <span>
+                    R$ {{ "%.2f"|format(item.Subtotal) }}
+                </span>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -32,6 +32,8 @@ def produtos_registrar(app):
 
         return render_template('/produtos/listar.html', produtos=produtos)
 
+
+    #Rota responsavel por cadastrar os produtos da loja.
     @app.route('/produtos/cadastrar', methods=['GET', 'POST'])
     def cadastrar_produtos():
 
@@ -56,8 +58,9 @@ def produtos_registrar(app):
             return redirect(url_for('cadastre'))
         
         return render_template('produtos/cadastrar.html')
+    
 
-
+    #Rota responsavel por listar os produtos cadastrados do vendedor. "listar.html"
     @app.route('/consultar_produtos/<int:id>')
     def consultar_produtos(id):
 
@@ -70,6 +73,8 @@ def produtos_registrar(app):
         conn.close()
         return render_template('listar_html', produto=produto)
     
+
+    #Rota responsavel para o vendedor atualizar informaçoes do produto. "listar.html"
     @app.route('/atualizar_produtos/<int:id>', methods=['GET', 'POST'])
     def atualizar_produtos(id):
         
@@ -99,7 +104,7 @@ def produtos_registrar(app):
         return render_template('produtos/listar.html', produte=produte)
 
         
-
+    #Rota responsavel por excluir os produtos "listar.html" 
     @app.route('/excluir_produto/<int:id>')
     def excluir_produto(id):
         

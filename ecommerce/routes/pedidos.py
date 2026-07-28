@@ -58,8 +58,7 @@ def pedidos_registrar(app):
         return render_template("checkout/checkout.html", itens=itens, total=total)
     
 
-#Metodo para salvar endereço do cliente
-
+    #Metodo para salvar endereço do cliente.
     @app.route('/checkout/endereco', methods=['POST'])
     def salvar_endereco():
 
@@ -99,3 +98,147 @@ def pedidos_registrar(app):
         conn.close()
 
         return redirect(url_for('checkout'))
+
+
+    @app.route('/finalizar_pedido', methods=['POST'])
+    def finalizar_pedido():
+
+        if 'usuario_id' not in session:
+                    return redirect(url_for('usuarios'))
+        
+        
+        usuario_id = session['usuario_id']
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        #Busca os itens do carrinho
+        cursor.execute(""" SELECT IC.ProdutoId, IC.Quantidade, P.Preco
+                            FROM ItensCarrinho IC
+                            INNER JOIN Carrinhos C
+                            ON  IC.CarrinhoId = C.Id
+                            INNER JOIN Produtos P
+                            ON IC.ProdutoId = P.Id
+                            WHERE C.UsuarioId = ? """, (usuario_id, ))
+
+        itens = cursor.fetchall()
+
+        if not itens:
+            conn.close()
+            return redirect(url_for('carrinho'))
+
+        #Calcular o valor total
+        valor_total = 0
+
+        for item in itens:
+             valor_total += item.Preco * item.Quantidade
+
+
+        #Criar pedido
+        cursor.execute(""" INSERT INTO Pedidos
+                        (UsuarioId, DataPedido, ValorTotal, Status)
+                        VALUES (?, GETDATE(), ?, ?) """, (usuario_id, valor_total, "Pendente"))
+
+        conn.commit()
+
+        #Buscar o Id do pedido criado
+        cursor.execute(""" SELECT TOP 1 Id
+                            FROM Pedidos
+                            WHERE UsuarioId = ?
+                            ORDER BY Id DESC""", (usuario_id, ))
+
+        
+        pedido_id = cursor.fetchone()[0]
+
+        #Inserir os itens do pedido
+        for item in itens:
+
+             cursor.execute(""" INSERT INTO ItensPedidos
+                                (PedidoId, ProdutoId, Quantidade, PrecoUnitario)
+                                VALUES (?, ?, ?, ?)""", (pedido_id, item.ProdutoId, item.Quantidade, item.Preco))
+
+             cursor.execute(""" UPDATE Produtos
+                                SET Estoque = Estoque - ?
+                                WHERE Id = ? """, (item.Quantidade, item.ProdutoId))
+
+        #Limpar o carrinho
+        cursor.execute(""" DELETE IC
+                        FROM ItensCarrinho IC
+                        INNER JOIN Carrinhos C
+                        ON IC.CarrinhoId = C.Id
+                        WHERE C.UsuarioId = ? """, (usuario_id, ))
+
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for('pedido_sucesso'))
+
+
+    #Pedido sucesso rota
+    @app.route('/pedido_sucesso')
+    def pedido_sucesso():
+         
+         return render_template("checkout/sucesso.html")
+
+
+    #Rota para ver pedidos.
+    @app.route('/meus_pedidos')
+    def meus_pedidos():
+
+        if 'usuario_id' not in session:
+
+                    return redirect(url_for('usuarios'))
+
+        usuario_id = session['usuario_id']
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute(""" SELECT
+                    Id, DataPedido, ValorTotal, Status
+                    FROM Pedidos
+                    WHERE UsuarioId = ?
+                    ORDER BY DataPedido DESC""", (usuario_id,))
+
+        pedidos = cursor.fetchall()
+
+        conn.close()
+
+        return render_template("pedidos/meus_pedidos.html", pedidos=pedidos)
+
+            
+
+    @app.route('/pedido/<int:pedido_id>')
+    def detalhes_pedido(pedido_id):
+
+        if 'usuario_id' not in session:
+            return redirect(url_for('usuarios'))
+
+        usuario_id = session['usuario_id']
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+        SELECT
+            P.Nome,
+            P.Imagem,
+            IP.Quantidade,
+            IP.PrecoUnitario,
+            (IP.Quantidade * IP.PrecoUnitario) AS Subtotal
+        FROM ItensPedidos IP
+        INNER JOIN Produtos P
+            ON IP.ProdutoId = P.Id
+        WHERE IP.PedidoId = ?
+    """, (pedido_id,))
+
+        itens = cursor.fetchall()
+
+        conn.close()
+
+        return render_template("pedidos/detalhes_pedidos.html", itens=itens, pedido_id=pedido_id)
+
+
+
+
+        
