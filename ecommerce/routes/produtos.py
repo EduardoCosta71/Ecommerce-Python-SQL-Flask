@@ -116,3 +116,46 @@ def produtos_registrar(app):
         conn.commit()
         conn.close()
         return redirect(url_for('listar_medicamentos'))
+
+
+#==================================================
+
+
+    #Rota para as categorias
+
+    @app.route('/categorias')
+    def categorias():
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute(""" SELECT Id, Nome
+                            FROM Categorias
+                             ORDER BY Nome
+                             """)
+
+        categorias = cursor.fetchall()
+
+        conn.close()
+
+        return render_template('/produtos/categorias.html', categorias=categorias)
+
+
+
+    # Rota para mostrar os produtos de uma categoria específica
+    @app.route('/categoria/<int:categoria_id>')
+    def produtos_categoria(categoria_id):
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute(""" SELECT Id, Nome, Descricao, Preco, Imagem
+                            FROM Produtos
+                            WHERE CategoriaId = ?
+                            """, (categoria_id,))
+
+        produtos = cursor.fetchall()
+
+        conn.close()
+
+        return render_template('/produtos/produtos_categoria.html', produtos=produtos)

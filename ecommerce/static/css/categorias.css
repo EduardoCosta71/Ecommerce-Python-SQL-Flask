@@ -1,0 +1,339 @@
+/* Reset */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f7fa;
+    color:#333;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+ul{
+    list-style:none;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    background:#0f172a;
+    color:white;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:20px 50px;
+
+    flex-wrap:nowrap;
+}
+
+.logo h1{
+    color:#3b82f6;
+    font-size:34px;
+}
+
+.pesquisa{
+    display:flex;
+    gap:10px;
+}
+
+.pesquisa input{
+
+    width:420px;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:8px;
+
+    outline:none;
+}
+
+.pesquisa button{
+
+    padding:12px 22px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#2563eb;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.pesquisa button:hover{
+
+    background:#1d4ed8;
+}
+
+.usuario{
+
+    display:flex;
+
+    gap:25px;
+
+    font-size:18px;
+
+    font-weight:500;
+}
+
+/* =========================
+   MENU
+========================= */
+
+nav{
+
+    background:white;
+
+    padding:18px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+nav ul{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:50px;
+}
+
+nav a{
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+nav a:hover{
+
+    color:#2563eb;
+}
+
+.ativo{
+
+    color:#2563eb;
+}
+
+/* =========================
+   BANNER
+========================= */
+
+.banner{
+
+    width:90%;
+
+    height:350px;
+
+    margin:40px auto;
+
+    background:linear-gradient(135deg,#2563eb,#0f172a);
+
+    border-radius:20px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    color:white;
+}
+
+.banner h2{
+
+    font-size:58px;
+
+    margin-bottom:15px;
+}
+
+.banner p{
+
+    font-size:22px;
+}
+
+/* =========================
+   CATEGORIAS
+========================= */
+
+.produtos{
+
+    width:90%;
+
+    margin:70px auto;
+}
+
+.produtos h2{
+
+    text-align:center;
+
+    font-size:38px;
+
+    margin-bottom:50px;
+}
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:30px;
+}
+
+.card{
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+    transition:.3s;
+}
+
+.card:hover{
+
+    transform:translateY(-10px);
+}
+
+.card img{
+
+    width:120px;
+
+    height:120px;
+
+    object-fit:contain;
+
+    margin-bottom:20px;
+}
+
+.card h3{
+
+    font-size:24px;
+
+    margin-bottom:15px;
+}
+
+.card p{
+
+    color:#666;
+
+    margin-bottom:25px;
+}
+
+.card button{
+
+    width:170px;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.card button:hover{
+
+    background:#1d4ed8;
+}
+
+/* =========================
+   RODAPÉ
+========================= */
+
+footer{
+
+    margin-top:80px;
+
+    background:#0f172a;
+
+    color:white;
+
+    text-align:center;
+
+    padding:40px;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:1000px){
+
+    header{
+
+        flex-direction:column;
+
+        gap:20px;
+    }
+
+    .pesquisa input{
+
+        width:250px;
+    }
+
+    .cards{
+
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:650px){
+
+    nav ul{
+
+        flex-direction:column;
+
+        align-items:center;
+    }
+
+    .cards{
+
+        grid-template-columns:1fr;
+    }
+
+    .banner h2{
+
+        font-size:40px;
+    }
+
+    .banner p{
+
+        font-size:18px;
+    }
+}

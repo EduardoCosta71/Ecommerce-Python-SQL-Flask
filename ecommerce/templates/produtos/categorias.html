@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>DuTech - Categorias</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/categorias.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+
+        <div class="logo">
+            <h1>DuTech</h1>
+        </div>
+
+        <div class="pesquisa">
+            <input type="text" placeholder="Pesquisar categorias...">
+            <button>Buscar</button>
+        </div>
+
+        <div class="usuario">
+            <a href="/usuarios/login">Entrar</a>
+            <a href="/carrinho">🛒 Carrinho</a>
+        </div>
+
+    </header>
+
+    <!-- Menu -->
+    <nav>
+
+        <ul>
+
+            <li><a href="/home">Início</a></li>
+
+            <li><a href="/produtos">Produtos</a></li>
+
+            <li><a href="/categorias" class="ativo">Categorias</a></li>
+
+            <li><a href="/ofertas">Ofertas</a></li>
+
+            <li><a href="/contato">Contato</a></li>
+
+            <li><a href="{{ url_for('meus_pedidos') }}">Meus Pedidos</a></li>
+
+        </ul>
+
+    </nav>
+
+    <!-- Banner -->
+
+    <section class="banner">
+
+        <div class="banner-texto">
+
+            <h2>Categorias</h2>
+
+            <p>Escolha uma categoria para encontrar os melhores produtos.</p>
+
+        </div>
+
+    </section>
+
+    <!-- Lista de Categorias -->
+
+    <section class="produtos">
+
+        <h2>Nossas Categorias</h2>
+
+        <div class="cards">
+
+            {% for categoria in categorias %}
+
+            <div class="card">
+
+                <img src="{{ url_for('static', filename='img/categoria.png') }}" alt="{{ categoria.Nome }}">
+
+                <h3>{{ categoria.Nome }}</h3>
+
+                <p>Confira todos os produtos desta categoria.</p>
+
+                <a href="{{ url_for('produtos_categoria', categoria_id=categoria.Id) }}">
+                    <button>Ver Produtos</button>
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+    <!-- Rodapé -->
+
+    <footer>
+
+        <p>&copy; 2026 DuTech. Todos os direitos reservados.</p>
+
+    </footer>
+
+</body>
+
+</html>

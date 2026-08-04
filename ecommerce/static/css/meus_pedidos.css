@@ -2,81 +2,154 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Poppins,sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 body{
-    background:#f5f7fa;
+    background:#edf3fb;
 }
 
 .container{
     width:90%;
-    margin:50px auto;
+    max-width:1200px;
+    margin:40px auto;
+    background:#fff;
+    padding:35px;
+    border-radius:15px;
+    box-shadow:0 8px 25px rgba(0,0,0,.12);
 }
-
-h1{
-    margin-bottom:30px;
-    color:#0f172a;
-}
-
-table{
-    width:100%;
-    background:white;
-    border-radius:12px;
-    overflow:hidden;
-    border-collapse:collapse;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-}
-
-thead{
-    background:#2563eb;
-    color:white;
-}
-
-th,td{
-    padding:18px;
-    text-align:center;
-}
-
-tbody tr{
-    border-bottom:1px solid #eee;
-}
-
-tbody tr:hover{
-    background:#f8fafc;
-}
-
-.btn{
-    background:#2563eb;
-    color:white;
-    padding:10px 18px;
-    border-radius:8px;
-    text-decoration:none;
-}
-
-.btn:hover{
-    background:#1d4ed8;
-}
-
-
 
 .topo{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:30px;
+    margin-bottom:35px;
 }
 
-.btn-voltar{
-    background:#2563eb;
-    color:white;
+.topo h1{
+    color:#1565c0;
+    font-size:38px;
+}
+
+.botoes{
+    display:flex;
+    gap:15px;
+}
+
+.btn-home,
+.btn-comprar{
     text-decoration:none;
+    color:#fff;
+    background:#1565c0;
     padding:12px 22px;
     border-radius:8px;
     font-weight:bold;
-    transition:0.3s;
+    transition:.3s;
 }
 
-.btn-voltar:hover{
-    background:#1d4ed8;
+.btn-home:hover,
+.btn-comprar:hover{
+    background:#0d47a1;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    overflow:hidden;
+    border-radius:10px;
+}
+
+thead{
+    background:#1565c0;
+    color:white;
+}
+
+thead th{
+    padding:18px;
+}
+
+tbody td{
+    padding:18px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+tbody tr:nth-child(even){
+    background:#f8f9fb;
+}
+
+tbody tr:hover{
+    background:#e8f1ff;
+}
+
+.status{
+    padding:7px 15px;
+    border-radius:20px;
+    color:white;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.pendente{
+    background:#f39c12;
+}
+
+.preparando{
+    background:#3498db;
+}
+
+.enviado{
+    background:#8e44ad;
+}
+
+.entregue{
+    background:#27ae60;
+}
+
+.cancelado{
+    background:#e74c3c;
+}
+
+.btn-ver{
+    display:inline-block;
+    background:#1565c0;
+    color:white;
+    text-decoration:none;
+    padding:10px 18px;
+    border-radius:8px;
+    transition:.3s;
+}
+
+.btn-ver:hover{
+    background:#0d47a1;
+    transform:scale(1.05);
+}
+
+@media(max-width:900px){
+
+    .topo{
+        flex-direction:column;
+        gap:20px;
+        text-align:center;
+    }
+
+    .botoes{
+        flex-direction:column;
+        width:100%;
+    }
+
+    .btn-home,
+    .btn-comprar{
+        text-align:center;
+    }
+
+    table{
+        font-size:14px;
+    }
+
+    thead th,
+    tbody td{
+        padding:12px;
+    }
+
 }
