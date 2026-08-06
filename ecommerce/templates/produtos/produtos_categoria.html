@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>DuTech | Produtos</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/produtos_categoria.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+
+    <div class="logo">
+        <h1>DuTech</h1>
+    </div>
+
+    <div class="pesquisa">
+        <input type="text" placeholder="Pesquisar produtos...">
+        <button>Buscar</button>
+    </div>
+
+    <div class="usuario">
+        <a href="/usuarios/login">Entrar</a>
+        <a href="/carrinho">🛒 Carrinho</a>
+    </div>
+
+</header>
+
+<nav>
+    <ul>
+        <li><a href="/home">Início</a></li>
+        <li><a href="/produtos">Produtos</a></li>
+        <li><a href="/categorias">Categorias</a></li>
+        <li><a href="#">Ofertas</a></li>
+        <li><a href="#">Contato</a></li>
+        <li><a href="/meus_pedidos">Meus Pedidos</a></li>
+    </ul>
+</nav>
+
+<section class="banner">
+
+    <div class="banner-texto">
+        <h2>Produtos da Categoria</h2>
+        <p>Confira todos os produtos disponíveis nesta categoria.</p>
+
+        <a href="/categorias" class="btn-banner">
+            ← Voltar para Categorias
+        </a>
+    </div>
+
+</section>
+
+<section class="produtos">
+
+    {% if produtos %}
+
+    <div class="cards">
+
+        {% for produto in produtos %}
+
+        <div class="card">
+
+            <img src="{{ produto.Imagem }}" alt="{{ produto.Nome }}">
+
+            <h3>{{ produto.Nome }}</h3>
+
+            <p class="descricao">
+                {{ produto.Descricao }}
+            </p>
+
+            <h2>R$ {{ "%.2f"|format(produto.Preco) }}</h2>
+
+            <div class="botoes">
+
+                <a href="/produto/{{ produto.Id }}" class="btn-ver">
+                    Ver Produto
+                </a>
+
+                <a href="/carrinho/adicionar/{{ produto.Id }}" class="btn-carrinho">
+                    Carrinho
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="sem-produtos">
+
+        <h2>Nenhum produto encontrado.</h2>
+
+        <a href="/categorias" class="btn-banner">
+            Voltar
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+<footer>
+
+    <p>&copy; 2026 DuTech - Todos os direitos reservados.</p>
+
+</footer>
+
+</body>
+</html>

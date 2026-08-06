@@ -1,0 +1,122 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+a{
+    text-decoration:none;
+}
+
+
+.banner{
+    width:90%;
+    margin:40px auto;
+    background:linear-gradient(135deg,#2563eb,#0f172a);
+    border-radius:20px;
+    color:white;
+    padding:60px;
+}
+
+.banner h2{
+    font-size:48px;
+}
+
+.banner p{
+    margin:20px 0 35px;
+    font-size:20px;
+}
+
+.btn-banner{
+    display:inline-block;
+    background:white;
+    color:#2563eb;
+    padding:14px 30px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.produtos{
+    width:90%;
+    margin:60px auto;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    width:100%;
+    height:240px;
+    object-fit:cover;
+}
+
+.card h3{
+    margin:20px;
+    font-size:22px;
+}
+
+.descricao{
+    margin:0 20px;
+    color:#666;
+    min-height:60px;
+}
+
+.card h2{
+    margin:20px;
+    color:#2563eb;
+}
+
+.botoes{
+    display:flex;
+    gap:10px;
+    padding:20px;
+}
+
+.btn-ver,
+.btn-carrinho{
+    flex:1;
+    text-align:center;
+    padding:12px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.btn-ver{
+    background:#2563eb;
+    color:white;
+}
+
+.btn-carrinho{
+    background:#0f172a;
+    color:white;
+}
+
+.btn-ver:hover{
+    background:#1d4ed8;
+}
+
+.btn-carrinho:hover{
+    background:#1e293b;
+}
+
+.sem-produtos{
+    text-align:center;
+    padding:80px;
+}
+
