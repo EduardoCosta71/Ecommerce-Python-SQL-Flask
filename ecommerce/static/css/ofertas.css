@@ -1,0 +1,290 @@
+/* =========================
+   BANNER OFERTAS
+========================= */
+
+.banner-ofertas{
+
+    width:90%;
+
+    height:320px;
+
+    margin:40px auto;
+
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #0f172a
+    );
+
+    border-radius:20px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    color:white;
+
+}
+
+.banner-ofertas h2{
+
+    font-size:52px;
+
+    margin-bottom:15px;
+
+}
+
+.banner-ofertas p{
+
+    font-size:20px;
+
+    max-width:700px;
+
+}
+
+
+/* =========================
+   OFERTAS
+========================= */
+
+.ofertas{
+
+    width:90%;
+
+    margin:70px auto;
+
+}
+
+.ofertas > h2{
+
+    text-align:center;
+
+    font-size:36px;
+
+    margin-bottom:50px;
+
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.cards-ofertas{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:30px;
+
+}
+
+.card-oferta{
+
+    position:relative;
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    text-align:center;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.card-oferta:hover{
+
+    transform:translateY(-8px);
+
+}
+
+
+/* =========================
+   ETIQUETA
+========================= */
+
+.etiqueta{
+
+    position:absolute;
+
+    top:15px;
+
+    left:15px;
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:6px 12px;
+
+    border-radius:6px;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+
+/* =========================
+   IMAGEM
+========================= */
+
+.imagem-produto{
+
+    width:100%;
+
+    height:220px;
+
+    margin-bottom:20px;
+
+    border-radius:10px;
+
+    background:#f1f3f5;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.imagem-produto img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:contain;
+
+    border-radius:10px;
+
+}
+
+
+/* =========================
+   INFORMAÇÕES
+========================= */
+
+.card-oferta h3{
+
+    font-size:20px;
+
+    margin-bottom:10px;
+
+}
+
+.descricao{
+
+    color:#777;
+
+    font-size:14px;
+
+    margin-bottom:15px;
+
+}
+
+.preco-antigo{
+
+    color:#999;
+
+    text-decoration:line-through;
+
+    font-size:15px;
+
+}
+
+.preco{
+
+    color:#2563eb;
+
+    font-size:26px;
+
+    font-weight:bold;
+
+    margin:5px 0 15px;
+
+}
+
+
+/* =========================
+   BOTÃO
+========================= */
+
+.card-oferta button{
+
+    width:100%;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.card-oferta button:hover{
+
+    background:#1d4ed8;
+
+}
+
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:1000px){
+
+    .cards-ofertas{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .cards-ofertas{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .banner-ofertas h2{
+
+        font-size:38px;
+
+    }
+
+    .banner-ofertas p{
+
+        font-size:16px;
+
+    }
+
+}

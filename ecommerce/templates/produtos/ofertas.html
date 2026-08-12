@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>DuTech | Ofertas</title>
+
+    <!-- CSS principal da Home -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+
+    <!-- CSS específico das ofertas -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ofertas.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+
+    <header>
+
+        <div class="logo">
+            <h1>DuTech</h1>
+        </div>
+
+        <div class="pesquisa">
+
+            <input type="text" placeholder="Pesquisar produtos...">
+
+            <button>Buscar</button>
+
+        </div>
+
+        <div class="usuario">
+
+            <a href="/usuarios/login">Entrar</a>
+
+            <a href="/carrinho">🛒 Carrinho</a>
+
+        </div>
+
+    </header>
+
+
+    <!-- Menu -->
+
+    <nav>
+
+        <ul>
+
+            <li>
+                <a href="/home">Início</a>
+            </li>
+
+            <li>
+                <a href="/produtos">Produtos</a>
+            </li>
+
+            <li>
+                <a href="/categorias">Categorias</a>
+            </li>
+
+            <li>
+                <a href="/ofertas" class="ativo">Ofertas</a>
+            </li>
+
+            <li>
+                <a href="/contato">Contato</a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('meus_pedidos') }}">Meus Pedidos</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- Banner -->
+
+    <section class="banner-ofertas">
+
+        <div>
+
+            <h2>Ofertas DuTech</h2>
+
+            <p>
+                Aproveite nossas ofertas e encontre
+                produtos de tecnologia por preços especiais.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Ofertas -->
+
+    <section class="ofertas">
+
+        <h2>Ofertas em Destaque</h2>
+
+        <div class="cards-ofertas">
+
+
+            <!-- Oferta 1 -->
+
+            <div class="card-oferta">
+
+                <div class="etiqueta">
+                    OFERTA
+                </div>
+
+                <div class="imagem-produto">
+
+                    <img src="" alt="Produto em oferta">
+
+                </div>
+
+                <h3>Produto de Tecnologia</h3>
+
+                <p class="descricao">
+                    Produto em destaque da DuTech.
+                </p>
+
+                <p class="preco-antigo">
+                    R$ 599,90
+                </p>
+
+                <p class="preco">
+                    R$ 499,90
+                </p>
+
+                <button>
+                    Ver Produto
+                </button>
+
+            </div>
+
+
+            <!-- Oferta 2 -->
+
+            <div class="card-oferta">
+
+                <div class="etiqueta">
+                    OFERTA
+                </div>
+
+                <div class="imagem-produto">
+
+                    <img src="" alt="Produto em oferta">
+
+                </div>
+
+                <h3>Produto de Tecnologia</h3>
+
+                <p class="descricao">
+                    Produto em destaque da DuTech.
+                </p>
+
+                <p class="preco-antigo">
+                    R$ 399,90
+                </p>
+
+                <p class="preco">
+                    R$ 299,90
+                </p>
+
+                <button>
+                    Ver Produto
+                </button>
+
+            </div>
+
+
+            <!-- Oferta 3 -->
+
+            <div class="card-oferta">
+
+                <div class="etiqueta">
+                    OFERTA
+                </div>
+
+                <div class="imagem-produto">
+
+                    <img src="" alt="Produto em oferta">
+
+                </div>
+
+                <h3>Produto de Tecnologia</h3>
+
+                <p class="descricao">
+                    Produto em destaque da DuTech.
+                </p>
+
+                <p class="preco-antigo">
+                    R$ 799,90
+                </p>
+
+                <p class="preco">
+                    R$ 699,90
+                </p>
+
+                <button>
+                    Ver Produto
+                </button>
+
+            </div>
+
+
+            <!-- Oferta 4 -->
+
+            <div class="card-oferta">
+
+                <div class="etiqueta">
+                    OFERTA
+                </div>
+
+                <div class="imagem-produto">
+
+                    <img src="" alt="Produto em oferta">
+
+                </div>
+
+                <h3>Produto de Tecnologia</h3>
+
+                <p class="descricao">
+                    Produto em destaque da DuTech.
+                </p>
+
+                <p class="preco-antigo">
+                    R$ 249,90
+                </p>
+
+                <p class="preco">
+                    R$ 199,90
+                </p>
+
+                <button>
+                    Ver Produto
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Rodapé -->
+
+    <footer>
+
+        <p>
+            &copy; 2026 DuTech. Todos os direitos reservados.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>DuTech | Contato</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/home.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/contato.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        <h1>DuTech</h1>
+    </div>
+
+    <div class="pesquisa">
+
+        <input type="text" placeholder="Pesquisar produtos...">
+
+        <button>Buscar</button>
+
+    </div>
+
+    <div class="usuario">
+
+        <a href="/usuarios/login">Entrar</a>
+
+        <a href="/carrinho">🛒 Carrinho</a>
+
+    </div>
+
+</header>
+
+
+<nav>
+
+    <ul>
+
+        <li>
+            <a href="/home">Início</a>
+        </li>
+        <li>
+            <a href="/produtos">Produtos</a>
+        </li>
+        <li>
+            <a href="/categorias">Categorias</a>
+        </li>
+        <li>
+            <a href="/ofertas">Ofertas</a>
+        </li>
+        <li>
+            <a href="/contato">Contato</a>
+        </li>
+        <li>
+            <a href="{{ url_for('meus_pedidos') }}">Meus Pedidos</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+<!-- Banner -->
+
+<section class="banner-contato">
+
+    <div>
+
+        <h2>Entre em contato</h2>
+
+        <p>
+            Tem alguma dúvida ou precisa de ajuda?
+            Envie uma mensagem para a DuTech.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- Contato -->
+
+<section class="contato">
+
+    <div class="contato-info">
+
+        <h2>Fale conosco</h2>
+
+        <p>
+            Estamos aqui para ajudar.
+            Preencha o formulário ao lado e entre em contato conosco.
+        </p>
+
+        <div class="informacao">
+
+            <h3>📧 E-mail</h3>
+
+            <p>contato@dutech.com</p>
+
+        </div>
+
+        <div class="informacao">
+
+            <h3>📱 Telefone</h3>
+
+            <p>(11) 99999-9999</p>
+
+        </div>
+
+        <div class="informacao">
+
+            <h3>🕐 Atendimento</h3>
+
+            <p>Segunda a sexta, das 9h às 18h</p>
+
+        </div>
+
+    </div>
+
+
+    <div class="formulario">
+
+        <h2>Envie uma mensagem</h2>
+
+        <form>
+
+            <label for="nome">Nome</label>
+
+            <input
+                type="text"
+                id="nome"
+                placeholder="Digite seu nome"
+            >
+
+
+            <label for="email">E-mail</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Digite seu e-mail"
+            >
+
+
+            <label for="assunto">Assunto</label>
+
+            <input
+                type="text"
+                id="assunto"
+                placeholder="Digite o assunto"
+            >
+
+
+            <label for="mensagem">Mensagem</label>
+
+            <textarea
+                id="mensagem"
+                rows="6"
+                placeholder="Digite sua mensagem..."
+            ></textarea>
+
+
+            <button type="button">
+                Enviar mensagem
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <p>
+        &copy; 2026 DuTech. Todos os direitos reservados.
+    </p>
+
+</footer>
+
+</body>
+
+</html>

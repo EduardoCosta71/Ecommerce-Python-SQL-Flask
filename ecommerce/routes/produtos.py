@@ -11,6 +11,20 @@ def get_db_connection():
     )
 
 def produtos_registrar(app):
+
+    #Rota para  as ofertas
+    @app.route('/ofertas')
+    def ofertas():  
+            
+        return render_template('/produtos/ofertas.html')
+        
+    #Rota para a página de contato
+    @app.route("/contato")
+    def contato():
+    
+        return render_template("/admin/contato.html")
+    
+        
     #Rota para cadastrar o produto
     @app.route('/cadastre')
     def cadastre():

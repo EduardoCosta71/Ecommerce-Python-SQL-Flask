@@ -1,0 +1,227 @@
+/* =========================
+   BANNER
+========================= */
+
+.banner-contato {
+
+    width: 90%;
+
+    height: 300px;
+
+    margin: 40px auto;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #0f172a
+    );
+
+    border-radius: 20px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    color: white;
+}
+
+.banner-contato h2 {
+
+    font-size: 48px;
+
+    margin-bottom: 15px;
+}
+
+.banner-contato p {
+
+    font-size: 19px;
+
+    max-width: 700px;
+}
+
+
+/* =========================
+   ÁREA DE CONTATO
+========================= */
+
+.contato {
+
+    width: 90%;
+
+    margin: 70px auto;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 50px;
+
+    align-items: start;
+}
+
+
+/* =========================
+   INFORMAÇÕES
+========================= */
+
+.contato-info {
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 10px 20px rgba(0,0,0,.08);
+}
+
+.contato-info h2 {
+
+    font-size: 30px;
+
+    margin-bottom: 15px;
+}
+
+.contato-info > p {
+
+    color: #666;
+
+    margin-bottom: 35px;
+
+    line-height: 1.7;
+}
+
+.informacao {
+
+    margin-bottom: 25px;
+}
+
+.informacao h3 {
+
+    color: #2563eb;
+
+    margin-bottom: 5px;
+}
+
+.informacao p {
+
+    color: #555;
+}
+
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+.formulario {
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 10px 20px rgba(0,0,0,.08);
+}
+
+.formulario h2 {
+
+    font-size: 30px;
+
+    margin-bottom: 25px;
+}
+
+.formulario form {
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+.formulario label {
+
+    font-weight: 600;
+
+    margin-bottom: 7px;
+
+    margin-top: 15px;
+}
+
+.formulario input,
+.formulario textarea {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: .3s;
+
+    resize: vertical;
+}
+
+.formulario input:focus,
+.formulario textarea:focus {
+
+    border-color: #2563eb;
+}
+
+.formulario button {
+
+    margin-top: 25px;
+
+    padding: 14px;
+
+    background: #2563eb;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.formulario button:hover {
+
+    background: #1d4ed8;
+}
+
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 800px) {
+
+    .contato {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .banner-contato h2 {
+
+        font-size: 38px;
+
+    }
+
+}
