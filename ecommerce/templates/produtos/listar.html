@@ -18,10 +18,10 @@
         <h1>DuTech</h1>
     </div>
 
-    <form class="pesquisa">
-        <input type="text" placeholder="Pesquisar produtos...">
-        <button>Buscar</button>
-    </form>
+    <form class="pesquisa" action="/pesquisar" method="get">
+            <input type="text" name="q" placeholder="Pesquisar produtos..." required>
+            <button>Buscar</button>
+        </form>
 
     <div class="usuario">
         <a href="/usuarios/login">Entrar</a>

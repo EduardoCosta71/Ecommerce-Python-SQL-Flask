@@ -165,3 +165,26 @@ def produtos_registrar(app):
         conn.close()
 
         return render_template('/produtos/produtos_categoria.html', produtos=produtos)
+
+    #========================================================
+
+    #Rota para pesquisar produtos
+
+    @app.route('/pesquisar', methods=['GET'])
+    def pesquisar_produtos():
+
+        query = request.args.get('q', '').strip()
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute(""" SELECT Id, Nome, Descricao, Preco, Imagem
+                            FROM Produtos
+                            WHERE Nome LIKE ? OR Descricao LIKE ?
+                            """, ('%' + query + '%', '%' + query + '%'))
+
+        produtos = cursor.fetchall()
+
+        conn.close()
+
+        return render_template('/produtos/listar.html', produtos=produtos, query=query)
