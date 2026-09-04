@@ -54,27 +54,33 @@
 
     <h2>Nossos Produtos</h2>
 
-    <div class="filtros">
+    <form class="filtros" action="/pesquisar" method="GET">
 
-        <input type="text" placeholder="Pesquisar...">
+    <select name="categoria">
 
-        <select>
-            <option>Todas categorias</option>
-            <option>Notebooks</option>
-            <option>Celulares</option>
-            <option>Monitores</option>
-            <option>Periféricos</option>
-        </select>
+        <option value="">Todas categorias</option>
+        <option value="1">Notebooks</option>
+        <option value="2">Celulares</option>
+        <option value="3">Monitores</option>
+        <option value="4">Periféricos</option>
+        <option value="5">Componentes</option>
 
-        <select>
-            <option>Ordenar por</option>
-            <option>Menor preço</option>
-            <option>Maior preço</option>
-            <option>Mais vendidos</option>
-        </select>
+    </select>
 
-    </div>
+    <select name="ordenar">
 
+        <option value="">Ordenar por</option>
+        <option value="menor_preco">Menor preço</option>
+        <option value="maior_preco">Maior preço</option>
+        <option value="mais_vendidos">Mais vendidos</option>
+
+    </select>
+
+    <button type="submit">
+        Filtrar
+    </button>
+
+</form>
 </section>
 
 <section class="produtos-grid">

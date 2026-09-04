@@ -10,13 +10,7 @@ def produtos_registrar(app):
             
         return render_template('/produtos/ofertas.html')
         
-    #Rota para a página de contato
-    @app.route("/contato")
-    def contato():
-    
-        return render_template("/admin/contato.html")
-    
-        
+     
     #Rota para cadastrar o produto
     @app.route('/cadastre')
     def cadastre():
@@ -173,18 +167,131 @@ def produtos_registrar(app):
     @app.route('/pesquisar', methods=['GET'])
     def pesquisar_produtos():
 
+    # Pesquisa
         query = request.args.get('q', '').strip()
+
+    # Categoria
+        categoria = request.args.get('categoria', '').strip()
+
+    # Ordenação
+        ordenar = request.args.get('ordenar', '').strip()
 
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        cursor.execute(""" SELECT Id, Nome, Descricao, Preco, Imagem
-                            FROM Produtos
-                            WHERE Nome LIKE ? OR Descricao LIKE ?
-                            """, ('%' + query + '%', '%' + query + '%'))
+    # Consulta base
+        sql = """
+        SELECT
+            p.Id,
+            p.Nome,
+            p.Descricao,
+            p.Preco,
+            p.Imagem,
+            p.Estoque,
+            c.Nome AS Categorias
+
+        FROM Produtos p
+
+        LEFT JOIN Categorias c
+            ON p.CategoriaId = c.Id
+
+        WHERE 1 = 1
+    """
+
+        parametros = []
+
+    # ==================================================
+    # PESQUISA POR NOME OU DESCRIÇÃO
+    # ==================================================
+
+        if query:
+
+            sql += """
+            AND (
+                p.Nome LIKE ?
+                OR p.Descricao LIKE ?
+            )
+        """
+
+            parametros.append('%' + query + '%')
+            parametros.append('%' + query + '%')
+
+
+    # ==================================================
+    # FILTRO POR CATEGORIA
+    # ==================================================
+
+        if categoria:
+
+            sql += """
+            AND p.CategoriaId = ?
+        """
+
+            parametros.append(categoria)
+
+
+    # ==================================================
+    # ORDENAÇÃO
+    # ==================================================
+
+        if ordenar == 'menor_preco':
+
+            sql += """
+            ORDER BY p.Preco ASC
+        """
+
+        elif ordenar == 'maior_preco':
+
+            sql += """
+            ORDER BY p.Preco DESC
+        """
+
+        elif ordenar == 'mais_vendidos':
+
+            sql += """
+            ORDER BY p.Id DESC
+        """
+
+        else:
+
+            sql += """
+            ORDER BY p.Id DESC
+        """
+
+
+    # ==================================================
+    # EXECUTA A CONSULTA DOS PRODUTOS
+    # ==================================================
+
+        cursor.execute(sql, parametros)
 
         produtos = cursor.fetchall()
 
+
+    # ==================================================
+    # BUSCA AS CATEGORIAS
+    # ==================================================
+
+        cursor.execute("""
+        SELECT Id, Nome
+        FROM Categorias
+        ORDER BY Nome
+    """)
+
+        categorias = cursor.fetchall()
+
         conn.close()
 
-        return render_template('/produtos/listar.html', produtos=produtos, query=query)
+
+    # ==================================================
+    # ENVIA PARA O HTML
+    # ==================================================
+
+        return render_template(
+        '/produtos/listar.html',
+        produtos=produtos,
+        query=query,
+        categorias=categorias,
+        categoria_selecionada=categoria,
+        ordenar=ordenar
+    )

@@ -35,7 +35,7 @@ def carrinho_registrar(app):
             WHERE C.UsuarioId = ?
         """, (usuario_id,))
 
-        itens = cursor.fetchall()
+        itens = cursor.fetchall() #Busca varias tuplas, mas só pega a primeira, que é o item do carrinho.
 
         total = 0
 
@@ -84,7 +84,7 @@ def carrinho_registrar(app):
                 (usuario_id,)
             )
 
-            carrinho = cursor.fetchone()
+            carrinho = cursor.fetchone() 
 
         carrinho_id = carrinho[0]
 
@@ -95,7 +95,7 @@ def carrinho_registrar(app):
             WHERE CarrinhoId = ? AND ProdutoId = ?
         """, (carrinho_id, produto_id))
 
-        item = cursor.fetchone()
+        item = cursor.fetchone() #Busca varias tuplas, mas só pega a primeira, que é o item do carrinho.
 
         if item:
 
