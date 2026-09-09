@@ -1,18 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>DuTech | Painel Administrativo</title>
+
 </head>
 <body>
 
-    <h1>Dashboard</h1>
-    <h2>Produtos</h2>
-    <p>Lista de produtos:</p>
-    <ul>
-        {% for produto in produtos %}
-            <li>{{ produto[1] }} - R$ {{ "%.2f"|format(produto[2]) }}</li>
-        {% endfor %}
-    </ul>
+    <div class="admin-container">
+
+        <!-- Menu lateral -->
+
+        <aside class="sidebar">
+
+            <div class="admin-logo">
+
+                <h1>DuTech</h1>
+                <span>ADMIN</span>
+
+            </div>
+
+            <nav class="menu-admin">
+
+                <a href="#" class="ativo">
+                    Dashboard
+                </a>
+
+                <a href="/produtos_admin">
+                    Produtos
+                </a>
+
+                <a href="#">
+                    Categorias
+                </a>
+
+                <a href="#">
+                    Pedidos
+                </a>
+
+                <a href="#">
+                    Usuários
+                </a>
+
+                <a href="#">
+                    Mensagens
+                </a>
+
+                <a href="#">
+                    Mensagens
+                </a>
+
+            </nav>
+
+            <div class="menu-inferior">
+
+                <a href="/home">
+                    Ver Loja
+                </a>
+
+                <a href="#">
+                    Sair
+                </a>
+
+            </div>
+
+        </aside>
+
+        <!-- CONTEUDO -->
+
+        <main class="conteudo">
+            <!--TOPO-->
+
+            <header class="topo">
+
+                <div>
+
+                    <h2>Dashboard</h2>
+                    <p>Bem-vindo ao painel Administrativo da DuTech</p>
+
+                </div>
+
+                <div class="admin-usuario">
+
+                    <span>Administrador</span>
+
+                </div>
+
+            </header>
+
+            <!--CARD-->
+
+            <section class="cards-dahsboard">
+
+                <div class="card-dashboard">
+
+                    <div class="card-icone">
+                        Caixa
+                    </div>
+
+                    <div>
+
+                        <p>Produtos</p>
+                        <h3>12</h3>
+
+                    </div>
+                </div>
+
+                <div class="card-dashboard">
+
+                    <div class="card-icone">
+                        Carrinho
+                    </div>
+                    
+                    <div>
+
+                        <p>Pedidos</p>
+                        <h3>8</h3>
+
+                    </div>
+                </div>
+
+                <div class="card-dashboard">
+
+                    <div class="card-icone">
+                        User
+                    </div>
+
+                    <div>
+                        <p>Usuários</p>
+                        <h3>20</h3>
+
+                    </div>
+                </div>
+
+                <div class="card-dashboard">
+
+                    <div class="card-icone">
+                        Carta
+                    </div>
+
+                    <div>
+
+                        <p>Mensagens</p>
+                        <h3>5</h3>
+
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- PEDIDOS RECENTES -->
+
+        <section class="pedidos-recentes">
+
+            <div class="titulo-secao">
+
+                <h2>Pedidos Recentes</h2>
+
+                <a href="#">
+                    Ver todos →
+                </a>
+
+            </div>
+
+
+            <div class="tabela-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Pedido</th>
+
+                            <th>Cliente</th>
+
+                            <th>Data</th>
+
+                            <th>Valor</th>
+
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>#001</td>
+
+                            <td>Cliente Exemplo</td>
+
+                            <td>09/09/2026</td>
+
+                            <td>R$ 299,90</td>
+
+                            <td>
+                                <span class="status pendente">
+                                    Pendente
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>#002</td>
+
+                            <td>Cliente Exemplo</td>
+
+                            <td>08/09/2026</td>
+
+                            <td>R$ 599,90</td>
+
+                            <td>
+                                <span class="status concluido">
+                                    Concluído
+                                </span>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
 </body>
+
 </html>
+
+
+
+

@@ -1,0 +1,276 @@
+/* =========================
+   TOPO PRODUTOS
+========================= */
+
+.topo-produtos {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 40px;
+}
+
+.topo-produtos h2 {
+
+    font-size: 32px;
+
+    margin-bottom: 5px;
+}
+
+.topo-produtos p {
+
+    color: #64748b;
+}
+
+
+/* =========================
+   BOTÃO NOVO PRODUTO
+========================= */
+
+.btn-novo {
+
+    background: #2563eb;
+
+    color: white;
+
+    padding: 13px 20px;
+
+    border-radius: 8px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.btn-novo:hover {
+
+    background: #1d4ed8;
+
+}
+
+
+/* =========================
+   LISTA
+========================= */
+
+.lista-produtos {
+
+    background: white;
+
+    border-radius: 15px;
+
+    padding: 25px;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .06);
+}
+
+.tabela-container {
+
+    overflow-x: auto;
+}
+
+
+/* =========================
+   TABELA
+========================= */
+
+.lista-produtos table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+.lista-produtos th {
+
+    text-align: left;
+
+    padding: 15px;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.lista-produtos td {
+
+    padding: 15px;
+
+    border-bottom: 1px solid #e2e8f0;
+
+    vertical-align: middle;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   IMAGEM
+========================= */
+
+.imagem-produto {
+
+    width: 60px;
+
+    height: 60px;
+
+    object-fit: cover;
+
+    border-radius: 8px;
+}
+
+.sem-imagem {
+
+    width: 60px;
+
+    height: 60px;
+
+    background: #f1f5f9;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    border-radius: 8px;
+
+    font-size: 25px;
+}
+
+
+/* =========================
+   DESCRIÇÃO
+========================= */
+
+.descricao-produto {
+
+    color: #64748b;
+
+    font-size: 12px;
+
+    margin-top: 5px;
+
+    max-width: 200px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================
+   PREÇO
+========================= */
+
+.preco {
+
+    color: #2563eb;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* =========================
+   ESTOQUE
+========================= */
+
+.estoque {
+
+    background: #dbeafe;
+
+    color: #1d4ed8;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-weight: 600;
+}
+
+
+/* =========================
+   AÇÕES
+========================= */
+
+.acoes {
+
+    display: flex;
+
+    gap: 10px;
+
+    align-items: center;
+}
+
+.btn-editar,
+.btn-excluir {
+
+    padding: 8px 12px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    transition: 0.3s;
+}
+
+.btn-editar {
+
+    background: #dbeafe;
+
+    color: #1d4ed8;
+}
+
+.btn-editar:hover {
+
+    background: #bfdbfe;
+}
+
+
+.btn-excluir {
+
+    background: #fee2e2;
+
+    color: #dc2626;
+}
+
+.btn-excluir:hover {
+
+    background: #fecaca;
+}
+
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 700px) {
+
+    .topo-produtos {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+    }
+
+    .lista-produtos {
+
+        padding: 15px;
+    }
+
+}

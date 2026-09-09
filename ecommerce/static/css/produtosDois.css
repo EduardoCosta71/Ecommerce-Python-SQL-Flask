@@ -153,8 +153,23 @@
 
 }
 
+
 footer{
 
     margin-top:80px;
 
+}
+
+/* BOTÃO DE FILTRAR */
+.btn-filtrar{
+
+    margin-top: 20px;
+    width: 100px;
+    padding: 12px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: .3s;
 }

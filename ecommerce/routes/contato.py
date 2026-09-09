@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import render_template, request, redirect, url_for, session
 import pyodbc
 from config import get_db_connection
 
@@ -15,9 +15,10 @@ def contato_registrar(app):
             assunto = request.form['assunto']
             mensagem = request.form['mensagem']
 
+        #Se não tiver esses campos preenchidos vai dar erro
             if not nome or not email or not assunto or not mensagem:
 
-                return render_template('/contato/contato.html', error="Por favor, preencha todos os campos do formulário.")
+                return render_template('/admin/contato.html', error="Por favor, preencha todos os campos do formulário.")
 
             conn = get_db_connection()
             cursor = conn.cursor()  

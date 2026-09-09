@@ -1,11 +1,211 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <title>DuTech Admin | Produtos</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/produtos_admin.css') }}">
+
 </head>
+
 <body>
-    
+
+<div class="admin-container">
+
+    <!-- MENU LATERAL -->
+
+    <aside class="sidebar">
+
+        <div class="admin-logo">
+            <h1>DuTech</h1>
+            <span>ADMIN</span>
+        </div>
+
+
+        <nav class="menu-admin">
+
+            <a href="/admin">
+                📊 Dashboard
+            </a>
+
+            <a href="/admin/produtos" class="ativo">
+                📦 Produtos
+            </a>
+
+            <a href="#">
+                📂 Categorias
+            </a>
+
+            <a href="#">
+                🛒 Pedidos
+            </a>
+
+            <a href="#">
+                👥 Usuários
+            </a>
+
+            <a href="#">
+                📩 Mensagens
+            </a>
+
+        </nav>
+
+
+        <div class="menu-inferior">
+
+            <a href="/home">
+                🏠 Ver Loja
+            </a>
+
+            <a href="/usuarios/logout">
+                🚪 Sair
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- CONTEÚDO -->
+
+    <main class="conteudo">
+
+        <div class="topo-produtos">
+
+            <div>
+
+                <h2>Produtos</h2>
+
+                <p>
+                    Gerencie os produtos cadastrados na DuTech.
+                </p>
+
+            </div>
+
+
+            <!-- Usar sua rota que já cadastra produto -->
+
+            <a href="/produtos/cadastrar" class="btn-novo">
+                + Novo Produto
+            </a>
+
+        </div>
+
+
+        <!-- LISTA DE PRODUTOS -->
+
+        <section class="lista-produtos">
+
+            {% if produtos %}
+
+            <div class="produtos-admin-grid">
+
+                {% for produto in produtos %}
+
+                <div class="produto-admin-card">
+
+                    <!-- Imagem -->
+
+                    <div class="produto-imagem">
+
+                        <img
+                            src="{{ url_for('static', filename='uploads/' + produto.Imagem) }}"
+                            alt="{{ produto.Nome }}"
+                        >
+
+                    </div>
+
+
+                    <!-- Informações -->
+
+                    <div class="produto-info">
+
+                        <h3>
+                            {{ produto.Nome }}
+                        </h3>
+
+
+                        <p class="descricao">
+
+                            {{ produto.Descricao }}
+
+                        </p>
+
+
+                        <p class="preco">
+
+                            R$ {{ "%.2f"|format(produto.Preco) }}
+
+                        </p>
+
+
+                        <p class="estoque">
+
+                            📦 Estoque:
+                            {{ produto.Estoque }}
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- AÇÕES ADMIN -->
+
+                    <div class="acoes-produto">
+
+                        <a
+                            href="/atulizar_produtos/{{ produto.Id }}"
+                            class="btn-editar"
+                        >
+                            ✏️ Editar
+                        </a>
+
+
+                        <a
+                            href="/excluir_produto/{{ produto.Id }}"
+                            class="btn-excluir"
+                            onclick="return confirm('Deseja realmente excluir este produto?')"
+                        >
+                            🗑️ Excluir
+                        </a>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+          
+    </main>  {% else %}
+
+            <div class="sem-produtos">
+
+                <h3>Nenhum produto encontrado</h3>
+
+                <p>
+                    Ainda não existem produtos cadastrados.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+
+</div>
+
 </body>
+
 </html>

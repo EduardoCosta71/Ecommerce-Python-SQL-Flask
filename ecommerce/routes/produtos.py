@@ -31,6 +31,9 @@ def produtos_registrar(app):
         conn.close()
 
         return render_template('/produtos/listar.html', produtos=produtos)
+        
+                    
+            
 
 
     #Rota responsavel por cadastrar os produtos da loja.
