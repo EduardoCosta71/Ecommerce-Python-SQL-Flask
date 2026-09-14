@@ -105,7 +105,7 @@ def pedidos_registrar(app):
         cursor = conn.cursor()
 
         #Busca os itens do carrinho
-        cursor.execute(""" SELECT IC.ProdutoId, IC.Quantidade, P.Preco
+        cursor.execute(""" SELECT IC.ProdutoId, IC.Quantidade, P.Preco, P.Estoque
                             FROM ItensCarrinho IC
                             INNER JOIN Carrinhos C
                             ON  IC.CarrinhoId = C.Id
@@ -115,9 +115,18 @@ def pedidos_registrar(app):
 
         itens = cursor.fetchall()
 
+        #Verifica se tem itens no carrinho
         if not itens:
             conn.close()
             return redirect(url_for('carrinho'))
+    
+    #Verifica o Estoque
+        for item in itens:
+
+             if item.Quantidade > item.Estoque:
+                  conn.close()
+                  return "Estoque insuficiente para um dos produtos."
+
 
         #Calcular o valor total
         valor_total = 0

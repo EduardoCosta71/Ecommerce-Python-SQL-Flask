@@ -25,16 +25,18 @@ def produtos_registrar(app):
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        cursor.execute('SELECT * FROM Produtos')
+        cursor.execute("""SELECT Id, Nome, Descricao, Preco, Imagem, Estoque
+                          FROM Produtos
+                          WHERE Estoque > 0
+                        """)
         produtos = cursor.fetchall()
 
+        
         conn.close()
 
         return render_template('/produtos/listar.html', produtos=produtos)
         
                     
-            
-
 
     #Rota responsavel por cadastrar os produtos da loja.
     @app.route('/produtos/cadastrar', methods=['GET', 'POST'])
@@ -110,15 +112,36 @@ def produtos_registrar(app):
     #Rota responsavel por excluir os produtos "listar.html" 
     @app.route('/excluir_produto/<int:id>')
     def excluir_produto(id):
-        
+
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        cursor.execute('DELETE FROM Produtos WHERE Id = ?', (id,))
-    
+    # Verifica se o produto já foi usado em algum pedido
+        cursor.execute("""
+            SELECT COUNT(*)
+            FROM ItensPedidos
+            WHERE ProdutoId = ?
+        """, (id,))
+
+        quantidade = cursor.fetchone()[0]
+
+    # Se já estiver em algum pedido, não permite excluir
+        if quantidade > 0:
+
+            conn.close()
+
+            return "Não é possível excluir este produto porque ele já possui pedidos."
+
+    # Se não estiver em nenhum pedido, pode excluir
+        cursor.execute("""
+            DELETE FROM Produtos
+            WHERE Id = ?
+        """, (id,))
+
         conn.commit()
         conn.close()
-        return redirect(url_for('listar_medicamentos'))
+
+        return render_template('/admin/produtos.html')
 
 
 #==================================================
@@ -290,11 +313,4 @@ def produtos_registrar(app):
     # ENVIA PARA O HTML
     # ==================================================
 
-        return render_template(
-        '/produtos/listar.html',
-        produtos=produtos,
-        query=query,
-        categorias=categorias,
-        categoria_selecionada=categoria,
-        ordenar=ordenar
-    )
+        return render_template('/produtos/listar.html', produtos=produtos, query=query, categorias=categorias, categoria_selecionada=categoria, ordenar=ordenar)
