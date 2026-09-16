@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DuTech Admin | Categorias</title>
+
+
+    <!-- CSS principal do painel Admin -->
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+
+    <!-- CSS específico das categorias -->
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/categorias_admin.css') }}">
+
+
+    <!-- Fonte Poppins -->
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+
+<body>
+
+
+    <!-- CONTAINER PRINCIPAL DO ADMIN -->
+
+    <div class="admin-container">
+
+
+        <!-- =====================================================
+             MENU LATERAL
+             ===================================================== -->
+
+        <aside class="sidebar">
+
+
+            <!-- LOGO -->
+
+            <div class="admin-logo">
+
+                <h1>DuTech</h1>
+
+                <span>ADMIN</span>
+
+            </div>
+
+
+            <!-- MENU -->
+
+            <nav class="menu-admin">
+
+                <a href="/admin">
+                    Dashboard
+                </a>
+
+                <a href="/produtos_admin">
+                    Produtos
+                </a>
+
+                <a href="/categorias_admin" class="ativo">
+                    Categorias
+                </a>
+
+                <a href="#">
+                    Pedidos
+                </a>
+
+                <a href="#">
+                    Usuários
+                </a>
+
+                <a href="#">
+                    Mensagens
+                </a>
+
+            </nav>
+
+
+            <!-- MENU INFERIOR -->
+
+            <div class="menu-inferior">
+
+                <a href="/home">
+                    Ver Loja
+                </a>
+
+                <a href="/usuarios/logout">
+                    Sair
+                </a>
+
+            </div>
+
+
+        </aside>
+
+
+
+        <!-- =====================================================
+             CONTEÚDO PRINCIPAL
+             ===================================================== -->
+
+        <main class="conteudo">
+
+
+            <!-- TOPO -->
+
+            <div class="topo-categorias">
+
+
+                <div>
+
+                    <h2>Categorias</h2>
+
+                    <p>
+                        Gerencie as categorias dos produtos da DuTech.
+                    </p>
+
+                </div>
+
+
+                <!-- BOTÃO NOVA CATEGORIA -->
+
+                <a href="#"
+                   class="btn-nova-categoria">
+
+                    + Nova Categoria
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 LISTA DE CATEGORIAS
+                 ================================================= -->
+
+            <section class="lista-categorias">
+
+
+                {% if categorias %}
+
+
+                    <div class="tabela-container">
+
+
+                        <table>
+
+
+                            <!-- CABEÇALHO -->
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        ID
+                                    </th>
+
+                                    <th>
+                                        Categoria
+                                    </th>
+
+                                    <th>
+
+                                        Produtos
+
+                                    </th>
+
+                                    <th>
+                                        Ações
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+
+                            <!-- CATEGORIAS -->
+
+                            <tbody>
+
+
+                                {% for categoria in categorias %}
+
+
+                                    <tr>
+
+
+                                        <!-- ID -->
+
+                                        <td>
+                                            {{ categoria.Id }}
+                                        </td>
+
+
+                                        <!-- NOME -->
+
+                                        <td>
+                                            {{ categoria.Nome }}
+                                        </td>
+
+                                        <td>
+                                        {{ categoria.QuantidadeProdutos}}
+
+                                        </td>
+
+
+                                        <!-- AÇÕES -->
+
+                                        <td>
+
+                                            <div class="acoes-categoria">
+
+                                                
+                                                <a href="/produtos_categorias_admin/{{ categoria.Id }}/produtos" class="btn-ver">
+                                                    
+                                                        Ver produtos
+                                                            </a>
+
+
+                                                <a href="#"
+                                                   class="btn-editar">
+
+                                                    Editar
+
+                                                </a>
+
+
+                                                <a href="#"
+                                                   class="btn-excluir">
+
+                                                    Excluir
+
+                                                </a>
+
+
+                                            </div>
+
+                                        </td>
+
+
+                                    </tr>
+
+
+                                {% endfor %}
+
+
+                            </tbody>
+
+
+                        </table>
+
+
+                    </div>
+
+
+                {% else %}
+
+
+                    <!-- CASO NÃO TENHA CATEGORIAS -->
+
+                    <div class="sem-categorias">
+
+                        <h3>
+                            Nenhuma categoria encontrada
+                        </h3>
+
+                        <p>
+                            Ainda não existem categorias cadastradas.
+                        </p>
+
+                        <a href="#"
+                           class="btn-nova-categoria">
+
+                            + Nova Categoria
+
+                        </a>
+
+                    </div>
+
+
+                {% endif %}
+
+
+            </section>
+
+
+        </main>
+
+
+    </div>
+
+
+</body>
+
+</html>

@@ -66,8 +66,10 @@ a {
     padding: 13px;
     border-radius: 8px;
     transition: 0.3s;
-}
 
+    font-weight: 400;
+    letter-spacing: 0;
+}
 .menu-admin a:hover,
 .menu-admin .ativo {
     background: #2563eb;

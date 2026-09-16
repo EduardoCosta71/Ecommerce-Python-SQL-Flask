@@ -9,52 +9,64 @@
 
     <title>DuTech Admin | Produtos</title>
 
+    <!-- CSS principal do Admin -->
     <link rel="stylesheet"
         href="{{ url_for('static', filename='css/dashboard.css') }}">
 
+    <!-- CSS somente da página de produtos -->
     <link rel="stylesheet"
         href="{{ url_for('static', filename='css/produtos_admin.css') }}">
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
 <div class="admin-container">
 
-    <!-- MENU LATERAL -->
+
+    <!-- =====================================================
+         MENU LATERAL
+    ====================================================== -->
 
     <aside class="sidebar">
 
         <div class="admin-logo">
+
             <h1>DuTech</h1>
+
             <span>ADMIN</span>
+
         </div>
 
 
         <nav class="menu-admin">
 
             <a href="/admin">
-                📊 Dashboard
+                Dashboard
             </a>
 
-            <a href="/admin/produtos" class="ativo">
-                📦 Produtos
+            <a href="/produtos_admin" class="ativo">
+                Produtos
             </a>
 
-            <a href="#">
-                📂 Categorias
-            </a>
-
-            <a href="#">
-                🛒 Pedidos
+            <a href="/categorias_admin">
+                Categorias
             </a>
 
             <a href="#">
-                👥 Usuários
+                Pedidos
             </a>
 
             <a href="#">
-                📩 Mensagens
+                Usuários
+            </a>
+
+            <a href="#">
+                Mensagens
             </a>
 
         </nav>
@@ -63,11 +75,11 @@
         <div class="menu-inferior">
 
             <a href="/home">
-                🏠 Ver Loja
+                Ver Loja
             </a>
 
             <a href="/usuarios/logout">
-                🚪 Sair
+                Sair
             </a>
 
         </div>
@@ -75,9 +87,15 @@
     </aside>
 
 
-    <!-- CONTEÚDO -->
+
+    <!-- =====================================================
+         CONTEÚDO PRINCIPAL
+    ====================================================== -->
 
     <main class="conteudo">
+
+
+        <!-- CABEÇALHO -->
 
         <div class="topo-produtos">
 
@@ -92,8 +110,6 @@
             </div>
 
 
-            <!-- Usar sua rota que já cadastra produto -->
-
             <a href="/produtos/cadastrar" class="btn-novo">
                 + Novo Produto
             </a>
@@ -101,19 +117,29 @@
         </div>
 
 
-        <!-- LISTA DE PRODUTOS -->
+
+        <!-- =================================================
+             LISTAGEM DOS PRODUTOS
+        ================================================== -->
 
         <section class="lista-produtos">
 
+
             {% if produtos %}
+
 
             <div class="produtos-admin-grid">
 
+
                 {% for produto in produtos %}
+
+
+                <!-- CARD DO PRODUTO -->
 
                 <div class="produto-admin-card">
 
-                    <!-- Imagem -->
+
+                    <!-- IMAGEM -->
 
                     <div class="produto-imagem">
 
@@ -125,7 +151,8 @@
                     </div>
 
 
-                    <!-- Informações -->
+
+                    <!-- INFORMAÇÕES -->
 
                     <div class="produto-info">
 
@@ -150,7 +177,7 @@
 
                         <p class="estoque">
 
-                            📦 Estoque:
+                            <span>Estoque:</span>
                             {{ produto.Estoque }}
 
                         </p>
@@ -158,15 +185,17 @@
                     </div>
 
 
-                    <!-- AÇÕES ADMIN -->
+
+                    <!-- AÇÕES -->
 
                     <div class="acoes-produto">
+
 
                         <a
                             href="/atulizar_produtos/{{ produto.Id }}"
                             class="btn-editar"
                         >
-                            ✏️ Editar
+                            Editar
                         </a>
 
 
@@ -175,19 +204,26 @@
                             class="btn-excluir"
                             onclick="return confirm('Deseja realmente excluir este produto?')"
                         >
-                            🗑️ Excluir
+                            Excluir
                         </a>
+
 
                     </div>
 
+
                 </div>
+
 
                 {% endfor %}
 
+
             </div>
 
-          
-    </main>  {% else %}
+
+            {% else %}
+
+
+            <!-- CASO NÃO EXISTAM PRODUTOS -->
 
             <div class="sem-produtos">
 
@@ -197,11 +233,20 @@
                     Ainda não existem produtos cadastrados.
                 </p>
 
+                <a href="/produtos/cadastrar" class="btn-novo">
+                    + Cadastrar Produto
+                </a>
+
             </div>
+
 
             {% endif %}
 
+
         </section>
+
+
+    </main>
 
 
 </div>
