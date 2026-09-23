@@ -1,0 +1,200 @@
+/* =====================================================
+   PEDIDOS - DETALHES ADMIN
+   ===================================================== */
+
+.conteudo {
+    flex: 1;
+    padding: 40px;
+    background: #f5f7fa;
+}
+
+
+/* TOPO */
+
+.topo-detalhes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.topo-detalhes h2 {
+    font-size: 32px;
+    color: #1e293b;
+    margin-bottom: 5px;
+}
+
+.topo-detalhes p {
+    color: #64748b;
+}
+
+
+/* BOTÃO VOLTAR */
+
+.btn-voltar {
+    background: #f1f5f9;
+    color: #475569;
+
+    padding: 11px 18px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.btn-voltar:hover {
+    background: #e2e8f0;
+}
+
+
+/* LISTA */
+
+.lista-itens {
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .06);
+}
+
+
+/* TÍTULO */
+
+.titulo-secao {
+    margin-bottom: 25px;
+}
+
+.titulo-secao h3 {
+    color: #1e293b;
+    font-size: 20px;
+}
+
+
+/* TABELA */
+
+.tabela-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 16px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+    color: #64748b;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+td {
+    color: #1e293b;
+
+    font-size: 14px;
+}
+
+
+/* PRODUTO */
+
+.produto {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.produto-imagem {
+    width: 60px;
+    height: 60px;
+
+    background: #f1f5f9;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    flex-shrink: 0;
+}
+
+.produto-imagem img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.produto span {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+
+/* SUBTOTAL */
+
+.subtotal {
+    color: #2563eb;
+    font-weight: 600;
+}
+
+
+/* SEM ITENS */
+
+.sem-itens {
+    text-align: center;
+    padding: 50px;
+}
+
+.sem-itens h3 {
+    font-size: 22px;
+
+    color: #1e293b;
+
+    margin-bottom: 10px;
+}
+
+.sem-itens p {
+    color: #64748b;
+}
+
+
+/* RESPONSIVO */
+
+@media (max-width: 700px) {
+
+    .conteudo {
+        padding: 20px;
+    }
+
+    .topo-detalhes {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .lista-itens {
+        padding: 20px;
+    }
+
+    th,
+    td {
+        padding: 12px;
+    }
+
+}

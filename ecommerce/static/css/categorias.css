@@ -1,162 +1,117 @@
 /* =====================================================
-   CATEGORIAS - ADMIN
+   CATEGORIAS
    ===================================================== */
 
-.conteudo {
-    flex: 1;
-    padding: 40px;
-    background: #f5f7fa;
+.categorias-banner {
+    background: #2563eb;
+    padding: 50px 60px;
+    color: white;
 }
 
-
-/* =====================================================
-   TOPO
-   ===================================================== */
-
-.topo-categorias {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-}
-
-.topo-categorias h2 {
+.categorias-banner h2 {
     font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.categorias-banner p {
+    font-size: 15px;
+    color: #dbeafe;
+}
+
+
+/* =====================================================
+   CONTEÚDO
+   ===================================================== */
+
+.categorias-conteudo {
+    padding: 50px 60px;
+}
+
+.categorias-conteudo h2 {
+    font-size: 28px;
     color: #1e293b;
-    margin-bottom: 5px;
-}
-
-.topo-categorias p {
-    color: #64748b;
+    margin-bottom: 30px;
 }
 
 
 /* =====================================================
-   BOTÃO NOVA CATEGORIA
+   CARDS
    ===================================================== */
 
-.btn-nova-categoria {
-    background: #2563eb;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: 0.3s;
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
 }
 
-.btn-nova-categoria:hover {
-    background: #1d4ed8;
-}
-
-
-/* =====================================================
-   ÁREA DA TABELA
-   ===================================================== */
-
-.lista-categorias {
+.card {
     background: white;
-    padding: 30px;
+    padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, .06);
-}
-
-.tabela-container {
-    overflow-x: auto;
-}
-
-
-/* =====================================================
-   TABELA
-   ===================================================== */
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th,
-td {
-    padding: 16px;
-    text-align: left;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-th {
-    color: #64748b;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-td {
-    color: #1e293b;
-    font-size: 14px;
-}
-
-
-/* =====================================================
-   AÇÕES
-   ===================================================== */
-
-.acoes-categoria {
-    display: flex;
-    gap: 10px;
-}
-
-
-/* EDITAR */
-
-.btn-editar {
-    background: #eff6ff;
-    color: #2563eb;
-    padding: 8px 14px;
-    border-radius: 7px;
-    font-size: 13px;
-    font-weight: 600;
-    transition: 0.3s;
-}
-
-.btn-editar:hover {
-    background: #2563eb;
-    color: white;
-}
-
-
-/* EXCLUIR */
-
-.btn-excluir {
-    background: #fef2f2;
-    color: #dc2626;
-    padding: 8px 14px;
-    border-radius: 7px;
-    font-size: 13px;
-    font-weight: 600;
-    transition: 0.3s;
-}
-
-.btn-excluir:hover {
-    background: #dc2626;
-    color: white;
-}
-
-
-/* =====================================================
-   CASO NÃO TENHA CATEGORIAS
-   ===================================================== */
-
-.sem-categorias {
     text-align: center;
-    padding: 50px;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .06);
+
+    transition: 0.3s;
 }
 
-.sem-categorias h3 {
-    font-size: 22px;
+.card:hover {
+    transform: translateY(-5px);
+}
+
+
+/* =====================================================
+   IMAGEM
+   ===================================================== */
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+
+/* =====================================================
+   TEXTO
+   ===================================================== */
+
+.card h3 {
     color: #1e293b;
+    font-size: 20px;
     margin-bottom: 10px;
 }
 
-.sem-categorias p {
+.card p {
     color: #64748b;
-    margin-bottom: 25px;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+
+/* =====================================================
+   BOTÃO
+   ===================================================== */
+
+.card button {
+    border: none;
+    background: #2563eb;
+    color: white;
+
+    padding: 10px 18px;
+    border-radius: 8px;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card button:hover {
+    background: #1d4ed8;
 }
 
 
@@ -164,21 +119,43 @@ td {
    RESPONSIVO
    ===================================================== */
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
 
-    .topo-categorias {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
+    .categorias-banner {
+        padding: 45px 30px;
     }
 
-    .lista-categorias {
-        padding: 20px;
+    .categorias-conteudo {
+        padding: 40px 30px;
     }
 
-    th,
-    td {
-        padding: 12px;
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .categorias-banner {
+        padding: 40px 20px;
+    }
+
+    .categorias-banner h2 {
+        font-size: 27px;
+    }
+
+    .categorias-conteudo {
+        padding: 35px 20px;
+    }
+
+    .categorias-conteudo h2 {
+        font-size: 24px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
     }
 
 }

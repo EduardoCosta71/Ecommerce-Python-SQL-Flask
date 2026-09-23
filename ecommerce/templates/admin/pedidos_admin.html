@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DuTech Admin | Pedidos</title>
+
+    <!-- CSS do menu lateral -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <!-- CSS desta página -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/pedidos_admin_detalhes.css') }}">
+
+    <!-- Fonte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="admin-container">
+
+    <!-- MENU LATERAL -->
+    <aside class="sidebar">
+
+        <div class="admin-logo">
+            <h1>DuTech</h1>
+            <span>ADMIN</span>
+        </div>
+
+        <nav class="menu-admin">
+
+            <a href="/admin">
+                Dashboard
+            </a>
+
+            <a href="/produtos_admin">
+                Produtos
+            </a>
+
+            <a href="/categorias_admin">
+                Categorias
+            </a>
+
+            <a href="/pedidos_admin" class="ativo">
+                Pedidos
+            </a>
+
+            <a href="#">
+                Usuários
+            </a>
+
+            <a href="#">
+                Mensagens
+            </a>
+
+        </nav>
+
+        <div class="menu-inferior">
+
+            <a href="/home">
+                Ver Loja
+            </a>
+
+            <a href="/usuarios/logout">
+                Sair
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- CONTEÚDO -->
+    <main class="conteudo">
+
+        <!-- TOPO -->
+        <div class="topo-pedidos">
+
+            <div>
+
+                <h2>Pedidos</h2>
+
+                <p>
+                    Gerencie os pedidos realizados na DuTech.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- LISTA DE PEDIDOS -->
+        <section class="lista-pedidos">
+
+            {% if pedidos %}
+
+            <div class="tabela-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Cliente</th>
+
+                            <th>Data</th>
+
+                            <th>Valor Total</th>
+
+                            <th>Status</th>
+
+                            <th>Ações</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for pedido in pedidos %}
+
+                        <tr>
+
+                            <td>
+                                #{{ pedido.Id }}
+                            </td>
+
+                            <td>
+                                {{ pedido.UsuarioId }}
+                            </td>
+
+                            <td>
+                                {{ pedido.DataPedido }}
+                            </td>
+
+                            <td>
+                                R$ {{ "%.2f"|format(pedido.ValorTotal) }}
+                            </td>
+
+                            <td>
+
+                                <span class="status {{ pedido.Status|lower }}">
+                                    {{ pedido.Status }}
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <div class="acoes-pedido">
+
+                                    <a href="/pedido_admin_detalhes/{{ pedido.Id }}"
+                                    class="btn-ver">
+                                    Ver detalhes
+                                    </a>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <div class="sem-pedidos">
+
+                <h3>Nenhum pedido encontrado</h3>
+
+                <p>
+                    Ainda não existem pedidos realizados na loja.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

@@ -89,24 +89,24 @@ def produtos_registrar(app):
         if request.method == 'POST':
 
             nome = request.form['nome']
-            descricao = request.form['preco']
+            descricao = request.form['descricao']
             preco = request.form['preco']
             estoque = request.form['estoque']
             imagem = request.form['imagem']
 
-            cursor.execute('UPDATE Produtos SET Nome = ?, Descricao = ?, Preco = ?, Estoque = ?, Imagem = ?',
-                           (nome, descricao, preco, estoque, imagem))
+            cursor.execute('UPDATE Produtos SET Nome = ?, Descricao = ?, Preco = ?, Estoque = ?, Imagem = ? WHERE Id = ?',
+                           (nome, descricao, preco, estoque, imagem, id))
             
             conn.commit()
             conn.close()
 
-            return redirect(url_for('listar'))
+            return redirect(url_for('produtos_admin', id=id))
         
         cursor.execute('SELECT * FROM Produtos WHERE Id = ?', (id,))
         produte = cursor.fetchone()
 
         conn.close()
-        return render_template('produtos/listar.html', produte=produte)
+        return render_template('/admin/atualizar.html', produte=produte)
 
         
     #Rota responsavel por excluir os produtos "listar.html" 
@@ -148,7 +148,6 @@ def produtos_registrar(app):
 
 
     #Rota para as categorias
-
     @app.route('/categorias')
     def categorias():
 
@@ -165,6 +164,7 @@ def produtos_registrar(app):
         conn.close()
 
         return render_template('/produtos/categorias.html', categorias=categorias)
+
 
 
 
@@ -186,10 +186,9 @@ def produtos_registrar(app):
 
         return render_template('/produtos/produtos_categoria.html', produtos=produtos)
 
-    #========================================================
+    #===================================================================================================
 
     #Rota para pesquisar produtos
-
     @app.route('/pesquisar', methods=['GET'])
     def pesquisar_produtos():
 
@@ -294,10 +293,8 @@ def produtos_registrar(app):
         produtos = cursor.fetchall()
 
 
-    # ==================================================
     # BUSCA AS CATEGORIAS
-    # ==================================================
-
+  
         cursor.execute("""
         SELECT Id, Nome
         FROM Categorias
@@ -305,12 +302,7 @@ def produtos_registrar(app):
     """)
 
         categorias = cursor.fetchall()
-
         conn.close()
 
-
-    # ==================================================
-    # ENVIA PARA O HTML
-    # ==================================================
 
         return render_template('/produtos/listar.html', produtos=produtos, query=query, categorias=categorias, categoria_selecionada=categoria, ordenar=ordenar)

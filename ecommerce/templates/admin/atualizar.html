@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DuTech | Editar Produto</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/atualizar.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="admin-container">
+
+    <!-- MENU LATERAL -->
+
+    <aside class="sidebar">
+
+        <div class="admin-logo">
+            <h1>DuTech</h1>
+            <span>ADMIN</span>
+        </div>
+
+        <nav class="menu-admin">
+
+            <a href="/admin">
+                Dashboard
+            </a>
+
+            <a href="/produtos_admin" class="ativo">
+                Produtos
+            </a>
+
+            <a href="/categorias_admin">
+                Categorias
+            </a>
+
+            <a href="/pedidos_admin">
+                Pedidos
+            </a>
+
+            <a href="#">
+                Usuários
+            </a>
+
+            <a href="#">
+                Mensagens
+            </a>
+
+        </nav>
+
+        <div class="menu-inferior">
+
+            <a href="/home">
+                Ver Loja
+            </a>
+
+            <a href="/usuarios/logout">
+                Sair
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- CONTEÚDO -->
+
+    <main class="conteudo">
+
+        <div class="topo-editar">
+
+            <div>
+
+                <h2>Editar Produto</h2>
+
+                <p>
+                    Atualize as informações do produto.
+                </p>
+
+            </div>
+
+            <a href="/produtos_admin" class="btn-voltar">
+                Voltar
+            </a>
+
+        </div>
+
+
+        <!-- FORMULÁRIO -->
+
+        <section class="formulario-produto">
+
+            <form method="POST">
+
+                <div class="campo">
+
+                    <label for="nome">
+                        Nome do produto
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        value="{{ produte.Nome }}"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="descricao">
+                        Descrição
+                    </label>
+
+                    <textarea
+                        id="descricao"
+                        name="descricao"
+                        rows="4"
+                        required
+                    >{{ produte.Descricao }}</textarea>
+
+                </div>
+
+
+                <div class="linha-campos">
+
+                    <div class="campo">
+
+                        <label for="preco">
+                            Preço
+                        </label>
+
+                        <input
+                            type="number"
+                            id="preco"
+                            name="preco"
+                            step="0.01"
+                            value="{{ produte.Preco }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="estoque">
+                            Estoque
+                        </label>
+
+                        <input
+                            type="number"
+                            id="estoque"
+                            name="estoque"
+                            value="{{ produte.Estoque }}"
+                            min="0"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="imagem">
+                        Imagem
+                    </label>
+
+                    <input
+                        type="text"
+                        id="imagem"
+                        name="imagem"
+                        value="{{ produte.Imagem }}"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="acoes-formulario">
+
+                    <a href="/produtos_admin" class="btn-cancelar">
+                        Cancelar
+                    </a>
+
+                    <button type="submit" class="btn-salvar">
+                        Salvar Alterações
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

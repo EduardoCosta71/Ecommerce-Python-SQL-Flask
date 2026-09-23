@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DuTech Admin | Nova Categoria</title>
+
+    <!-- CSS do menu lateral -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <!-- CSS desta página -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/cadastrar_categoria.css') }}">
+
+    <!-- Fonte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="admin-container">
+
+    <!-- MENU LATERAL -->
+    <aside class="sidebar">
+
+        <div class="admin-logo">
+            <h1>DuTech</h1>
+            <span>ADMIN</span>
+        </div>
+
+        <nav class="menu-admin">
+
+            <a href="/admin">
+                Dashboard
+            </a>
+
+            <a href="/produtos_admin">
+                Produtos
+            </a>
+
+            <a href="/categorias_admin" class="ativo">
+                Categorias
+            </a>
+
+            <a href="/pedidos_admin">
+                Pedidos
+            </a>
+
+            <a href="#">
+                Usuários
+            </a>
+
+            <a href="#">
+                Mensagens
+            </a>
+
+        </nav>
+
+        <div class="menu-inferior">
+
+            <a href="/home">
+                Ver Loja
+            </a>
+
+            <a href="/usuarios/logout">
+                Sair
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- CONTEÚDO -->
+    <main class="conteudo">
+
+        <div class="topo-cadastro">
+
+            <div>
+                <h2>Nova Categoria</h2>
+
+                <p>
+                    Cadastre uma nova categoria para os produtos.
+                </p>
+            </div>
+
+            <a href="/categorias_admin" class="btn-voltar">
+                Voltar
+            </a>
+
+        </div>
+
+
+        <!-- FORMULÁRIO -->
+        <section class="formulario-categoria">
+
+            <form method="POST">
+
+                <div class="campo">
+
+                    <label for="nome_categoria">
+                        Nome da categoria
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome_categoria"
+                        name="nome_categoria"
+                        placeholder="Ex: Notebooks"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="acoes-formulario">
+
+                    <a href="/categorias_admin"
+                       class="btn-cancelar">
+                        Cancelar
+                    </a>
+
+                    <button type="submit" class="btn-salvar">
+                        Cadastrar Categoria
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+/* CONTEÚDO */
+
+.conteudo {
+    flex: 1;
+    padding: 40px;
+    background: #f5f7fa;
+}
+
+
+/* TOPO */
+
+.topo-cadastro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.topo-cadastro h2 {
+    font-size: 32px;
+    color: #1e293b;
+    margin-bottom: 5px;
+}
+
+.topo-cadastro p {
+    color: #64748b;
+}
+
+
+/* BOTÃO VOLTAR */
+
+.btn-voltar {
+    background: #f1f5f9;
+    color: #475569;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-voltar:hover {
+    background: #e2e8f0;
+}
+
+
+/* FORMULÁRIO */
+
+.formulario-categoria {
+    background: white;
+    max-width: 700px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .06);
+}
+
+
+/* CAMPO */
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+.campo label {
+    color: #1e293b;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.campo input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+
+    transition: 0.3s;
+}
+
+.campo input:focus {
+    border-color: #2563eb;
+}
+
+
+/* AÇÕES */
+
+.acoes-formulario {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+
+/* CANCELAR */
+
+.btn-cancelar {
+    padding: 11px 18px;
+    border-radius: 8px;
+
+    background: #f1f5f9;
+    color: #475569;
+
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.btn-cancelar:hover {
+    background: #e2e8f0;
+}
+
+
+/* SALVAR */
+
+.btn-salvar {
+    border: none;
+
+    padding: 11px 18px;
+    border-radius: 8px;
+
+    background: #2563eb;
+    color: white;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.btn-salvar:hover {
+    background: #1d4ed8;
+}
+
+
+/* RESPONSIVO */
+
+@media (max-width: 700px) {
+
+    .conteudo {
+        padding: 20px;
+    }
+
+    .topo-cadastro {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .formulario-categoria {
+        padding: 20px;
+    }
+
+    .acoes-formulario {
+        flex-direction: column;
+    }
+
+    .btn-cancelar,
+    .btn-salvar {
+        width: 100%;
+        text-align: center;
+    }
+
+}

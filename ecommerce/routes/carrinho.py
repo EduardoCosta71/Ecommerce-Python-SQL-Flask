@@ -118,6 +118,7 @@ def carrinho_registrar(app):
 
         return redirect(url_for('carrinho'))
     
+    
     #Rota para excluir produto do carrinho de compras.
     #Foi adicionado uma verificação para só usuarios logado.
     @app.route('/carrinho/remover/<int:item_id>')
@@ -181,6 +182,8 @@ def carrinho_registrar(app):
         conn.close()
 
         return redirect(url_for('carrinho'))
+
+    
     
     #Rota para aumentar os itens do carrinho.
     @app.route('/carrinho/aumentar/<item_id>')

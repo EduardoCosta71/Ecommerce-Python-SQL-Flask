@@ -206,6 +206,7 @@ def pedidos_registrar(app):
         conn.close()
 
         return render_template("pedidos/meus_pedidos.html", pedidos=pedidos)
+        
 
             
 
