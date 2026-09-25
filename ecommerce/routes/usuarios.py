@@ -32,6 +32,12 @@ def usuarios_registrar(app):
 
 
 #================================================================================   
+    @app.route('/usuarios/logout')
+    def logout():
+
+        session.clear()
+
+        return redirect(url_for('home'))  # Redirecionar para a página inicial após o logout
 
     #Rota responsavel por verificar cadastro realizado pelo cliente e fazer login.
     @app.route('/usuarios/login', methods=['GET', 'POST'])

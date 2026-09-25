@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meu Perfil | DuTech</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+    <header class="header">
+
+        <div class="logo">
+            <a href="/home">DuTech</a>
+        </div>
+
+        <nav class="menu">
+            <a href="/home">Início</a>
+            <a href="/produtos">Produtos</a>
+            <a href="/meus_pedidos">Meus pedidos</a>
+            <a href="/usuarios/logout" class="btn-sair">Sair</a>
+        </nav>
+
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main class="container">
+
+        <div class="titulo-pagina">
+            <h1>Meu Perfil</h1>
+            <p>Gerencie suas informações pessoais.</p>
+        </div>
+
+        <!-- Informações pessoais -->
+        <section class="card-perfil">
+
+            <div class="card-titulo">
+                <h2>Informações pessoais</h2>
+
+                <a href="#" class="btn-editar">
+                    Editar perfil
+                </a>
+            </div>
+
+            <div class="informacoes">
+
+                <div class="campo">
+                    <label>Nome completo</label>
+                    <p>{{ usuario.Nome }}</p>
+                </div>
+
+                <div class="campo">
+                    <label>E-mail</label>
+                    <p>{{ usuario.Email }}</p>
+                </div>
+
+                <div class="campo">
+                    <label>ID do usuário</label>
+                    <p>#{{ usuario.Id }}</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Endereço de entrega -->
+        <section class="card-perfil">
+
+            <div class="card-titulo">
+                <h2>Endereço de entrega</h2>
+            </div>
+
+            <div class="informacoes">
+
+                <div class="campo">
+                    <label>CEP</label>
+                    <p>{{ usuario.CEP or 'Não informado' }}</p>
+                </div>
+
+                <div class="campo">
+                    <label>Rua</label>
+                    <p>{{ usuario.Rua or 'Não informado' }}</p>
+                </div>
+
+                <div class="campo">
+                    <label>Número</label>
+                    <p>{{ usuario.Numero or 'Não informado' }}</p>
+                </div>
+
+                <div class="campo">
+                    <label>Bairro</label>
+                    <p>{{ usuario.Bairro or 'Não informado' }}</p>
+                </div>
+
+                <div class="campo">
+                    <label>Cidade</label>
+                    <p>{{ usuario.Cidade or 'Não informado' }}</p>
+                </div>
+
+                <div class="campo">
+                    <label>Estado</label>
+                    <p>{{ usuario.Estado or 'Não informado' }}</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Ações -->
+        <section class="acoes-perfil">
+
+            <a href="/meus_pedidos" class="btn-pedidos">
+                Meus pedidos
+            </a>
+
+            <a href="/usuarios/logout" class="btn-sair-conteudo">
+                Sair da conta
+            </a>
+
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <p>© 2026 DuTech - Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>

@@ -6,6 +6,7 @@ import os
 #Iniciação Flask
 app = Flask(__name__)
 
+from routes.perfil import perfil_registrar
 from routes.home import home_registrar
 from routes.usuarios import usuarios_registrar
 from routes.produtos import produtos_registrar
@@ -24,6 +25,7 @@ carrinho_registrar(app)
 admin_registrar(app)
 pedidos_registrar(app)
 contato_registrar(app)
+perfil_registrar(app)
 
 
 if __name__ == '__main__':
