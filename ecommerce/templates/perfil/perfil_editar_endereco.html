@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Editar Endereço | DuTech</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil_editar_endereco.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>DuTech</h1>
+    </header>
+
+    <main class="container">
+
+        <div class="endereco-card">
+
+            <h2>Editar Endereço</h2>
+
+            <p class="descricao">
+                Atualize seu endereço de entrega.
+            </p>
+
+            <form method="POST">
+
+                <!-- CEP -->
+                <div class="campo">
+                    <label for="cep">CEP</label>
+                    <input
+                        type="text"
+                        id="cep"
+                        name="cep"
+                        value="{{ endereco.CEP }}"
+                        placeholder="Digite seu CEP"
+                        required
+                    >
+                </div>
+
+                <!-- Rua -->
+                <div class="campo">
+                    <label for="rua">Rua</label>
+                    <input
+                        type="text"
+                        id="rua"
+                        name="rua"
+                        value="{{ endereco.Rua }}"
+                        placeholder="Digite o nome da rua"
+                        required
+                    >
+                </div>
+
+                <!-- Número e complemento -->
+                <div class="linha">
+
+                    <div class="campo">
+                        <label for="numero">Número</label>
+                        <input
+                            type="text"
+                            id="numero"
+                            name="numero"
+                            value="{{ endereco.Numero }}"
+                            placeholder="Nº"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="complemento">Complemento</label>
+                        <input
+                            type="text"
+                            id="complemento"
+                            name="complemento"
+                            value="{{ endereco.Complemento or '' }}"
+                            placeholder="Casa, ap..."
+                        >
+                    </div>
+
+                </div>
+
+                <!-- Bairro -->
+                <div class="campo">
+                    <label for="bairro">Bairro</label>
+                    <input
+                        type="text"
+                        id="bairro"
+                        name="bairro"
+                        value="{{ endereco.Bairro }}"
+                        placeholder="Digite seu bairro"
+                        required
+                    >
+                </div>
+
+                <!-- Cidade e estado -->
+                <div class="linha">
+
+                    <div class="campo">
+                        <label for="cidade">Cidade</label>
+                        <input
+                            type="text"
+                            id="cidade"
+                            name="cidade"
+                            value="{{ endereco.Cidade }}"
+                            placeholder="Digite sua cidade"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="estado">Estado</label>
+                        <input
+                            type="text"
+                            id="estado"
+                            name="estado"
+                            value="{{ endereco.Estado }}"
+                            placeholder="UF"
+                            maxlength="2"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn-salvar">
+                    Salvar endereço
+                </button>
+
+                <a href="{{ url_for('perfil') }}" class="btn-voltar">
+                    Voltar ao perfil
+                </a>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

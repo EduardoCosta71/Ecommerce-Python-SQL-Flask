@@ -1,0 +1,128 @@
+/* Configurações gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: #0f172a;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #0f172a;
+    padding: 20px 8%;
+}
+
+header h1 {
+    color: #3b82f6;
+    font-size: 28px;
+}
+
+/* Container principal */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh;
+    padding: 30px 15px;
+}
+
+/* Cartão de edição */
+.perfil-card {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 500px;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Título */
+.perfil-card h2 {
+    font-size: 26px;
+    margin-bottom: 10px;
+    color: #0f172a;
+}
+
+.descricao {
+    color: #64748b;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+/* Campos do formulário */
+.campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.campo label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.campo input {
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.campo input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* Botão salvar */
+.btn-salvar {
+    width: 100%;
+    padding: 13px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-salvar:hover {
+    background-color: #1d4ed8;
+}
+
+/* Botão voltar */
+.btn-voltar {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    padding: 12px;
+    color: #2563eb;
+    text-decoration: none;
+    border: 1px solid #2563eb;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.btn-voltar:hover {
+    background-color: #eff6ff;
+}
+
+/* Responsividade */
+@media (max-width: 500px) {
+    .perfil-card {
+        padding: 25px 20px;
+    }
+
+    .perfil-card h2 {
+        font-size: 23px;
+    }
+}

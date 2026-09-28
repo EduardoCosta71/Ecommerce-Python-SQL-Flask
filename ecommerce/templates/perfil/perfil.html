@@ -48,7 +48,7 @@
             <div class="card-titulo">
                 <h2>Informações pessoais</h2>
 
-                <a href="#" class="btn-editar">
+                <a href="/atualizar_perfil/{{ usuario.Id }}" class="btn-editar">
                     Editar perfil
                 </a>
             </div>
@@ -83,6 +83,8 @@
 
             <div class="informacoes">
 
+                
+
                 <div class="campo">
                     <label>CEP</label>
                     <p>{{ usuario.CEP or 'Não informado' }}</p>
@@ -112,6 +114,10 @@
                     <label>Estado</label>
                     <p>{{ usuario.Estado or 'Não informado' }}</p>
                 </div>
+
+                <a href="/atualizar_perfil_endereco/{{ usuario.Id }}" class="btn-editar">
+                    Editar endereço
+                </a>
 
             </div>
 
