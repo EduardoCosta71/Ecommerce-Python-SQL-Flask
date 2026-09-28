@@ -83,39 +83,38 @@
 
             <div class="informacoes">
 
-                
-
+            
                 <div class="campo">
                     <label>CEP</label>
-                    <p>{{ usuario.CEP or 'Não informado' }}</p>
+                    <p>{{ endereco.CEP or 'Não informado' }}</p>
                 </div>
 
                 <div class="campo">
                     <label>Rua</label>
-                    <p>{{ usuario.Rua or 'Não informado' }}</p>
+                    <p>{{ endereco.Rua or 'Não informado' }}</p>
                 </div>
 
                 <div class="campo">
                     <label>Número</label>
-                    <p>{{ usuario.Numero or 'Não informado' }}</p>
+                    <p>{{ endereco.Numero or 'Não informado' }}</p>
                 </div>
 
                 <div class="campo">
                     <label>Bairro</label>
-                    <p>{{ usuario.Bairro or 'Não informado' }}</p>
+                    <p>{{ endereco.Bairro or 'Não informado' }}</p>
                 </div>
 
                 <div class="campo">
                     <label>Cidade</label>
-                    <p>{{ usuario.Cidade or 'Não informado' }}</p>
+                    <p>{{ endereco.Cidade or 'Não informado' }}</p>
                 </div>
 
                 <div class="campo">
                     <label>Estado</label>
-                    <p>{{ usuario.Estado or 'Não informado' }}</p>
+                    <p>{{ endereco.Estado or 'Não informado' }}</p>
                 </div>
 
-                <a href="/atualizar_perfil_endereco/{{ usuario.Id }}" class="btn-editar">
+                <a href="/atualizar_perfil_endereco/{{ endereco.Id }}" class="btn-editar">
                     Editar endereço
                 </a>
 

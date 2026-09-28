@@ -14,6 +14,7 @@ from routes.carrinho import carrinho_registrar
 from routes.admin import admin_registrar
 from routes.pedidos import pedidos_registrar
 from routes.contato import contato_registrar
+from routes.api_cep import api_cep_registrar
 
 app.secret_key = os.getenv("SECRET_KEY")
 load_dotenv()  # Carrega as variáveis de ambiente do arquivo .env
@@ -26,6 +27,7 @@ admin_registrar(app)
 pedidos_registrar(app)
 contato_registrar(app)
 perfil_registrar(app)
+api_cep_registrar(app)
 
 
 if __name__ == '__main__':

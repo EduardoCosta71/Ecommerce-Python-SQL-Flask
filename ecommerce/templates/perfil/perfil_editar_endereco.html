@@ -26,17 +26,43 @@
                 Atualize seu endereço de entrega.
             </p>
 
-            <form method="POST">
+            <!-- Formulário para buscar o CEP -->
+            <form method="POST" action="{{ url_for('buscar_cep', endereco_id=endereco_id) }}">
 
-                <!-- CEP -->
                 <div class="campo">
                     <label for="cep">CEP</label>
+
                     <input
                         type="text"
                         id="cep"
                         name="cep"
-                        value="{{ endereco.CEP }}"
+                        value="{{ endereco.cep if endereco and endereco.cep else '' }}"
                         placeholder="Digite seu CEP"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn-buscar">
+                    Buscar CEP
+                </button>
+
+            </form>
+
+            <hr>
+
+            <!-- Formulário para salvar o endereço -->
+            <form method="POST" action="{{ url_for('atualizar_perfil_endereco', endereco_id=endereco_id) }}">
+
+                <!-- CEP -->
+                <div class="campo">
+                    <label for="cep_endereco">CEP</label>
+
+                    <input
+                        type="text"
+                        id="cep_endereco"
+                        name="cep"
+                        value="{{ endereco.cep if endereco and endereco.cep else '' }}"
+                        placeholder="CEP"
                         required
                     >
                 </div>
@@ -44,11 +70,12 @@
                 <!-- Rua -->
                 <div class="campo">
                     <label for="rua">Rua</label>
+
                     <input
                         type="text"
                         id="rua"
                         name="rua"
-                        value="{{ endereco.Rua }}"
+                        value="{{ endereco.logradouro if endereco and endereco.logradouro else '' }}"
                         placeholder="Digite o nome da rua"
                         required
                     >
@@ -59,11 +86,11 @@
 
                     <div class="campo">
                         <label for="numero">Número</label>
+
                         <input
                             type="text"
                             id="numero"
                             name="numero"
-                            value="{{ endereco.Numero }}"
                             placeholder="Nº"
                             required
                         >
@@ -71,12 +98,12 @@
 
                     <div class="campo">
                         <label for="complemento">Complemento</label>
+
                         <input
                             type="text"
                             id="complemento"
                             name="complemento"
-                            value="{{ endereco.Complemento or '' }}"
-                            placeholder="Casa, ap..."
+                            placeholder="Casa, apartamento..."
                         >
                     </div>
 
@@ -85,11 +112,12 @@
                 <!-- Bairro -->
                 <div class="campo">
                     <label for="bairro">Bairro</label>
+
                     <input
                         type="text"
                         id="bairro"
                         name="bairro"
-                        value="{{ endereco.Bairro }}"
+                        value="{{ endereco.bairro if endereco and endereco.bairro else '' }}"
                         placeholder="Digite seu bairro"
                         required
                     >
@@ -100,11 +128,12 @@
 
                     <div class="campo">
                         <label for="cidade">Cidade</label>
+
                         <input
                             type="text"
                             id="cidade"
                             name="cidade"
-                            value="{{ endereco.Cidade }}"
+                            value="{{ endereco.localidade if endereco and endereco.localidade else '' }}"
                             placeholder="Digite sua cidade"
                             required
                         >
@@ -112,11 +141,12 @@
 
                     <div class="campo">
                         <label for="estado">Estado</label>
+
                         <input
                             type="text"
                             id="estado"
                             name="estado"
-                            value="{{ endereco.Estado }}"
+                            value="{{ endereco.uf if endereco and endereco.uf else '' }}"
                             placeholder="UF"
                             maxlength="2"
                             required

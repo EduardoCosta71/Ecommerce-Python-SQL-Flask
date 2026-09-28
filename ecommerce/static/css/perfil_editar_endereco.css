@@ -124,6 +124,24 @@ header h1 {
     background-color: #eff6ff;
 }
 
+.btn-buscar{
+
+    width: 100%;
+    padding: 13px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-buscar:hover {
+    background-color: #1d4ed8;
+}
+
 /* Responsividade */
 @media (max-width: 500px) {
     .endereco-card {

@@ -20,10 +20,13 @@ def perfil_registrar(app):
         cursor.execute("SELECT * FROM Usuarios WHERE Id = ?", (usuario_id,))
         usuario = cursor.fetchone()
 
+        cursor.execute("SELECT * FROM Enderecos WHERE UsuarioId = ?", (usuario_id,))
+        endereco = cursor.fetchone()
+
         conn.close()
 
 
-        return render_template("/perfil/perfil.html", usuario=usuario)
+        return render_template("/perfil/perfil.html", usuario=usuario, endereco=endereco)
 
     #Responsável por atualizar o perfil do usuário (nome e endereço), caso ele queira alterar algum dado.
     @app.route('/atualizar_perfil/<int:perfil_id>', methods=['GET', 'POST'])
@@ -78,13 +81,13 @@ def perfil_registrar(app):
 
             return redirect(url_for('perfil'))
 
-        cursor.execute('SELECT * FROM Usuarios WHERE Id = ?', (endereco_id,))
+        cursor.execute('SELECT * FROM Enderecos WHERE Id = ?', (endereco_id,))
 
         endereco = cursor.fetchone()
 
         conn.close()
 
-        return render_template('/perfil/perfil_editar_endereco.html', endereco=endereco)
+        return render_template('/perfil/perfil_editar_endereco.html', endereco=endereco, endereco_id=endereco_id)
 
     # Rota responsável por atualizar a senha do usuário
     @app.route('/atualizar_senha', methods=['GET', 'POST'])
