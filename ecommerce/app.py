@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for, session
 import re
 import os
+
+
 #Iniciação Flask
 app = Flask(__name__)
 
@@ -15,6 +17,7 @@ from routes.admin import admin_registrar
 from routes.pedidos import pedidos_registrar
 from routes.contato import contato_registrar
 from routes.api_cep import api_cep_registrar
+from routes.recuperar_senha import recuperar_senha_registrar
 
 app.secret_key = os.getenv("SECRET_KEY")
 load_dotenv()  # Carrega as variáveis de ambiente do arquivo .env
@@ -28,6 +31,7 @@ pedidos_registrar(app)
 contato_registrar(app)
 perfil_registrar(app)
 api_cep_registrar(app)
+recuperar_senha_registrar(app)
 
 
 if __name__ == '__main__':

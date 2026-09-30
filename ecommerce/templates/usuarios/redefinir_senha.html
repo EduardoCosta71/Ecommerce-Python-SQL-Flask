@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nova senha | DuTech</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/redefinir_senha.css') }}">
+    
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>DuTech</h1>
+
+        <p class="descricao">
+            Criar nova senha
+        </p>
+
+
+        {% with mensagens = get_flashed_messages() %}
+
+            {% if mensagens %}
+
+                {% for mensagem in mensagens %}
+
+                    <div class="mensagem">
+                        {{ mensagem }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <p class="aviso">
+            Digite o código recebido e escolha uma nova senha.
+        </p>
+
+
+        <form method="POST">
+
+            <label for="codigo">
+                Código de recuperação
+            </label>
+
+            <input
+                type="text"
+                id="codigo"
+                name="codigo"
+                placeholder="Digite o código"
+                maxlength="6"
+                required
+            >
+
+
+            <label for="senha">
+                Nova senha
+            </label>
+
+            <input
+                type="password"
+                id="senha"
+                name="senha"
+                placeholder="Digite sua nova senha"
+                minlength="8"
+                required
+            >
+
+
+            <label for="confirmar_senha">
+                Confirmar nova senha
+            </label>
+
+            <input
+                type="password"
+                id="confirmar_senha"
+                name="confirmar_senha"
+                placeholder="Digite a senha novamente"
+                minlength="8"
+                required
+            >
+
+
+            <button type="submit">
+                Alterar senha
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

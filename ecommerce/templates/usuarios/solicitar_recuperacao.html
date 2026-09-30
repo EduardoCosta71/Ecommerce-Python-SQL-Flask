@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Recuperar senha | DuTech</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/solicitar_recuperacao.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>DuTech</h1>
+
+        <p class="descricao">
+            Recuperação de senha
+        </p>
+
+        {% with mensagens = get_flashed_messages() %}
+
+            {% if mensagens %}
+
+                {% for mensagem in mensagens %}
+
+                    <div class="mensagem">
+                        {{ mensagem }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        {% if not codigo %}
+
+            <form method="POST">
+
+                <label for="email">
+                    E-mail
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Digite seu e-mail"
+                    required
+                >
+
+                <button type="submit">
+                    Continuar
+                </button>
+
+            </form>
+
+        {% else %}
+
+            <div class="codigo">
+
+                <p>
+                    Seu código de recuperação é:
+                </p>
+
+                <strong>
+                    {{ codigo }}
+                </strong>
+
+                <p>
+                    Código válido por 5 minutos.
+                </p>
+
+            </div>
+
+            <a href="{{ url_for('redefinir_senha') }}">
+                Continuar para redefinição
+            </a>
+
+        {% endif %}
+
+
+        <a href="{{ url_for('perfil') }}">
+            Voltar para o perfil
+        </a>
+
+    </div>
+
+</body>
+
+</html>
