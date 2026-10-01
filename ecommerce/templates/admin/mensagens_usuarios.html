@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/mensagens.usuarios.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <title>DuTech | Mensagens</title>
+
+</head>
+
+<body>
+
+    <div class="admin-container">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="admin-logo">
+
+                <h1>DuTech</h1>
+
+                <span>ADMIN</span>
+
+            </div>
+
+
+            <nav class="menu-admin">
+
+                <a href="/admin">
+                    Dashboard
+                </a>
+
+                <a href="/produtos_admin">
+                    Produtos
+                </a>
+
+                <a href="/categorias_admin">
+                    Categorias
+                </a>
+
+                <a href="/pedidos_admin">
+                    Pedidos
+                </a>
+
+                <a href="/usuarios_admin">
+                    Usuários
+                </a>
+
+                <a href="/mensagens_admin" class="ativo">
+                    Mensagens
+                </a>
+
+            </nav>
+
+
+            <div class="menu-inferior">
+
+                <a href="/home">
+                    Ver Loja
+                </a>
+
+                <a href="#">
+                    Sair
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- CONTEÚDO -->
+
+        <main class="conteudo">
+
+            <!-- CABEÇALHO -->
+
+            <header class="topo">
+
+                <div>
+
+                    <h2>Mensagens</h2>
+
+                    <p>
+                        Mensagens enviadas pelos clientes.
+                    </p>
+
+                </div>
+
+
+                <div class="admin-usuario">
+
+                    <span>
+                        Administrador
+                    </span>
+
+                </div>
+
+            </header>
+
+
+            <!-- ÁREA DE MENSAGENS -->
+
+            <section class="mensagens-area">
+
+                <div class="titulo-mensagens">
+
+                    <div>
+
+                        <h2>
+                            Mensagens recebidas
+                        </h2>
+
+                        <p>
+                            Confira as mensagens enviadas através do formulário de contato.
+                        </p>
+
+                    </div>
+
+
+                    <div class="contador">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong>
+                            {{ mensagens|length }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LISTA -->
+
+                <div class="lista-mensagens">
+
+                    {% for mensagem in mensagens %}
+
+                    <div class="mensagem-card">
+
+
+                        <!-- PARTE SUPERIOR -->
+
+                        <div class="mensagem-topo">
+
+                            <div>
+
+                                <h3>
+                                    {{ mensagem.Assunto }}
+                                </h3>
+
+                                <p class="cliente">
+
+                                    {{ mensagem.Nome }}
+
+                                    <span>
+                                        {{ mensagem.Email }}
+                                    </span>
+
+                                </p>
+
+                            </div>
+
+
+                            <!-- STATUS -->
+
+                            {% if mensagem.Status == 'Pendente' %}
+
+                                <span class="status pendente">
+                                    Pendente
+                                </span>
+
+                            {% else %}
+
+                                <span class="status lida">
+                                    Lida
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- MENSAGEM -->
+
+                        <div class="mensagem-conteudo">
+
+                            <p>
+                                {{ mensagem.Mensagem }}
+                            </p>
+
+                        </div>
+
+
+                        <!-- RODAPÉ -->
+
+                        <div class="mensagem-footer">
+
+                            <span class="data">
+
+                                {{ mensagem.DataEnvio.strftime('%d/%m/%Y %H:%M') }}
+
+                            </span>
+
+
+                            <div class="acoes">
+
+                                {% if mensagem.Status == 'Pendente' %}
+
+                                    <form
+                                        action="{{ url_for('atualizar_status_mensagem', mensagem_id=mensagem.Id) }}"
+                                        method="POST">
+
+                                        <button
+                                            type="submit"
+                                            class="btn-lida">
+
+                                            Marcar como lida
+
+                                        </button>
+
+                                    </form>
+
+                                {% else %}
+
+                                    <span class="visualizada">
+                                        Visualizada
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    {% else %}
+
+                    <!-- CASO NÃO TENHA MENSAGENS -->
+
+                    <div class="sem-mensagens">
+
+                        <h3>
+                            Nenhuma mensagem encontrada
+                        </h3>
+
+                        <p>
+                            Quando um cliente enviar uma mensagem,
+                            ela aparecerá aqui.
+                        </p>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

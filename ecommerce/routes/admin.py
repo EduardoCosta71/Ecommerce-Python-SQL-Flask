@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 import pyodbc
 from config import get_db_connection
 
@@ -11,7 +11,7 @@ def admin_registrar(app):
 
         return render_template("admin/dashboard.html")
     
-    
+#-------------------PRODUTOS----------------------------------------------------------------------------------------------------------
 
 #Lista de produtos cadastrados no banco de dados, para o admin poder visualizar.
     @app.route('/produtos_admin')
@@ -74,7 +74,7 @@ def admin_registrar(app):
     
             return render_template("admin/pedidos_detalhes.html", itens=itens, pedido_id=pedido_id)
 
-    
+#-------------------CATEGORIAS----------------------------------------------------------------------------------------------------------
 
     #Responsavel por puxar as categorias do Banco de dados.
     @app.route('/categorias_admin')
@@ -200,3 +200,189 @@ def admin_registrar(app):
             return redirect(url_for('categorias_admin'))
 
         return render_template('/admin/cadastrar_categoria.html')
+
+
+#--------------------Usuarios----------------------------------------------------------------------------------------------------------
+    #Rota para listar os usuarios cadastrados no banco de dados, para o admin poder visualizar.
+    @app.route('/usuarios_admin')
+    def usuarios_admin():
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+                        SELECT Id,
+                        Nome,
+                        Email
+                        FROM Usuarios
+                        ORDER BY Nome
+                    """)
+
+        usuarios = cursor.fetchall()
+
+        conn.close()
+
+        return render_template('/usuario_admin/listar_usuario_admin.html', usuarios=usuarios)
+    
+
+    #Rota para deletar um usuário do banco de dados, com verificação se o usuário possui pedidos registrados.
+    @app.route('/deletar_usuario/<int:usuario_id>')
+    def deletar_usuario(usuario_id):
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        try:
+
+        # Verifica se o usuário possui pedidos
+            cursor.execute("""
+            SELECT COUNT(*)
+            FROM Pedidos
+            WHERE UsuarioId = ?
+        """, (usuario_id,))
+
+            quantidade_pedidos = cursor.fetchone()[0]
+
+            if quantidade_pedidos > 0:
+
+                flash('Este usuário possui pedidos registrados e não pode ser excluído.', 'erro')
+
+           
+
+                return redirect(url_for('usuarios_admin'))
+
+        # Busca o carrinho
+            cursor.execute("""
+            SELECT Id
+            FROM Carrinhos
+            WHERE UsuarioId = ?
+        """, (usuario_id,))
+
+            carrinho = cursor.fetchone()
+
+            if carrinho:
+
+                carrinho_id = carrinho[0]
+
+            # Exclui itens do carrinho
+                cursor.execute("""
+                DELETE FROM ItensCarrinho
+                WHERE CarrinhoId = ?
+            """, (carrinho_id,))
+
+            # Exclui carrinho
+                cursor.execute("""
+                DELETE FROM Carrinhos
+                WHERE Id = ?
+            """, (carrinho_id,))
+
+        # Exclui usuário
+                cursor.execute("""
+                DELETE FROM Usuarios
+                 WHERE Id = ?
+             """, (usuario_id,))
+
+            conn.commit()
+
+            flash('Usuário excluído com sucesso.', 'sucesso')
+
+        except Exception as erro:
+
+            conn.rollback()
+
+            print("Erro ao excluir usuário:", erro)
+
+            flash('Ocorreu um erro ao excluir o usuário.', 'erro')
+
+        finally:
+
+            conn.close()
+
+        return redirect(url_for('usuarios_admin'))
+
+
+    @app.route('/atualizar_perfil_admin/<int:perfil_id>', methods=['GET', 'POST'])
+    def atualizar_perfil_admin(perfil_id):
+    
+        conn = get_db_connection()
+        cursor = conn.cursor()
+    
+        if request.method == 'POST':
+    
+            nome = request.form['nome']
+            email = request.form['email']
+            
+            
+            cursor.execute(""" UPDATE Usuarios SET Nome = ?, Email = ?
+            WHERE Id = ?  """, (nome, email, perfil_id))
+    
+            conn.commit()
+            conn.close()
+    
+            return redirect(url_for('usuarios_admin'))
+    
+        cursor.execute('SELECT * FROM Usuarios WHERE Id = ?', (perfil_id,))
+        usuario = cursor.fetchone()
+        conn.close()
+    
+        return render_template('/usuario_admin/atualizar_usuario.html', usuario=usuario)
+
+
+
+
+#=========================Mensagens Usuarios============================================================================
+
+
+    @app.route('/mensagens_admin')
+    def mensagens_admin():
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+                        SELECT Id, Nome, Email, Assunto, Mensagem, DataEnvio, Status
+                        FROM MensagensContato
+                        ORDER BY Id DESC
+                    """)
+
+        mensagens = cursor.fetchall()
+
+        conn.close()
+
+        return render_template('/admin/mensagens_usuarios.html', mensagens=mensagens)
+
+    @app.route('/mensagem_admin_detalhes/<int:mensagem_id>')
+    def mensagem_admin_detalhes(mensagem_id):
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+                        SELECT Id, Nome, Email, Assunto, Mensagem, DataEnvio, Status
+                        FROM MensagensContato
+                        WHERE Id = ?
+                    """, (mensagem_id,))
+
+        mensagem = cursor.fetchone()
+
+        conn.close()
+
+        return render_template('/admin/mensagem_detalhes.html', mensagem=mensagem)
+
+
+    @app.route('/atualizar_status_mensagem/<int:mensagem_id>', methods=['POST'])
+    def atualizar_status_mensagem(mensagem_id):
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+        UPDATE MensagensContato
+        SET Status = 'Lida'
+        WHERE Id = ?
+    """, (mensagem_id,))
+
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for('mensagens_admin'))

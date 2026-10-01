@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Editar Usuário | DuTech Admin</title>
+
+    <!-- CSS do Dashboard -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <!-- CSS desta página -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/atualizar_usuario_admin.css') }}">
+
+    <!-- Fonte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="admin-container">
+
+        <!-- MENU LATERAL -->
+
+        <aside class="sidebar">
+
+            <div class="admin-logo">
+
+                <h1>DuTech</h1>
+
+                <span>ADMIN</span>
+
+            </div>
+
+
+            <nav class="menu-admin">
+
+                <a href="/admin">
+                    Dashboard
+                </a>
+
+                <a href="/produtos_admin">
+                    Produtos
+                </a>
+
+                <a href="/categorias_admin">
+                    Categorias
+                </a>
+
+                <a href="/pedidos_admin">
+                    Pedidos
+                </a>
+
+                <a href="/usuarios_admin" class="ativo">
+                    Usuários
+                </a>
+
+                <a href="/mensagens_admin">
+                    Mensagens
+                </a>
+
+            </nav>
+
+
+            <div class="menu-inferior">
+
+                <a href="/home">
+                    Ver Loja
+                </a>
+
+                <a href="#">
+                    Sair
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- CONTEÚDO -->
+
+        <main class="conteudo">
+
+            <!-- CABEÇALHO -->
+
+            <header class="topo">
+
+                <div>
+
+                    <h2>Editar usuário</h2>
+
+                    <p>
+                        Atualize os dados do usuário cadastrado.
+                    </p>
+
+                </div>
+
+                <div class="admin-usuario">
+
+                    <span>Administrador</span>
+
+                </div>
+
+            </header>
+
+
+            <!-- FORMULÁRIO -->
+
+            <section class="editar-container">
+
+                <div class="editar-header">
+
+                    <h2>Dados do usuário</h2>
+
+                    <p>
+                        Altere as informações abaixo e salve as alterações.
+                    </p>
+
+                </div>
+
+
+                <form method="POST"
+                      action="{{ url_for('atualizar_perfil_admin', perfil_id=usuario.Id) }}">
+
+
+                    <!-- NOME -->
+
+                    <div class="campo">
+
+                        <label for="nome">
+                            Nome
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            value="{{ usuario.Nome }}"
+                            required>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="campo">
+
+                        <label for="email">
+                            E-mail
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value="{{ usuario.Email }}"
+                            required>
+
+                    </div>
+
+
+                    <!-- ID -->
+
+                    <div class="campo">
+
+                        <label>
+                            ID do usuário
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{{ usuario.Id }}"
+                            disabled>
+
+                    </div>
+
+
+                    <!-- BOTÕES -->
+
+                    <div class="botoes">
+
+                        <a href="{{ url_for('usuarios_admin') }}"
+                           class="btn-cancelar">
+
+                            Cancelar
+
+                        </a>
+
+                        <button type="submit"
+                                class="btn-salvar">
+
+                            Salvar alterações
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Usuários | DuTech Admin</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/listar_usuarios_admin.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="admin-container">
+
+        <aside class="sidebar">
+
+            <div class="admin-logo">
+                <h1>DuTech</h1>
+                <span>ADMIN</span>
+            </div>
+
+            <nav class="menu-admin">
+
+                <a href="/admin">
+                    Dashboard
+                </a>
+
+                <a href="/produtos_admin">
+                    Produtos
+                </a>
+
+                <a href="/categorias_admin">
+                    Categorias
+                </a>
+
+                <a href="/pedidos_admin">
+                    Pedidos
+                </a>
+
+                <a href="/usuarios_admin" class="ativo">
+                    Usuários
+                </a>
+
+                <a href="/mensagens_admin">
+                    Mensagens
+                </a>
+
+            </nav>
+
+            <div class="menu-inferior">
+
+                <a href="/home">
+                    Ver Loja
+                </a>
+
+                <a href="#">
+                    Sair
+                </a>
+
+            </div>
+
+        </aside>
+
+        <main class="conteudo">
+
+            {% with mensagens = get_flashed_messages(with_categories=true) %}
+
+    {% if mensagens %}
+
+        <div class="mensagens">
+
+            {% for categoria, mensagem in mensagens %}
+
+                <div class="mensagem {{ categoria }}">
+                    {{ mensagem }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+{% endwith %}
+
+            <header class="topo">
+
+                <div>
+                    <h2>Usuários</h2>
+
+                    <p>
+                        Gerencie os usuários cadastrados na DuTech.
+                    </p>
+                </div>
+
+                <div class="admin-usuario">
+                    <span>Administrador</span>
+                </div>
+
+            </header>
+
+            <section class="resumo">
+
+                <div class="card-resumo">
+
+                    <div class="icone-card">
+                        👤
+                    </div>
+
+                    <div class="informacao-card">
+
+                        <span>
+                            Usuários cadastrados
+                        </span>
+
+                        <strong>
+                            {{ usuarios|length }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="usuarios-container">
+
+                <div class="usuarios-header">
+
+                    <div>
+                        <h2>Usuários cadastrados</h2>
+
+                        <p>
+                            Confira os usuários registrados no sistema.
+                        </p>
+                    </div>
+
+                </div>
+
+                {% if usuarios %}
+
+                <div class="tabela-container">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for usuario in usuarios %}
+
+                            <tr>
+
+                                <td>{{ usuario.Id }}</td>
+
+                                <td>{{ usuario.Nome }}</td>
+
+                                <td>{{ usuario.Email }}</td>
+
+                                <td class="acoes">
+
+                                    <a href="{{ url_for('atualizar_perfil_admin', perfil_id=usuario.Id) }}" class="btn-editar">
+                                        Editar
+                                    </a>
+
+                                    <a href="{{ url_for('deletar_usuario', usuario_id=usuario.Id) }}"
+                                       class="btn-excluir">
+                                        Excluir
+                                    </a>
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                {% else %}
+
+                <div class="nenhum-usuario">
+
+                    <div class="icone-vazio">
+                        👤
+                    </div>
+
+                    <h3>Nenhum usuário cadastrado</h3>
+
+                    <p>
+                        Ainda não existem usuários registrados no sistema.
+                    </p>
+
+                </div>
+
+                {% endif %}
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

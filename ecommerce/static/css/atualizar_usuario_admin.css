@@ -1,0 +1,183 @@
+/* =========================================
+   CONTAINER DA PÁGINA
+========================================= */
+
+.editar-container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 800px;
+    margin-top: 30px;
+}
+
+
+/* =========================================
+   CABEÇALHO DO FORMULÁRIO
+========================================= */
+
+.editar-header {
+    margin-bottom: 30px;
+}
+
+.editar-header h2 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 22px;
+}
+
+.editar-header p {
+    margin-top: 6px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* =========================================
+   CAMPOS
+========================================= */
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 22px;
+}
+
+.campo label {
+    margin-bottom: 8px;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.campo input {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 12px 14px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+
+/* =========================================
+   FOCO NO INPUT
+========================================= */
+
+.campo input:focus {
+    border-color: #2563eb;
+
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+
+/* =========================================
+   ID DESABILITADO
+========================================= */
+
+.campo input:disabled {
+    background: #f1f5f9;
+    color: #64748b;
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   BOTÕES
+========================================= */
+
+.botoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+
+    margin-top: 30px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #e2e8f0;
+}
+
+
+/* CANCELAR */
+
+.btn-cancelar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 18px;
+
+    border-radius: 8px;
+
+    background: #e2e8f0;
+    color: #334155;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: 0.2s;
+}
+
+.btn-cancelar:hover {
+    background: #cbd5e1;
+}
+
+
+/* SALVAR */
+
+.btn-salvar {
+    padding: 10px 20px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #2563eb;
+    color: white;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn-salvar:hover {
+    background: #1d4ed8;
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .editar-container {
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .botoes {
+        flex-direction: column;
+    }
+
+    .btn-cancelar,
+    .btn-salvar {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+}
