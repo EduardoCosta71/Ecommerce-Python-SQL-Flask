@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session, flash
+from flask import Blueprint, app, render_template, request, redirect, url_for, session, flash
 import pyodbc
 from config import get_db_connection
 
@@ -48,31 +48,58 @@ def admin_registrar(app):
 
         return render_template("admin/pedidos_admin.html", pedidos=pedidos)
 
-
+    # Rota para ver os detalhes de um pedido no admin
     @app.route('/pedido_admin_detalhes/<int:pedido_id>')
     def pedido_admin_detalhes(pedido_id):
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+    # Busca os produtos do pedido
+        cursor.execute("""
+        SELECT
+            P.Nome,
+            P.Imagem,
+            IP.Quantidade,
+            IP.PrecoUnitario,
+            (IP.Quantidade * IP.PrecoUnitario) AS Subtotal
+        FROM ItensPedidos IP
+        INNER JOIN Produtos P
+            ON IP.ProdutoId = P.Id
+        WHERE IP.PedidoId = ?
+    """, (pedido_id,))
+
+        itens = cursor.fetchall()
+
+
+    # Busca o status e o valor total do pedido
+        cursor.execute("""
+        SELECT Status, ValorTotal
+        FROM Pedidos
+        WHERE Id = ?
+    """, (pedido_id,))
+
+        pedido = cursor.fetchone()
+
+        conn.close()
+
+
+        return render_template("admin/pedidos_detalhes.html", itens=itens, pedido_id=pedido_id, status_pedido=pedido.Status, valor_total=pedido.ValorTotal)
     
-            conn = get_db_connection()
-            cursor = conn.cursor()
-    
-            cursor.execute("""
-            SELECT
-                P.Nome,
-                P.Imagem,
-                IP.Quantidade,
-                IP.PrecoUnitario,
-                (IP.Quantidade * IP.PrecoUnitario) AS Subtotal
-            FROM ItensPedidos IP
-            INNER JOIN Produtos P
-                ON IP.ProdutoId = P.Id
-            WHERE IP.PedidoId = ?
-        """, (pedido_id,))
-    
-            itens = cursor.fetchall()
-    
-            conn.close()
-    
-            return render_template("admin/pedidos_detalhes.html", itens=itens, pedido_id=pedido_id)
+
+    #Rota para finalizar um pedido no admin, para o admin poder finalizar os pedidos feitos pelos clientes.
+    @app.route('/finalizar_pedido_admin/<int:pedido_id>', methods=['POST'])
+    def finalizar_pedido_admin(pedido_id):
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute(""" UPDATE Pedidos SET Status = 'Finalizado' WHERE Id = ? """, (pedido_id,))
+
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for('pedido_admin_detalhes', pedido_id=pedido_id))
 
 #-------------------CATEGORIAS----------------------------------------------------------------------------------------------------------
 
@@ -179,9 +206,9 @@ def admin_registrar(app):
         return render_template('/admin/atualizar_categoria.html', categoria=categoria)
 
 
-    
 
-     #Cadastrar uma nova categoria no banco de dados.
+
+    #Cadastrar uma nova categoria no banco de dados.
     @app.route('/cadastrar_categoria/nova', methods=['GET', 'POST'])
     def cadastrar_categoria():
 
@@ -299,8 +326,9 @@ def admin_registrar(app):
             conn.close()
 
         return redirect(url_for('usuarios_admin'))
+    
 
-
+    #Rota para atualizar o perfil do usuário no admin, para o admin poder atualizar os dados dos usuários cadastrados.
     @app.route('/atualizar_perfil_admin/<int:perfil_id>', methods=['GET', 'POST'])
     def atualizar_perfil_admin(perfil_id):
     
@@ -369,7 +397,7 @@ def admin_registrar(app):
 
         return render_template('/admin/mensagem_detalhes.html', mensagem=mensagem)
 
-
+    #Rota para atualizar o status da mensagem para "Lida" no banco de dados.
     @app.route('/atualizar_status_mensagem/<int:mensagem_id>', methods=['POST'])
     def atualizar_status_mensagem(mensagem_id):
 

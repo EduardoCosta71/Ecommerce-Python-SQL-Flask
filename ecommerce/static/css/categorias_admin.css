@@ -1,5 +1,5 @@
 /* =========================================================
-   PEDIDOS - DETALHES
+   CATEGORIAS ADMIN
    ========================================================= */
 
 .conteudo {
@@ -12,7 +12,7 @@
    TOPO DA PÁGINA
    ========================================================= */
 
-.topo-detalhes {
+.topo-categorias {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -20,7 +20,7 @@
     margin-bottom: 28px;
 }
 
-.topo-detalhes h2 {
+.topo-categorias h2 {
     margin: 0;
 
     font-size: 28px;
@@ -29,28 +29,33 @@
     color: #0f172a;
 }
 
-.topo-detalhes p {
+.topo-categorias p {
     margin: 6px 0 0;
 
     font-size: 14px;
+
     color: #64748b;
 }
 
 
-/* BOTÃO VOLTAR */
+/* =========================================================
+   BOTÃO NOVA CATEGORIA
+   ========================================================= */
 
-.btn-voltar {
+.btn-nova-categoria {
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
     padding: 10px 16px;
 
-    background: #ffffff;
-    color: #334155;
+    background: #2563eb;
+    color: #ffffff;
 
-    border: 1px solid #e2e8f0;
+    border: 1px solid #2563eb;
     border-radius: 8px;
+
+    font-family: 'Poppins', sans-serif;
 
     font-size: 13px;
     font-weight: 500;
@@ -60,18 +65,23 @@
     transition: all 0.2s ease;
 }
 
-.btn-voltar:hover {
-    background: #f1f5f9;
-    border-color: #cbd5e1;
+.btn-nova-categoria:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+
     transform: translateY(-1px);
+
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.18);
 }
 
 
 /* =========================================================
-   CARD DOS PRODUTOS
+   CARD DA LISTA
    ========================================================= */
 
-.lista-itens {
+.lista-categorias {
+    width: 100%;
+
     background: #ffffff;
 
     border: 1px solid #e2e8f0;
@@ -80,25 +90,6 @@
     padding: 25px;
 
     box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
-}
-
-
-/* TÍTULO DA SEÇÃO */
-
-.titulo-secao {
-    display: flex;
-    align-items: center;
-
-    margin-bottom: 22px;
-}
-
-.titulo-secao h3 {
-    margin: 0;
-
-    font-size: 18px;
-    font-weight: 600;
-
-    color: #0f172a;
 }
 
 
@@ -119,7 +110,9 @@
 }
 
 
-/* CABEÇALHO */
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
 
 .tabela-container th {
     padding: 14px 12px;
@@ -145,7 +138,9 @@
 }
 
 
-/* LINHAS */
+/* =========================================================
+   LINHAS
+   ========================================================= */
 
 .tabela-container td {
     padding: 16px 12px;
@@ -173,51 +168,23 @@
 
 
 /* =========================================================
-   PRODUTO
+   ID
    ========================================================= */
 
-.produto {
-    display: flex;
-    align-items: center;
+.tabela-container td:first-child {
+    width: 70px;
 
-    gap: 14px;
+    font-weight: 600;
+
+    color: #64748b;
 }
 
 
-/* IMAGEM */
+/* =========================================================
+   NOME DA CATEGORIA
+   ========================================================= */
 
-.produto-imagem {
-    width: 60px;
-    height: 60px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #f8fafc;
-
-    border: 1px solid #e2e8f0;
-    border-radius: 9px;
-
-    overflow: hidden;
-
-    flex-shrink: 0;
-}
-
-.produto-imagem img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: contain;
-
-    padding: 5px;
-}
-
-
-/* NOME DO PRODUTO */
-
-.produto span {
-    font-size: 14px;
+.tabela-container td:nth-child(2) {
     font-weight: 500;
 
     color: #1e293b;
@@ -225,10 +192,17 @@
 
 
 /* =========================================================
-   QUANTIDADE
+   QUANTIDADE DE PRODUTOS
    ========================================================= */
 
-.tabela-container td:nth-child(2) {
+.tabela-container td:nth-child(3) {
+    width: 120px;
+}
+
+
+/* DEIXA A QUANTIDADE COM APARÊNCIA DE BADGE */
+
+.tabela-container td:nth-child(3) {
     font-weight: 500;
 
     color: #475569;
@@ -236,31 +210,134 @@
 
 
 /* =========================================================
-   PREÇOS
+   AÇÕES
    ========================================================= */
 
-.tabela-container td:nth-child(3) {
-    color: #475569;
-}
+.acoes-categoria {
+    display: flex;
+    align-items: center;
 
-.subtotal {
-    font-weight: 600 !important;
+    gap: 8px;
 
-    color: #0f172a !important;
+    flex-wrap: wrap;
 }
 
 
 /* =========================================================
-   PEDIDO SEM PRODUTOS
+   BOTÃO VER PRODUTOS
    ========================================================= */
 
-.sem-itens {
-    padding: 45px 20px;
+.btn-ver {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 12px;
+
+    background: #eff6ff;
+    color: #2563eb;
+
+    border: 1px solid #dbeafe;
+    border-radius: 7px;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+}
+
+.btn-ver:hover {
+    background: #2563eb;
+    color: #ffffff;
+
+    border-color: #2563eb;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   BOTÃO EDITAR
+   ========================================================= */
+
+.btn-editar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 12px;
+
+    background: #f8fafc;
+    color: #475569;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 7px;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+}
+
+.btn-editar:hover {
+    background: #e2e8f0;
+
+    color: #1e293b;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   BOTÃO EXCLUIR
+   ========================================================= */
+
+.btn-excluir {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 12px;
+
+    background: #fff1f2;
+    color: #dc2626;
+
+    border: 1px solid #fecdd3;
+    border-radius: 7px;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+}
+
+.btn-excluir:hover {
+    background: #dc2626;
+    color: #ffffff;
+
+    border-color: #dc2626;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   SEM CATEGORIAS
+   ========================================================= */
+
+.sem-categorias {
+    padding: 55px 20px;
 
     text-align: center;
 }
 
-.sem-itens h3 {
+.sem-categorias h3 {
     margin: 0;
 
     font-size: 17px;
@@ -269,112 +346,12 @@
     color: #1e293b;
 }
 
-.sem-itens p {
-    margin: 7px 0 0;
+.sem-categorias p {
+    margin: 7px 0 20px;
 
     font-size: 13px;
 
     color: #64748b;
-}
-
-
-/* =========================================================
-   AÇÕES DO PEDIDO
-   ========================================================= */
-
-.acoes-pedido {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-top: 20px;
-
-    padding: 22px 25px;
-
-    background: #ffffff;
-
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-
-    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
-}
-
-
-/* INFORMAÇÕES */
-
-.informacao-acao h3 {
-    margin: 0;
-
-    font-size: 16px;
-    font-weight: 600;
-
-    color: #0f172a;
-}
-
-.informacao-acao p {
-    margin: 5px 0 0;
-
-    font-size: 13px;
-
-    color: #64748b;
-}
-
-
-/* =========================================================
-   BOTÃO FINALIZAR
-   ========================================================= */
-
-.btn-finalizar {
-    padding: 11px 20px;
-
-    border: none;
-    border-radius: 8px;
-
-    background: #2563eb;
-    color: #ffffff;
-
-    font-family: 'Poppins', sans-serif;
-
-    font-size: 13px;
-    font-weight: 500;
-
-    cursor: pointer;
-
-    transition: all 0.2s ease;
-}
-
-.btn-finalizar:hover {
-    background: #1d4ed8;
-
-    transform: translateY(-1px);
-
-    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.20);
-}
-
-.btn-finalizar:active {
-    transform: translateY(0);
-}
-
-
-/* =========================================================
-   PEDIDO FINALIZADO
-   ========================================================= */
-
-.pedido-finalizado {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-
-    padding: 9px 14px;
-
-    background: #ecfdf5;
-    color: #15803d;
-
-    border: 1px solid #bbf7d0;
-    border-radius: 8px;
-
-    font-size: 13px;
-    font-weight: 500;
 }
 
 
@@ -382,63 +359,46 @@
    RESPONSIVIDADE
    ========================================================= */
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
 
     .conteudo {
         padding: 25px 20px;
     }
 
-    .topo-detalhes {
-        align-items: flex-start;
-
-        gap: 15px;
-    }
-
-    .lista-itens {
+    .lista-categorias {
         padding: 18px;
     }
 
-    .acoes-pedido {
-        padding: 20px;
-
-        gap: 20px;
+    .tabela-container table {
+        min-width: 750px;
     }
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
 
     .conteudo {
         padding: 20px 15px;
     }
 
-    .topo-detalhes {
+    .topo-categorias {
+        align-items: flex-start;
+
         flex-direction: column;
+
+        gap: 15px;
     }
 
-    .topo-detalhes h2 {
-        font-size: 23px;
+    .topo-categorias h2 {
+        font-size: 24px;
     }
 
-    .btn-voltar {
+    .btn-nova-categoria {
         width: 100%;
     }
 
-    .lista-itens {
+    .lista-categorias {
         padding: 15px;
-    }
-
-    .acoes-pedido {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .btn-finalizar {
-        width: 100%;
-    }
-
-    .pedido-finalizado {
-        justify-content: center;
     }
 
     .tabela-container {
@@ -446,6 +406,10 @@
     }
 
     .tabela-container table {
-        min-width: 650px;
+        min-width: 750px;
+    }
+
+    .acoes-categoria {
+        flex-wrap: nowrap;
     }
 }

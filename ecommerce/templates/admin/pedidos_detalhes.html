@@ -14,11 +14,14 @@
 
     <!-- CSS desta página -->
     <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/pedidos_detalhes.css') }}">
+          href="{{ url_for('static', filename='css/pedidos_admin_detalhes.css') }}">
 
     <!-- Fonte -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
           rel="stylesheet">
@@ -29,14 +32,19 @@
 
 <div class="admin-container">
 
+
     <!-- MENU LATERAL -->
 
     <aside class="sidebar">
 
         <div class="admin-logo">
+
             <h1>DuTech</h1>
+
             <span>ADMIN</span>
+
         </div>
+
 
         <nav class="menu-admin">
 
@@ -66,6 +74,7 @@
 
         </nav>
 
+
         <div class="menu-inferior">
 
             <a href="/home">
@@ -85,13 +94,16 @@
 
     <main class="conteudo">
 
+
         <!-- TOPO -->
 
         <div class="topo-detalhes">
 
             <div>
 
-                <h2>Pedido #{{ pedido_id }}</h2>
+                <h2>
+                    Pedido #{{ pedido_id }}
+                </h2>
 
                 <p>
                     Detalhes dos produtos deste pedido.
@@ -99,8 +111,9 @@
 
             </div>
 
+
             <a href="/pedidos_admin" class="btn-voltar">
-                Voltar
+                ← Voltar
             </a>
 
         </div>
@@ -110,14 +123,18 @@
 
         <section class="lista-itens">
 
+
             <div class="titulo-secao">
 
-                <h3>Produtos do pedido</h3>
+                <h3>
+                    Produtos do pedido
+                </h3>
 
             </div>
 
 
             {% if itens %}
+
 
             <div class="tabela-container">
 
@@ -127,20 +144,35 @@
 
                         <tr>
 
-                            <th>Produto</th>
-                            <th>Quantidade</th>
-                            <th>Preço Unitário</th>
-                            <th>Subtotal</th>
+                            <th>
+                                Produto
+                            </th>
+
+                            <th>
+                                Quantidade
+                            </th>
+
+                            <th>
+                                Preço Unitário
+                            </th>
+
+                            <th>
+                                Subtotal
+                            </th>
 
                         </tr>
 
                     </thead>
+
 
                     <tbody>
 
                         {% for item in itens %}
 
                         <tr>
+
+
+                            <!-- PRODUTO -->
 
                             <td>
 
@@ -155,6 +187,7 @@
 
                                     </div>
 
+
                                     <span>
                                         {{ item.Nome }}
                                     </span>
@@ -163,17 +196,29 @@
 
                             </td>
 
+
+                            <!-- QUANTIDADE -->
+
                             <td>
                                 {{ item.Quantidade }}
                             </td>
+
+
+                            <!-- PREÇO -->
 
                             <td>
                                 R$ {{ "%.2f"|format(item.PrecoUnitario) }}
                             </td>
 
+
+                            <!-- SUBTOTAL -->
+
                             <td class="subtotal">
+
                                 R$ {{ "%.2f"|format(item.Subtotal) }}
+
                             </td>
+
 
                         </tr>
 
@@ -185,11 +230,15 @@
 
             </div>
 
+
             {% else %}
+
 
             <div class="sem-itens">
 
-                <h3>Nenhum produto encontrado</h3>
+                <h3>
+                    Nenhum produto encontrado
+                </h3>
 
                 <p>
                     Este pedido não possui produtos cadastrados.
@@ -197,11 +246,68 @@
 
             </div>
 
+
             {% endif %}
+
 
         </section>
 
+<section class="acoes-pedido">
+
+    {% if status_pedido == 'Pendente' %}
+
+        <div class="informacao-acao">
+
+            <h3>
+                Finalizar pedido
+            </h3>
+
+            <p>
+                Confirme que o pedido foi processado.
+            </p>
+
+        </div>
+
+        <form
+            action="{{ url_for('finalizar_pedido_admin', pedido_id=pedido_id) }}"
+            method="POST"
+            onsubmit="return confirm('Deseja realmente finalizar este pedido?');">
+
+            <button
+                type="submit"
+                class="btn-finalizar">
+
+                Finalizar pedido
+
+            </button>
+
+        </form>
+
+    {% else %}
+
+        <div class="informacao-acao">
+
+            <h3>
+                Pedido finalizado
+            </h3>
+
+            <p>
+                Este pedido já foi concluído com sucesso.
+            </p>
+
+        </div>
+
+        <span class="pedido-finalizado">
+            ✓ Finalizado
+        </span>
+
+    {% endif %}
+
+</section>
+        
+
     </main>
+
 
 </div>
 

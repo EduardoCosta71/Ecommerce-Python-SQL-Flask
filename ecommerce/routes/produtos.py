@@ -48,7 +48,7 @@ def produtos_registrar(app):
             descricao = request.form['descricao']
             preco = request.form['preco']
             estoque = request.form['estoque']
-            imagem = request.form['imagem']
+            imagem = request.files['imagem']
             categoriaId = request.form['categoriaId']
 
             conn = get_db_connection()

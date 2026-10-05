@@ -20,7 +20,7 @@
         <h1>Cadastrar Produto</h1>
         <p>Preencha as informações do novo produto.</p>
 
-        <form method="POST" action="/produtos/cadastrar">
+        <form method="POST" action="/produtos/cadastrar" enctype="multipart/form-data">
 
             <label>Nome do Produto</label>
             <input type="text" name="nome" required>
@@ -34,8 +34,8 @@
             <label>Estoque</label>
             <input type="number" name="estoque" required>
 
-            <label>Imagem (URL)</label>
-            <input type="text" name="imagem" placeholder="https://site.com/imagem.jpg" required>
+            <label>Imagem</label>
+            <input type="file" name="imagem" accept="image/*" required>
 
             <label>Categoria</label>
             <select name="categoriaId" required>

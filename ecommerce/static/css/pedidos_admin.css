@@ -1,0 +1,337 @@
+/* =========================================================
+   PEDIDOS ADMIN
+   ========================================================= */
+
+.conteudo {
+    padding: 35px;
+    background: #f8fafc;
+}
+
+
+/* =========================================================
+   TOPO
+   ========================================================= */
+
+.topo-pedidos {
+    margin-bottom: 28px;
+}
+
+.topo-pedidos h2 {
+    margin: 0;
+
+    font-size: 28px;
+    font-weight: 600;
+
+    color: #0f172a;
+}
+
+.topo-pedidos p {
+    margin: 6px 0 0;
+
+    font-size: 14px;
+    color: #64748b;
+}
+
+
+/* =========================================================
+   CARD DA LISTA
+   ========================================================= */
+
+.lista-pedidos {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+
+    padding: 25px;
+
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+
+/* =========================================================
+   TABELA
+   ========================================================= */
+
+.tabela-container {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+.tabela-container table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+
+/* =========================================================
+   CABEÇALHO DA TABELA
+   ========================================================= */
+
+.tabela-container th {
+    padding: 14px 12px;
+
+    background: #f8fafc;
+
+    color: #64748b;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-align: left;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.tabela-container th:first-child {
+    border-radius: 8px 0 0 0;
+}
+
+.tabela-container th:last-child {
+    border-radius: 0 8px 0 0;
+}
+
+
+/* =========================================================
+   LINHAS
+   ========================================================= */
+
+.tabela-container td {
+    padding: 16px 12px;
+
+    color: #334155;
+
+    font-size: 14px;
+
+    border-bottom: 1px solid #f1f5f9;
+
+    vertical-align: middle;
+}
+
+.tabela-container tbody tr {
+    transition: background 0.2s ease;
+}
+
+.tabela-container tbody tr:hover {
+    background: #f8fafc;
+}
+
+.tabela-container tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   ID DO PEDIDO
+   ========================================================= */
+
+.tabela-container td:first-child {
+    font-weight: 600;
+
+    color: #1e293b;
+}
+
+
+/* =========================================================
+   CLIENTE
+   ========================================================= */
+
+.tabela-container td:nth-child(2) {
+    font-weight: 500;
+
+    color: #475569;
+}
+
+
+/* =========================================================
+   DATA
+   ========================================================= */
+
+.tabela-container td:nth-child(3) {
+    color: #64748b;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   VALOR TOTAL
+   ========================================================= */
+
+.tabela-container td:nth-child(4) {
+    font-weight: 600;
+
+    color: #0f172a;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 85px;
+
+    padding: 6px 11px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    text-transform: capitalize;
+}
+
+
+/* STATUS PENDENTE */
+
+.status.pendente {
+    background: #fff7ed;
+
+    color: #c2410c;
+
+    border: 1px solid #fed7aa;
+}
+
+
+/* STATUS FINALIZADO */
+
+.status.finalizado {
+    background: #ecfdf5;
+
+    color: #15803d;
+
+    border: 1px solid #bbf7d0;
+}
+
+
+/* =========================================================
+   AÇÕES
+   ========================================================= */
+
+.acoes-pedido {
+    display: flex;
+    align-items: center;
+}
+
+
+/* BOTÃO VER DETALHES */
+
+.btn-ver {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 13px;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    border: 1px solid #dbeafe;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+}
+
+.btn-ver:hover {
+    background: #2563eb;
+
+    color: #ffffff;
+
+    border-color: #2563eb;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   NENHUM PEDIDO
+   ========================================================= */
+
+.sem-pedidos {
+    padding: 55px 20px;
+
+    text-align: center;
+}
+
+.sem-pedidos h3 {
+    margin: 0;
+
+    font-size: 17px;
+    font-weight: 600;
+
+    color: #1e293b;
+}
+
+.sem-pedidos p {
+    margin: 7px 0 0;
+
+    font-size: 13px;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .conteudo {
+        padding: 25px 20px;
+    }
+
+    .lista-pedidos {
+        padding: 18px;
+    }
+
+    .tabela-container table {
+        min-width: 800px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .conteudo {
+        padding: 20px 15px;
+    }
+
+    .topo-pedidos h2 {
+        font-size: 24px;
+    }
+
+    .lista-pedidos {
+        padding: 15px;
+    }
+
+    .tabela-container {
+        overflow-x: auto;
+    }
+
+    .tabela-container table {
+        min-width: 800px;
+    }
+
+    .btn-ver {
+        padding: 8px 11px;
+    }
+}
