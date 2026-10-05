@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
 import pyodbc
 from config import get_db_connection
+import os
+from werkzeug.utils import secure_filename
 
 def produtos_registrar(app):
 
@@ -48,14 +50,38 @@ def produtos_registrar(app):
             descricao = request.form['descricao']
             preco = request.form['preco']
             estoque = request.form['estoque']
-            imagem = request.files['imagem']
             categoriaId = request.form['categoriaId']
+
+            #Recebe o arquivo de imagem enviado pelo formulário
+            imagem = request.files['imagem']
+
+            if imagem and imagem.filename:
+
+                #Garante que o nome do arquivo seja seguro para uso no sistema de arquivos
+                nome_imagem = secure_filename(imagem.filename)
+
+                #Cria a pasta "uploads" dentro da pasta "static" se ela não existir
+                pasta_uploads = os.path.join(app.root_path, 'static/uploads')
+
+
+                #Cria a pasta "uploads" dentro da pasta "static" se ela não existir
+                os.makedirs(pasta_uploads, exist_ok=True)
+
+
+                #Salva a imagem na pasta "uploads" dentro da pasta "static"
+                caminho_imagem = os.path.join(pasta_uploads, nome_imagem)
+
+                imagem.save(caminho_imagem)
+
+            else:
+
+                nome_imagem = None
 
             conn = get_db_connection()
             cursor = conn.cursor()
 
             cursor.execute('INSERT INTO Produtos (Nome, Descricao, Preco, Estoque, Imagem, CategoriaId ) VALUES (?, ?, ?, ?, ?, ?)',
-                           (nome, descricao, preco, estoque, imagem, categoriaId))
+                           (nome, descricao, preco, estoque, nome_imagem, categoriaId))
             
             conn.commit()
             conn.close()
@@ -78,11 +104,10 @@ def produtos_registrar(app):
         conn.close()
         return render_template('listar_html', produto=produto)
     
+    #Rota responsavel por atualizar os produtos cadastrados do vendedor. "atualizar.html"
+    @app.route('/atualizar_produtos/<int:produto_id>', methods=['GET', 'POST'])
+    def atualizar_produtos(produto_id):
 
-    #Rota responsavel para o vendedor atualizar informaçoes do produto. "listar.html"
-    @app.route('/atualizar_produtos/<int:id>', methods=['GET', 'POST'])
-    def atualizar_produtos(id):
-        
         conn = get_db_connection()
         cursor = conn.cursor()
 
@@ -92,21 +117,68 @@ def produtos_registrar(app):
             descricao = request.form['descricao']
             preco = request.form['preco']
             estoque = request.form['estoque']
-            imagem = request.form['imagem']
+            categoriaId = request.form['categoriaId']
 
-            cursor.execute('UPDATE Produtos SET Nome = ?, Descricao = ?, Preco = ?, Estoque = ?, Imagem = ? WHERE Id = ?',
-                           (nome, descricao, preco, estoque, imagem, id))
-            
+            imagem = request.files['imagem']
+
+        # Busca a imagem atual
+            cursor.execute(""" SELECT Imagem
+                               FROM Produtos
+                               WHERE Id = ?
+                               """, (produto_id,))
+
+            produto = cursor.fetchone()
+
+            nome_imagem = produto.Imagem
+
+        # Se uma nova imagem foi selecionada
+            if imagem and imagem.filename:
+
+                nome_imagem = secure_filename(imagem.filename)
+
+                pasta_uploads = os.path.join(app.root_path, 'static','uploads')
+
+                os.makedirs(pasta_uploads, exist_ok=True)
+
+                caminho_imagem = os.path.join(pasta_uploads, nome_imagem)
+
+                imagem.save(caminho_imagem)
+
+        # Atualiza o produto
+            cursor.execute("""
+            UPDATE Produtos
+            SET Nome = ?,
+                Descricao = ?,
+                Preco = ?,
+                Estoque = ?,
+                Imagem = ?,
+                CategoriaId = ?
+            WHERE Id = ?
+        """, (
+            nome,
+            descricao,
+            preco,
+            estoque,
+            nome_imagem,
+            categoriaId,
+            produto_id
+        ))
+
             conn.commit()
             conn.close()
 
-            return redirect(url_for('produtos_admin', id=id))
-        
-        cursor.execute('SELECT * FROM Produtos WHERE Id = ?', (id,))
+            return redirect(url_for('produtos_admin'))
+
+    # Busca os dados atuais do produto
+        cursor.execute("""SELECT * FROM Produtos
+                            WHERE Id = ?
+                            """, (produto_id,))
+
         produte = cursor.fetchone()
 
         conn.close()
-        return render_template('/admin/atualizar.html', produte=produte)
+
+        return render_template('admin/atualizar.html', produte=produte)
 
         
     #Rota responsavel por excluir os produtos "listar.html" 

@@ -1,0 +1,296 @@
+/* ==========================================
+   RESET
+========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   BODY
+========================================== */
+
+body {
+    min-height: 100vh;
+
+    background: #f5f7fa;
+
+    color: #1e293b;
+
+    font-family: 'Roboto', sans-serif;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+}
+
+
+/* ==========================================
+   CONTAINER
+========================================== */
+
+.container {
+    width: 100%;
+    max-width: 700px;
+}
+
+
+/* ==========================================
+   FORMULÁRIO
+========================================== */
+
+.formulario {
+    background: #ffffff;
+
+    padding: 40px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 5px 20px rgba(15, 23, 42, 0.08);
+
+    border: 1px solid #e2e8f0;
+}
+
+
+/* ==========================================
+   TÍTULO
+========================================== */
+
+.formulario h1 {
+    margin-bottom: 7px;
+
+    color: #0f172a;
+
+    font-size: 28px;
+
+    font-weight: 600;
+}
+
+
+.formulario > p {
+    margin-bottom: 30px;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   FORM
+========================================== */
+
+.formulario form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ==========================================
+   LABELS
+========================================== */
+
+.formulario label {
+    margin-bottom: 8px;
+
+    color: #334155;
+
+    font-size: 14px;
+
+    font-weight: 500;
+}
+
+
+/* ==========================================
+   INPUTS
+========================================== */
+
+.formulario input[type="text"],
+.formulario input[type="number"],
+.formulario input[type="file"],
+.formulario textarea,
+.formulario select {
+
+    width: 100%;
+
+    padding: 12px 14px;
+
+    margin-bottom: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    color: #1e293b;
+
+    font-family: 'Roboto', sans-serif;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+
+/* ==========================================
+   FOCO
+========================================== */
+
+.formulario input[type="text"]:focus,
+.formulario input[type="number"]:focus,
+.formulario input[type="file"]:focus,
+.formulario textarea:focus,
+.formulario select:focus {
+
+    border-color: #2563eb;
+
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+
+/* ==========================================
+   TEXTAREA
+========================================== */
+
+.formulario textarea {
+
+    min-height: 120px;
+
+    resize: vertical;
+}
+
+
+/* ==========================================
+   CAMPO DE IMAGEM
+========================================== */
+
+.formulario input[type="file"] {
+
+    padding: 10px;
+
+    background: #f8fafc;
+
+    cursor: pointer;
+}
+
+
+/* ==========================================
+   SELECT
+========================================== */
+
+.formulario select {
+
+    cursor: pointer;
+
+    appearance: auto;
+}
+
+
+/* ==========================================
+   BOTÃO
+========================================== */
+
+.formulario button {
+
+    width: 100%;
+
+    padding: 13px 20px;
+
+    margin-top: 5px;
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-family: 'Roboto', sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: all 0.2s;
+}
+
+
+.formulario button:hover {
+
+    background: #1d4ed8;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 5px 12px rgba(37, 99, 235, 0.20);
+}
+
+
+.formulario button:active {
+
+    transform: translateY(0);
+}
+
+.voltar{
+
+    display: inline-block;
+
+    padding: 10px 20px;
+
+    margin-top: 10px;
+
+    text-decoration: none;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #475569;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    transition: .2s;
+}
+
+.voltar:hover {
+
+    background: #f8fafc;
+
+    border-color: #94a3b8;
+
+    color: #1e293b;
+}
+
+/* ==========================================
+   RESPONSIVIDADE
+========================================== */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 20px 15px;
+    }
+
+    .formulario {
+        padding: 25px 20px;
+    }
+
+    .formulario h1 {
+        font-size: 24px;
+    }
+
+}

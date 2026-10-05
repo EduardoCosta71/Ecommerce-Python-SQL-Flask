@@ -1,174 +1,312 @@
-/* =====================================================
-   EDITAR PRODUTO
-   ===================================================== */
+/* ==========================================
+   PÁGINA ATUALIZAR PRODUTO
+========================================== */
 
-.conteudo {
-    flex: 1;
-    padding: 40px;
-    background: #f5f7fa;
+.container-atualizar {
+    width: 100%;
+    max-width: 950px;
+    margin: 0 auto;
 }
 
 
-/* =====================================================
+/* ==========================================
    TOPO
-   ===================================================== */
+========================================== */
 
-.topo-editar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
+.topo-atualizar {
+    margin-bottom: 30px;
 }
 
-.topo-editar h2 {
+.topo-atualizar h2 {
     font-size: 32px;
     color: #1e293b;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
 }
 
-.topo-editar p {
+.topo-atualizar p {
     color: #64748b;
-}
-
-
-/* =====================================================
-   BOTÃO VOLTAR
-   ===================================================== */
-
-.btn-voltar {
-    background: #f1f5f9;
-    color: #475569;
-    padding: 11px 18px;
-    border-radius: 8px;
     font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.btn-voltar:hover {
-    background: #e2e8f0;
 }
 
 
-/* =====================================================
+/* ==========================================
    FORMULÁRIO
-   ===================================================== */
+========================================== */
 
 .formulario-produto {
     background: white;
-    max-width: 800px;
+
     padding: 30px;
+
     border-radius: 15px;
+
     box-shadow: 0 5px 15px rgba(0, 0, 0, .06);
 }
 
-.campo {
+
+.formulario-produto form {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-bottom: 22px;
 }
 
-.campo label {
-    color: #1e293b;
+
+/* ==========================================
+   LABEL
+========================================== */
+
+.formulario-produto label {
+    margin-bottom: 8px;
+
+    color: #334155;
+
     font-size: 14px;
-    font-weight: 600;
+
+    font-weight: 500;
 }
 
-.campo input,
-.campo textarea {
+
+/* ==========================================
+   CAMPOS
+========================================== */
+
+.formulario-produto input[type="text"],
+.formulario-produto input[type="number"],
+.formulario-produto input[type="file"],
+.formulario-produto textarea,
+.formulario-produto select {
+
     width: 100%;
-    padding: 12px 15px;
+
+    padding: 12px 14px;
+
+    margin-bottom: 20px;
 
     border: 1px solid #cbd5e1;
+
     border-radius: 8px;
+
+    background: white;
+
+    color: #1e293b;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 14px;
 
     outline: none;
 
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
+    transition: .2s;
 
-    transition: 0.3s;
+    box-sizing: border-box;
 }
 
-.campo input:focus,
-.campo textarea:focus {
+
+.formulario-produto input:focus,
+.formulario-produto textarea:focus,
+.formulario-produto select:focus {
+
     border-color: #2563eb;
+
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .10);
 }
 
-.campo textarea {
+
+/* ==========================================
+   TEXTAREA
+========================================== */
+
+.formulario-produto textarea {
     resize: vertical;
+
+    min-height: 120px;
 }
 
 
-/* =====================================================
-   CAMPOS LADO A LADO
-   ===================================================== */
+/* ==========================================
+   IMAGEM ATUAL
+========================================== */
 
-.linha-campos {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
+.imagem-atual {
 
+    width: 180px;
 
-/* =====================================================
-   BOTÕES
-   ===================================================== */
+    height: 180px;
 
-.acoes-formulario {
+    margin-bottom: 20px;
+
     display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 10px;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 10px;
+
+    overflow: hidden;
 }
 
-.btn-cancelar {
-    padding: 11px 18px;
+
+.imagem-atual img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+    padding: 10px;
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   SEM IMAGEM
+========================================== */
+
+.sem-imagem {
+
+    width: 180px;
+
+    height: 100px;
+
+    margin-bottom: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #f8fafc;
+
+    border: 1px dashed #cbd5e1;
+
     border-radius: 8px;
 
-    background: #f1f5f9;
-    color: #475569;
+    color: #64748b;
 
-    font-size: 14px;
-    font-weight: 600;
-
-    text-decoration: none;
-
-    transition: 0.3s;
+    font-size: 13px;
 }
 
-.btn-cancelar:hover {
-    background: #e2e8f0;
+
+/* ==========================================
+   TEXTO AUXILIAR
+========================================== */
+
+.formulario-produto small {
+
+    margin-top: -12px;
+
+    margin-bottom: 22px;
+
+    color: #64748b;
+
+    font-size: 12px;
 }
 
-.btn-salvar {
-    border: none;
+
+/* ==========================================
+   BOTÕES
+========================================== */
+
+.botoes {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding-top: 25px;
+
+    margin-top: 10px;
+
+    border-top: 1px solid #e2e8f0;
+}
+
+
+/* ==========================================
+   VOLTAR
+========================================== */
+
+.btn-voltar {
 
     padding: 11px 18px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #475569;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    transition: .2s;
+}
+
+
+.btn-voltar:hover {
+
+    background: #f8fafc;
+
+    border-color: #94a3b8;
+
+    color: #1e293b;
+}
+
+
+/* ==========================================
+   ATUALIZAR
+========================================== */
+
+.btn-atualizar {
+
+    padding: 11px 20px;
+
+    border: none;
+
     border-radius: 8px;
 
     background: #2563eb;
+
     color: white;
 
     font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
+
+    font-size: 13px;
+
+    font-weight: 500;
 
     cursor: pointer;
 
-    transition: 0.3s;
+    transition: .2s;
 }
 
-.btn-salvar:hover {
+
+.btn-atualizar:hover {
+
     background: #1d4ed8;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 4px 10px rgba(37, 99, 235, .20);
 }
 
 
-/* =====================================================
+/* ==========================================
    RESPONSIVO
-   ===================================================== */
+========================================== */
 
 @media (max-width: 700px) {
 
@@ -176,29 +314,28 @@
         padding: 20px;
     }
 
-    .topo-editar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-    }
-
-    .linha-campos {
-        grid-template-columns: 1fr;
-        gap: 0;
+    .container-atualizar {
+        max-width: 100%;
     }
 
     .formulario-produto {
         padding: 20px;
     }
 
-    .acoes-formulario {
-        flex-direction: column;
+    .topo-atualizar h2 {
+        font-size: 26px;
     }
 
-    .btn-cancelar,
-    .btn-salvar {
+    .botoes {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .btn-voltar,
+    .btn-atualizar {
         width: 100%;
         text-align: center;
+        box-sizing: border-box;
     }
 
 }

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Produto - DuTech</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/produtos.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/produtos_cadastrar.css') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,6 +50,8 @@
             <button type="submit">
                 Cadastrar Produto
             </button>
+
+            <a href="{{ url_for('produtos_admin') }}" class="voltar">Voltar</a>
 
         </form>
 
