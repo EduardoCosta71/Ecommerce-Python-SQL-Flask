@@ -34,5 +34,6 @@ api_cep_registrar(app)
 recuperar_senha_registrar(app)
 
 
+
 if __name__ == '__main__':
     app.run(debug=True)

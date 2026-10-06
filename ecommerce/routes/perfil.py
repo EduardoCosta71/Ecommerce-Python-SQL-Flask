@@ -89,6 +89,8 @@ def perfil_registrar(app):
 
         return render_template('/perfil/perfil_editar_endereco.html', endereco=endereco, endereco_id=endereco_id)
 
+
+
     # Rota responsável por atualizar a senha do usuário
     @app.route('/atualizar_senha', methods=['GET', 'POST'])
     def atualizar_senha():

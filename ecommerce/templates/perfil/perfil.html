@@ -86,6 +86,8 @@
                 <h2>Endereço de entrega</h2>
             </div>
 
+            {% if endereco %}
+
             <div class="informacoes">
 
             
@@ -119,11 +121,17 @@
                     <p>{{ endereco.Estado or 'Não informado' }}</p>
                 </div>
 
-                <a href="/atualizar_perfil_endereco/{{ endereco.Id }}" class="btn-editar">
+                <a href="{{ url_for('atualizar_perfil_endereco', endereco_id=endereco.Id) }}" class="btn-editar">
                     Editar endereço
                 </a>
 
             </div>
+
+            {% else %}
+
+            <p>Endereço não cadastrado.</p>
+
+            {% endif %}
 
         </section>
 
