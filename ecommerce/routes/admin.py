@@ -8,8 +8,57 @@ def admin_registrar(app):
     @app.route('/admin')
     def admin():
 
+        conn = get_db_connection()
 
-        return render_template("admin/dashboard.html")
+        try:
+
+            cursor = conn.cursor()
+
+            #Total de Produtos
+            cursor.execute("SELECT COUNT(*) FROM Produtos")
+            total_produtos = cursor.fetchone()[0]
+
+            #total de pedidos
+            cursor.execute("SELECT COUNT(*) FROM Pedidos")
+            total_pedidos = cursor.fetchone()[0]
+
+            #total de usuarios
+            cursor.execute("SELECT COUNT(*) FROM Usuarios")
+            total_usuarios = cursor.fetchone()[0]
+
+            #total de mensagens recebidas
+            cursor.execute("SELECT COUNT(*) FROM MensagensContato")
+            total_mensagens = cursor.fetchone()[0]
+
+            
+            #Cria os 5 pedidos mais recentes, com o nome do cliente
+            cursor.execute("""
+                                SELECT TOP 5
+                                p.Id,
+                                u.Nome,
+                                p.DataPedido,
+                                p.ValorTotal,
+                                p.Status
+                            FROM Pedidos p
+                            INNER JOIN Usuarios u ON p.UsuarioId = u.Id
+                            ORDER BY p.DataPedido DESC
+                            """)
+
+            pedidos_recentes = cursor.fetchall()
+
+        
+
+            return render_template("admin/dashboard.html",
+                               total_produtos=total_produtos,
+                               total_pedidos=total_pedidos,
+                               total_usuarios=total_usuarios,
+                               total_mensagens=total_mensagens,
+                               pedidos_recentes=pedidos_recentes
+                               )
+
+        finally:
+
+            conn.close()
     
 #-------------------PRODUTOS----------------------------------------------------------------------------------------------------------
 

@@ -1,28 +1,33 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <title>DuTech | Painel Administrativo</title>
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <title>DuTech | Painel Administrativo</title>
 </head>
+
 <body>
 
     <div class="admin-container">
 
-        <!-- Menu lateral -->
+        <!-- MENU LATERAL -->
 
         <aside class="sidebar">
 
             <div class="admin-logo">
-
                 <h1>DuTech</h1>
                 <span>ADMIN</span>
-
             </div>
 
             <nav class="menu-admin">
@@ -51,7 +56,6 @@
                     Mensagens
                 </a>
 
-
             </nav>
 
             <div class="menu-inferior">
@@ -60,7 +64,7 @@
                     Ver Loja
                 </a>
 
-                <a href="#">
+                <a href="/usuarios/logout">
                     Sair
                 </a>
 
@@ -68,31 +72,30 @@
 
         </aside>
 
-        <!-- CONTEUDO -->
+        <!-- CONTEÚDO PRINCIPAL -->
 
         <main class="conteudo">
-            <!--TOPO-->
+
+            <!-- TOPO -->
 
             <header class="topo">
 
                 <div>
-
                     <h2>Dashboard</h2>
-                    <p>Bem-vindo ao painel Administrativo da DuTech</p>
-
+                    <p>Bem-vindo ao painel administrativo da DuTech</p>
                 </div>
 
                 <div class="admin-usuario">
-
                     <span>Administrador</span>
-
                 </div>
 
             </header>
 
-            <!--CARD-->
+            <!-- CARDS DE INDICADORES -->
 
             <section class="cards-dahsboard">
+
+                <!-- PRODUTOS -->
 
                 <div class="card-dashboard">
 
@@ -101,26 +104,28 @@
                     </div>
 
                     <div>
-
                         <p>Produtos</p>
-                        <h3>12</h3>
-
+                        <h3>{{ total_produtos }}</h3>
                     </div>
+
                 </div>
+
+                <!-- PEDIDOS -->
 
                 <div class="card-dashboard">
 
                     <div class="card-icone">
                         Carrinho
                     </div>
-                    
+
                     <div>
-
                         <p>Pedidos</p>
-                        <h3>8</h3>
-
+                        <h3>{{ total_pedidos }}</h3>
                     </div>
+
                 </div>
+
+                <!-- USUÁRIOS -->
 
                 <div class="card-dashboard">
 
@@ -130,10 +135,12 @@
 
                     <div>
                         <p>Usuários</p>
-                        <h3>20</h3>
-
+                        <h3>{{ total_usuarios }}</h3>
                     </div>
+
                 </div>
+
+                <!-- MENSAGENS -->
 
                 <div class="card-dashboard">
 
@@ -142,108 +149,86 @@
                     </div>
 
                     <div>
-
                         <p>Mensagens</p>
-                        <h3>5</h3>
-
+                        <h3>{{ total_mensagens }}</h3>
                     </div>
+
                 </div>
 
             </section>
 
             <!-- PEDIDOS RECENTES -->
 
-        <section class="pedidos-recentes">
+            <section class="pedidos-recentes">
 
-            <div class="titulo-secao">
+                <div class="titulo-secao">
 
-                <h2>Pedidos Recentes</h2>
+                    <h2>Pedidos Recentes</h2>
 
-                <a href="#">
-                    Ver todos →
-                </a>
+                    <a href="{{ url_for('pedidos_admin') }}">
+                        Ver todos →
+                    </a>
 
-            </div>
+                </div>
 
+                <div class="tabela-container">
 
-            <div class="tabela-container">
+                    <table>
 
-                <table>
+                        <thead>
+                            <tr>
+                                <th>Pedido</th>
+                                <th>Cliente</th>
+                                <th>Data</th>
+                                <th>Valor</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                    <thead>
+    {% for pedido in pedidos_recentes %}
+    <tr>
+        <td>#{{ pedido[0] }}</td>
 
-                        <tr>
+        <td>{{ pedido[1] }}</td>
 
-                            <th>Pedido</th>
+        <td>
+            {% if pedido[2] %}
+                {{ pedido[2].strftime('%d/%m/%Y') }}
+            {% else %}
+                -
+            {% endif %}
+        </td>
 
-                            <th>Cliente</th>
+        <td>
+            {{ 'R$ {:,.2f}'.format(pedido[3] or 0).replace(',', 'X').replace('.', ',').replace('X', '.') }}
+        </td>
 
-                            <th>Data</th>
+        <td>
+            <span class="status">
+                {{ pedido[4] or 'Sem status' }}
+            </span>
+        </td>
+    </tr>
 
-                            <th>Valor</th>
+    {% else %}
+    <tr>
+        <td colspan="5">Nenhum pedido cadastrado.</td>
+    </tr>
+    {% endfor %}
 
-                            <th>Status</th>
+</tbody>
 
-                        </tr>
+                    </table>
 
-                    </thead>
+                </div>
 
+            </section>
 
-                    <tbody>
+        </main>
 
-                        <tr>
-
-                            <td>#001</td>
-
-                            <td>Cliente Exemplo</td>
-
-                            <td>09/09/2026</td>
-
-                            <td>R$ 299,90</td>
-
-                            <td>
-                                <span class="status pendente">
-                                    Pendente
-                                </span>
-                            </td>
-
-                        </tr>
-
-
-                        <tr>
-
-                            <td>#002</td>
-
-                            <td>Cliente Exemplo</td>
-
-                            <td>08/09/2026</td>
-
-                            <td>R$ 599,90</td>
-
-                            <td>
-                                <span class="status concluido">
-                                    Concluído
-                                </span>
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </section>
-
-    </main>
-
-</div>
+    </div>
 
 </body>
 
 </html>
-
-
-
-
