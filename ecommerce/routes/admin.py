@@ -191,9 +191,10 @@ def admin_registrar(app):
         cursor = conn.cursor()
 
         if request.method == 'POST':
-            nome_categoria = request.form['nome_categoria']
 
-            cursor.execute('UPDATE Categorias SET Nome = ? WHERE Id = ?', (nome_categoria, categoria_id))
+            nome = request.form['nome']
+
+            cursor.execute('UPDATE Categorias SET Nome = ? WHERE Id = ?', (nome, categoria_id))
             conn.commit()
             conn.close()
 
