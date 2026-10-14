@@ -21,7 +21,10 @@ def admin_registrar(app):
         conn = get_db_connection()
         cursor = conn.cursor()
         
-        cursor.execute('SELECT * FROM Produtos')
+        cursor.execute("""SELECT Id, Nome, Descricao, Preco, Imagem, Estoque
+                          FROM Produtos
+                          WHERE Estoque > 0""")
+        
         produtos = cursor.fetchall()
         
         conn.close()

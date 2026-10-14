@@ -19,7 +19,7 @@ def produtos_registrar(app):
 
        return render_template('/produtos/cadastrar.html')
 
-
+    #Rota responsavel por listar produtos
     @app.route('/produtos')
     def produtos():
 
@@ -31,6 +31,7 @@ def produtos_registrar(app):
                           FROM Produtos
                           WHERE Estoque > 0
                         """)
+        
         produtos = cursor.fetchall()
 
         
