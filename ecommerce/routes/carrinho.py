@@ -4,46 +4,65 @@ from config import get_db_connection
 
 def carrinho_registrar(app):
 
+
     @app.route('/carrinho')
     def carrinho():
 
+        #Rota para o carrinho de compras, onde é feito a busca dos produtos do carrinho e o calculo do total.
         if 'usuario_id' not in session:
             return redirect(url_for('usuarios'))
 
         usuario_id = session['usuario_id']
 
         conn = get_db_connection()
-        cursor = conn.cursor()
 
-        cursor.execute("""
-            SELECT
+        try:
+
+            cursor = conn.cursor()
+
+            cursor.execute("""
+                SELECT
                 IC.Id,
                 P.Nome,
                 P.Descricao,
-                P.Preco,
+                P.Preco AS PrecoOriginal,
+                P.EmPromocao,
+                P.PrecoPromocional,
+
+                CASE
+                    WHEN P.PrecoPromocional = 1 
+                        AND P.PrecoPromocional IS NOT NULL
+                        AND P.PrecoPromocional > 0
+                        AND P.PrecoPromocional < P.Preco
+                    THEN P.PrecoPromocional
+                    ELSE P.Preco
+                END AS Preco,
+
                 P.Imagem,
                 IC.Quantidade
 
-            FROM Carrinhos C
+                FROM Carrinhos AS C
 
-            INNER JOIN ItensCarrinho IC
-                ON C.Id = IC.CarrinhoId
+                INNER JOIN ItensCarrinho IC
+                    ON C.Id = IC.CarrinhoId
 
-            INNER JOIN Produtos P
-                ON P.Id = IC.ProdutoId
+                INNER JOIN Produtos P
+                    ON P.Id = IC.ProdutoId
 
             WHERE C.UsuarioId = ?
         """, (usuario_id,))
 
-        itens = cursor.fetchall() #Busca varias tuplas, mas só pega a primeira, que é o item do carrinho.
 
-        total = 0
+            itens = cursor.fetchall() #Busca varias tuplas, mas só pega a primeira, que é o item do carrinho.
 
-        for item in itens:
-            
-            total += item.Preco * item.Quantidade
+            total = sum(
+            (item.Preco * item.Quantidade for item in itens),
+            0
+        )
+        
+        finally:
 
-        conn.close()
+            conn.close()
 
         return render_template("carrinho/carrinho.html", itens=itens, total=total)
     

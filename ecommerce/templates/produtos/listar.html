@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -8,8 +9,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/produtosDois.css') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
 <header>
@@ -19,9 +22,9 @@
     </div>
 
     <form class="pesquisa" action="/pesquisar" method="get">
-            <input type="text" name="q" placeholder="Pesquisar produtos..." required>
-            <button>Buscar</button>
-        </form>
+        <input type="text" name="q" placeholder="Pesquisar produtos..." required>
+        <button type="submit">Buscar</button>
+    </form>
 
     <div class="usuario">
         <a href="/usuarios/login">Entrar</a>
@@ -31,18 +34,14 @@
 </header>
 
 <nav>
-
     <ul>
-
         <li><a href="/home">Início</a></li>
         <li><a href="/produtos">Produtos</a></li>
         <li><a href="/categorias">Categorias</a></li>
         <li><a href="/ofertas">Ofertas</a></li>
         <li><a href="/contato">Contato</a></li>
-        <li><a href="{{ url_for('meus_pedidos') }}" class="btn"> Meus Pedidos</a></li>
-
+        <li><a href="{{ url_for('meus_pedidos') }}" class="btn">Meus Pedidos</a></li>
     </ul>
-
 </nav>
 
 <section class="topo-produtos">
@@ -56,75 +55,110 @@
 
     <form class="filtros" action="/pesquisar" method="GET">
 
-    <select name="categoria">
+        <select name="categoria">
+            <option value="">Todas categorias</option>
+            <option value="1">Notebooks</option>
+            <option value="2">Celulares</option>
+            <option value="3">Monitores</option>
+            <option value="4">Periféricos</option>
+            <option value="5">Componentes</option>
+        </select>
 
-        <option value="">Todas categorias</option>
-        <option value="1">Notebooks</option>
-        <option value="2">Celulares</option>
-        <option value="3">Monitores</option>
-        <option value="4">Periféricos</option>
-        <option value="5">Componentes</option>
+        <select name="ordenar">
+            <option value="">Ordenar por</option>
+            <option value="menor_preco">Menor preço</option>
+            <option value="maior_preco">Maior preço</option>
+            <option value="mais_vendidos">Mais vendidos</option>
+        </select>
 
-    </select>
+        <button type="submit" class="btn-filtrar">
+            Filtrar
+        </button>
 
-    <select name="ordenar">
+    </form>
 
-        <option value="">Ordenar por</option>
-        <option value="menor_preco">Menor preço</option>
-        <option value="maior_preco">Maior preço</option>
-        <option value="mais_vendidos">Mais vendidos</option>
-
-    </select>
-
-    <button type="submit" class="btn-filtrar">
-        Filtrar
-    </button>
-
-</form>
 </section>
 
 <section class="produtos-grid">
 
-{% for produto in produtos %}
+    {% for produto in produtos %}
 
-<div class="card">
+    <div class="card">
 
-<img src="{{ url_for('static', filename='uploads/' + produto.Imagem) }}" alt="{{ produto.Nome }}">
+        {% if produto.Imagem %}
+            <img
+                src="{{ url_for('static', filename='uploads/' + produto.Imagem) }}"
+                alt="{{ produto.Nome }}"
+            >
+        {% endif %}
 
-<h3>{{ produto.Nome }}</h3>
+        {% if produto.EmPromocao
+              and produto.PrecoPromocional is not none
+              and produto.PrecoPromocional > 0
+              and produto.PrecoPromocional < produto.Preco %}
 
-<p class="descricao">{{ produto.Descricao }}</p>
+            <span class="etiqueta-oferta">OFERTA</span>
 
-<p class="preco">
-R$ {{ "%.2f"|format(produto.Preco) }}
-</p>
+        {% endif %}
 
-<p class="estoque">
-Estoque: {{ produto.Estoque }}
-</p>
+        <h3>{{ produto.Nome }}</h3>
 
-<div class="botoes">
+        <p class="descricao">
+            {{ produto.Descricao }}
+        </p>
 
-<a href="{{ url_for ('adicionar_carrinho', produto_id=produto.Id) }}" class="btn-carrinho">
-    Adicionar ao Carrinho
-</a>
+        {% if produto.EmPromocao
+              and produto.PrecoPromocional is not none
+              and produto.PrecoPromocional > 0
+              and produto.PrecoPromocional < produto.Preco %}
 
-<a href="/produtos/{{ produto.Id }}" class="btn-comprar">
-Comprar
-</a>
+            <p class="preco-antigo">
+                De: R$ {{ "%.2f"|format(produto.Preco)|replace('.', ',') }}
+            </p>
 
-</div>
+            <p class="preco-promocional">
+                Por: R$ {{ "%.2f"|format(produto.PrecoPromocional)|replace('.', ',') }}
+            </p>
 
-</div>
+        {% else %}
 
-{% endfor %}
+            <p class="preco">
+                R$ {{ "%.2f"|format(produto.Preco)|replace('.', ',') }}
+            </p>
+
+        {% endif %}
+
+        <p class="estoque">
+            Estoque: {{ produto.Estoque }}
+        </p>
+
+        <div class="botoes">
+
+            <a href="{{ url_for('adicionar_carrinho', produto_id=produto.Id) }}"
+               class="btn-carrinho">
+                Adicionar ao Carrinho
+            </a>
+
+            <a href="/produtos/{{ produto.Id }}" class="btn-comprar">
+                Comprar
+            </a>
+
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <p class="sem-produtos">
+        Nenhum produto disponível no momento.
+    </p>
+
+    {% endfor %}
 
 </section>
 
 <footer>
-
-<p>© 2026 DuTech - Todos os direitos reservados.</p>
-
+    <p>© 2026 DuTech - Todos os direitos reservados.</p>
 </footer>
 
 </body>

@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DuTech Admin | Configurar Promoção</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/produtos_promocao.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+<div class="admin-container">
+
+    <!-- MENU LATERAL -->
+
+    <aside class="sidebar">
+
+        <div class="admin-logo">
+            <h1>DuTech</h1>
+            <span>ADMIN</span>
+        </div>
+
+        <nav class="menu-admin">
+            <a href="/admin">Dashboard</a>
+            <a href="/produtos_admin" class="ativo">Produtos</a>
+            <a href="/categorias_admin">Categorias</a>
+            <a href="/pedidos_admin">Pedidos</a>
+            <a href="/usuarios_admin">Usuários</a>
+            <a href="/mensagens_admin">Mensagens</a>
+        </nav>
+
+        <div class="menu-inferior">
+            <a href="/home">Ver Loja</a>
+            <a href="/usuarios/logout">Sair</a>
+        </div>
+
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+
+    <main class="conteudo">
+
+        <header class="topo-promocao">
+
+            <div>
+                <h2>Configurar promoção</h2>
+                <p>Defina um preço especial para este produto.</p>
+            </div>
+
+            <a href="{{ url_for('produtos_admin') }}"
+               class="btn-voltar">
+                ← Voltar aos produtos
+            </a>
+
+        </header>
+
+        <!-- FORMULÁRIO -->
+
+        <section class="promocao-container">
+
+            <div class="promocao-cabecalho">
+                <span class="promocao-etiqueta">OFERTA</span>
+                <h3>Produto selecionado</h3>
+                <p>O preço original será mantido no cadastro.</p>
+            </div>
+
+            <div class="produto-selecionado">
+
+                <div class="produto-promocao-imagem">
+
+                    {% if produto[3] %}
+                        <img
+                            src="{{ url_for('static', filename='uploads/' + produto[3]) }}"
+                            alt="{{ produto[1] }}">
+                    {% else %}
+                        <div class="sem-imagem">
+                            Imagem indisponível
+                        </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="produto-promocao-info">
+
+                    <span class="produto-id">
+                        Produto #{{ produto[0] }}
+                    </span>
+
+                    <h3>{{ produto[1] }}</h3>
+
+                    <p class="texto-preco-original">
+                        Preço original
+                    </p>
+
+                    <p class="preco-original">
+                        R$ {{ "%.2f"|format(produto[2]) }}
+                    </p>
+
+                </div>
+
+            </div>
+
+            <form method="POST"
+                  action="{{ url_for('promocao_produto', produto_id=produto[0]) }}"
+                  class="form-promocao">
+
+                <label for="preco_promocional">
+                    Novo preço promocional
+                </label>
+
+                <div class="campo-preco">
+                    <span>R$</span>
+
+                    <input
+                        type="number"
+                        id="preco_promocional"
+                        name="preco_promocional"
+                        min="0.01"
+                        step="0.01"
+                        max="{{ '%.2f'|format(produto[2]) }}"
+                        placeholder="Ex.: 749.90"
+                        required>
+                </div>
+
+                <small>
+                    O preço promocional deve ser menor que
+                    R$ {{ "%.2f"|format(produto[2]) }}.
+                </small>
+
+                <div class="aviso-promocao">
+                    <strong>Atenção:</strong>
+                    confira o valor antes de salvar.
+                    O produto será marcado como promocional.
+                </div>
+
+                <div class="botoes-promocao">
+
+                    <a href="{{ url_for('produtos_admin') }}"
+                       class="btn-cancelar">
+                        Cancelar
+                    </a>
+
+                    <button type="submit" class="btn-salvar">
+                        Salvar promoção
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

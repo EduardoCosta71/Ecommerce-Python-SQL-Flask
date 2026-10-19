@@ -7,6 +7,8 @@ from config import get_db_connection
 
 def usuarios_registrar(app):
 
+    #Funções auxiliares para validação de email e senha
+    
     #Verificações de emails, tipos, senhas etc.
     def validar_email(email):
 
@@ -32,12 +34,15 @@ def usuarios_registrar(app):
 
 
 #================================================================================   
+    #Rota responsavel por fazer logout do usuario.
     @app.route('/usuarios/logout')
     def logout():
 
         session.clear()
 
         return redirect(url_for('home'))  # Redirecionar para a página inicial após o logout
+
+    
 
     #Rota responsavel por verificar cadastro realizado pelo cliente e fazer login.
     @app.route('/usuarios/login', methods=['GET', 'POST'])

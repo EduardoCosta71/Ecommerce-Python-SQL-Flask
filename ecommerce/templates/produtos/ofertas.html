@@ -99,155 +99,75 @@
 
     <!-- Ofertas -->
 
-    <section class="ofertas">
+                
+<!-- Ofertas -->
+<section class="ofertas">
 
-        <h2>Ofertas em Destaque</h2>
+    <h2>Ofertas em Destaque</h2>
 
-        <div class="cards-ofertas">
+    <div class="cards-ofertas">
 
+        {% for produto in produtos %}
 
-            <!-- Oferta 1 -->
+        <div class="card-oferta">
 
-            <div class="card-oferta">
-
-                <div class="etiqueta">
-                    OFERTA
-                </div>
-
-                <div class="imagem-produto">
-
-                    <img src="" alt="Produto em oferta">
-
-                </div>
-
-                <h3>Produto de Tecnologia</h3>
-
-                <p class="descricao">
-                    Produto em destaque da DuTech.
-                </p>
-
-                <p class="preco-antigo">
-                    R$ 599,90
-                </p>
-
-                <p class="preco">
-                    R$ 499,90
-                </p>
-
-                <button>
-                    Ver Produto
-                </button>
-
+            <div class="etiqueta">
+                OFERTA
             </div>
 
-
-            <!-- Oferta 2 -->
-
-            <div class="card-oferta">
-
-                <div class="etiqueta">
-                    OFERTA
-                </div>
-
-                <div class="imagem-produto">
-
-                    <img src="" alt="Produto em oferta">
-
-                </div>
-
-                <h3>Produto de Tecnologia</h3>
-
-                <p class="descricao">
-                    Produto em destaque da DuTech.
-                </p>
-
-                <p class="preco-antigo">
-                    R$ 399,90
-                </p>
-
-                <p class="preco">
-                    R$ 299,90
-                </p>
-
-                <button>
-                    Ver Produto
-                </button>
-
+            <div class="imagem-produto">
+                {% if produto.Imagem %}
+                    <img
+                        src="{{ url_for('static', filename='uploads/' + produto.Imagem) }}"
+                        alt="{{ produto.Nome }}"
+                    >
+                {% else %}
+                    <img
+                        src="{{ url_for('static', filename='img/produto-sem-imagem.png') }}"
+                        alt="Produto sem imagem"
+                    >
+                {% endif %}
             </div>
 
+            <h3>{{ produto.Nome }}</h3>
 
-            <!-- Oferta 3 -->
+            <p class="descricao">
+                {{ produto.Descricao or 'Confira este produto da DuTech.' }}
+            </p>
 
-            <div class="card-oferta">
+            <p class="preco-antigo">
+                De: R$ {{ "%.2f"|format(produto.Preco)|replace('.', ',') }}
+            </p>
 
-                <div class="etiqueta">
-                    OFERTA
-                </div>
+            <p class="preco">
+                Por: R$ {{ "%.2f"|format(produto.PrecoPromocional)|replace('.', ',') }}
+            </p>
 
-                <div class="imagem-produto">
-
-                    <img src="" alt="Produto em oferta">
-
-                </div>
-
-                <h3>Produto de Tecnologia</h3>
-
-                <p class="descricao">
-                    Produto em destaque da DuTech.
-                </p>
-
-                <p class="preco-antigo">
-                    R$ 799,90
-                </p>
-
-                <p class="preco">
-                    R$ 699,90
-                </p>
-
-                <button>
-                    Ver Produto
-                </button>
-
-            </div>
-
-
-            <!-- Oferta 4 -->
-
-            <div class="card-oferta">
-
-                <div class="etiqueta">
-                    OFERTA
-                </div>
-
-                <div class="imagem-produto">
-
-                    <img src="" alt="Produto em oferta">
-
-                </div>
-
-                <h3>Produto de Tecnologia</h3>
-
-                <p class="descricao">
-                    Produto em destaque da DuTech.
-                </p>
-
-                <p class="preco-antigo">
-                    R$ 249,90
-                </p>
-
-                <p class="preco">
-                    R$ 199,90
-                </p>
-
-                <button>
-                    Ver Produto
-                </button>
-
-            </div>
+            <a href="/produtos" class="botao-oferta">
+                Ver Produto
+            </a>
 
         </div>
 
-    </section>
+        {% else %}
+
+        <div class="sem-ofertas">
+            <h3>Nenhuma oferta disponível no momento</h3>
+            <p>
+                Estamos preparando novas ofertas para você.
+                Volte em breve!
+            </p>
+            <a href="/produtos" class="botao-oferta">
+                Ver todos os produtos
+            </a>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
 
 
     <!-- Rodapé -->

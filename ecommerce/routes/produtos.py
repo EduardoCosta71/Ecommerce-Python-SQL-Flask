@@ -6,18 +6,41 @@ from werkzeug.utils import secure_filename
 
 def produtos_registrar(app):
 
-    #Rota para  as ofertas
-    @app.route('/ofertas')
-    def ofertas():  
-            
-        return render_template('/produtos/ofertas.html')
-        
-     
     #Rota para cadastrar o produto
     @app.route('/cadastre')
     def cadastre():
+    
+        return render_template('/produtos/cadastrar.html')
+    
 
-       return render_template('/produtos/cadastrar.html')
+    #Rota para  as ofertas
+    @app.route('/ofertas')
+    def ofertas():  
+
+        conn = get_db_connection()
+
+        try:
+
+            cursor = conn.cursor()
+        
+            cursor.execute(""" SELECT 
+                                Id, Nome, Descricao, Preco, Imagem, Estoque, EmPromocao, PrecoPromocional
+                            FROM Produtos
+                            WHERE Estoque > 0
+                                AND EmPromocao = 1
+                                AND PrecoPromocional IS NOT NULL
+                                AND PrecoPromocional > 0
+                                AND PrecoPromocional < Preco
+                            ORDER BY Nome
+                                    """)
+                    
+            produtos = cursor.fetchall()
+        
+        finally:
+                conn.close()
+            
+        return render_template('/produtos/ofertas.html', produtos=produtos)
+    
 
     #Rota responsavel por listar produtos
     @app.route('/produtos')
@@ -25,21 +48,24 @@ def produtos_registrar(app):
 
         #Listar Produtos
         conn = get_db_connection()
-        cursor = conn.cursor()
 
-        cursor.execute("""SELECT Id, Nome, Descricao, Preco, Imagem, Estoque
+        try: 
+
+            cursor = conn.cursor()
+
+            cursor.execute("""SELECT Id, Nome, Descricao, Preco, Imagem, Estoque, EmPromocao, PrecoPromocional
                           FROM Produtos
                           WHERE Estoque > 0
                         """)
         
-        produtos = cursor.fetchall()
+            produtos = cursor.fetchall()
 
-        
-        conn.close()
+        finally:
+
+            conn.close()
 
         return render_template('/produtos/listar.html', produtos=produtos)
-        
-                    
+
 
     #Rota responsavel por cadastrar os produtos da loja.
     @app.route('/produtos/cadastrar', methods=['GET', 'POST'])
@@ -57,7 +83,7 @@ def produtos_registrar(app):
             imagem = request.files['imagem']
 
             if imagem and imagem.filename:
-
+                
                 #Garante que o nome do arquivo seja seguro para uso no sistema de arquivos
                 nome_imagem = secure_filename(imagem.filename)
 
@@ -91,12 +117,13 @@ def produtos_registrar(app):
         
         return render_template('produtos/cadastrar.html')
     
+    
 
     #Rota responsavel por listar os produtos cadastrados do vendedor. "listar.html"
     @app.route('/consultar_produtos/<int:id>')
     def consultar_produtos(id):
 
-        conn = get_db_connection
+        conn = get_db_connection()
         cursor = conn.cursor()
 
         cursor.execute('SELECT * FROM Produtos WHERE Id = ?', (id,))
@@ -104,6 +131,8 @@ def produtos_registrar(app):
 
         conn.close()
         return render_template('listar_html', produto=produto)
+    
+    
     
     #Rota responsavel por atualizar os produtos cadastrados do vendedor. "atualizar.html"
     @app.route('/atualizar_produtos/<int:produto_id>', methods=['GET', 'POST'])
@@ -217,8 +246,7 @@ def produtos_registrar(app):
         return render_template('/admin/produtos.html')
 
 
-#==================================================
-
+#=================CATEGORIAS HOME======================================================
 
     #Rota para as categorias
     @app.route('/categorias')
@@ -239,8 +267,6 @@ def produtos_registrar(app):
         return render_template('/produtos/categorias.html', categorias=categorias)
 
 
-
-
     # Rota para mostrar os produtos de uma categoria específica
     @app.route('/categoria/<int:categoria_id>')
     def produtos_categoria(categoria_id):
@@ -258,8 +284,9 @@ def produtos_registrar(app):
         conn.close()
 
         return render_template('/produtos/produtos_categoria.html', produtos=produtos)
+    
 
-    #===================================================================================================
+    #==================PESQUISA DE PRODUTOS=================================================================================
 
     #Rota para pesquisar produtos
     @app.route('/pesquisar', methods=['GET'])
@@ -298,9 +325,7 @@ def produtos_registrar(app):
 
         parametros = []
 
-    # ==================================================
     # PESQUISA POR NOME OU DESCRIÇÃO
-    # ==================================================
 
         if query:
 
@@ -315,9 +340,7 @@ def produtos_registrar(app):
             parametros.append('%' + query + '%')
 
 
-    # ==================================================
     # FILTRO POR CATEGORIA
-    # ==================================================
 
         if categoria:
 
@@ -327,10 +350,7 @@ def produtos_registrar(app):
 
             parametros.append(categoria)
 
-
-    # ==================================================
     # ORDENAÇÃO
-    # ==================================================
 
         if ordenar == 'menor_preco':
 
@@ -356,10 +376,7 @@ def produtos_registrar(app):
             ORDER BY p.Id DESC
         """
 
-
-    # ==================================================
     # EXECUTA A CONSULTA DOS PRODUTOS
-    # ==================================================
 
         cursor.execute(sql, parametros)
 

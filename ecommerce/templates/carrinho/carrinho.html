@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -17,12 +18,11 @@
         <h1>DuTech</h1>
     </div>
 
-    <form class="pesquisa">
-        <input type="text" placeholder="Pesquisar produtos...">
-        <button>Buscar</button>
+    <form class="pesquisa" action="/pesquisar" method="get">
+        <input type="text" name="q" placeholder="Pesquisar produtos...">
+        <button type="submit">Buscar</button>
     </form>
 
-    
     <div class="usuario">
         <a href="/perfil">Perfil</a>
         <a href="/usuarios/login">Entrar</a>
@@ -56,7 +56,12 @@
 
             <div class="produto">
 
-                <img src="{{ url_for('static', filename='uploads/' + item.Imagem) }}" alt="{{ item.Nome }}">
+                {% if item.Imagem %}
+                    <img
+                        src="{{ url_for('static', filename='uploads/' + item.Imagem) }}"
+                        alt="{{ item.Nome }}"
+                    >
+                {% endif %}
 
                 <div class="info">
 
@@ -64,7 +69,26 @@
 
                     <p>{{ item.Descricao }}</p>
 
-                    <span>Preço: <strong>R$ {{ "%.2f"|format(item.Preco) }}</strong></span>
+                    {% if item.Preco < item.PrecoOriginal %}
+
+                        <span class="preco-antigo">
+                            De: R$ {{ "%.2f"|format(item.PrecoOriginal)|replace('.', ',') }}
+                        </span>
+
+                        <span class="preco-promocional">
+                            Por: R$ {{ "%.2f"|format(item.Preco)|replace('.', ',') }}
+                        </span>
+
+                    {% else %}
+
+                        <span>
+                            Preço:
+                            <strong>
+                                R$ {{ "%.2f"|format(item.Preco)|replace('.', ',') }}
+                            </strong>
+                        </span>
+
+                    {% endif %}
 
                 </div>
 
@@ -81,21 +105,27 @@
                 <div class="subtotal">
 
                     <strong>
-
-                        R$ {{ "%.2f"|format(item.Preco * item.Quantidade) }}
-
+                        R$ {{ "%.2f"|format(item.Preco * item.Quantidade)|replace('.', ',') }}
                     </strong>
 
                 </div>
 
                 <div class="remover">
 
-                    <a href="/carrinho/remover/{{ item.Id }}">
+                    <a href="/carrinho/remover/{{ item.Id }}" aria-label="Remover produto">
                         🗑️
                     </a>
 
                 </div>
 
+            </div>
+
+            {% else %}
+
+            <div class="carrinho-vazio">
+                <h3>Seu carrinho está vazio</h3>
+                <p>Explore nossos produtos e encontre sua próxima compra!</p>
+                <a href="/produtos" class="btn-continuar">Ver produtos</a>
             </div>
 
             {% endfor %}
@@ -110,18 +140,14 @@
 
             <p>Total de Produtos</p>
 
-            <h2>R$ {{ "%.2f"|format(total) }}</h2>
+            <h2>R$ {{ "%.2f"|format(total)|replace('.', ',') }}</h2>
 
             <a href="/checkout" class="btn-finalizar">
-
                 Finalizar Compra
-
             </a>
 
             <a href="/produtos" class="btn-continuar">
-
                 Continuar Comprando
-
             </a>
 
         </div>
@@ -131,9 +157,7 @@
 </div>
 
 <footer>
-
     <p>© 2026 DuTech - Todos os direitos reservados.</p>
-
 </footer>
 
 </body>

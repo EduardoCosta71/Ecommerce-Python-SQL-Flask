@@ -70,7 +70,7 @@ def admin_registrar(app):
         conn = get_db_connection()
         cursor = conn.cursor()
         
-        cursor.execute("""SELECT Id, Nome, Descricao, Preco, Imagem, Estoque
+        cursor.execute("""SELECT Id, Nome, Descricao, Preco, Imagem, Estoque, EmPromocao, PrecoPromocional
                           FROM Produtos
                           WHERE Estoque > 0""")
         
@@ -79,6 +79,7 @@ def admin_registrar(app):
         conn.close()
         
         return render_template('/admin/produtos.html', produtos=produtos)
+
 
 
     #Rota para ver pedidos no admin, para o admin poder visualizar os pedidos feitos pelos clientes.
@@ -99,6 +100,7 @@ def admin_registrar(app):
         conn.close()
 
         return render_template("admin/pedidos_admin.html", pedidos=pedidos)
+
 
     # Rota para ver os detalhes de um pedido no admin
     @app.route('/pedido_admin_detalhes/<int:pedido_id>')

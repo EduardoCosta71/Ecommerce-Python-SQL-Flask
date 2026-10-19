@@ -1,237 +1,195 @@
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>DuTech Admin | Produtos</title>
 
-    <!-- CSS principal do Admin -->
     <link rel="stylesheet"
-        href="{{ url_for('static', filename='css/dashboard.css') }}">
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
 
-    <!-- CSS somente da página de produtos -->
     <link rel="stylesheet"
-        href="{{ url_for('static', filename='css/produtos_admin.css') }}">
-    
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          href="{{ url_for('static', filename='css/produtos_admin.css') }}">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
 </head>
 
 <body>
 
 <div class="admin-container">
 
-
-    <!-- =====================================================
-         MENU LATERAL
-    ====================================================== -->
+    <!-- MENU LATERAL -->
 
     <aside class="sidebar">
 
         <div class="admin-logo">
-
             <h1>DuTech</h1>
-
             <span>ADMIN</span>
-
         </div>
 
-
         <nav class="menu-admin">
-
-            <a href="/admin">
-                Dashboard
-            </a>
-
-            <a href="/produtos_admin" class="ativo">
-                Produtos
-            </a>
-
-            <a href="/categorias_admin">
-                Categorias
-            </a>
-
-            <a href="/pedidos_admin">
-                Pedidos
-            </a>
-
-            <a href="/usuarios_admin">
-                Usuários
-            </a>
-
-            <a href="/mensagens_admin">
-                Mensagens
-            </a>
-
+            <a href="/admin">Dashboard</a>
+            <a href="/produtos_admin" class="ativo">Produtos</a>
+            <a href="/categorias_admin">Categorias</a>
+            <a href="/pedidos_admin">Pedidos</a>
+            <a href="/usuarios_admin">Usuários</a>
+            <a href="/mensagens_admin">Mensagens</a>
         </nav>
 
-
         <div class="menu-inferior">
-
-            <a href="/home">
-                Ver Loja
-            </a>
-
-            <a href="/usuarios/logout">
-                Sair
-            </a>
-
+            <a href="/home">Ver Loja</a>
+            <a href="/usuarios/logout">Sair</a>
         </div>
 
     </aside>
 
-
-
-    <!-- =====================================================
-         CONTEÚDO PRINCIPAL
-    ====================================================== -->
+    <!-- CONTEÚDO PRINCIPAL -->
 
     <main class="conteudo">
 
-
-        <!-- CABEÇALHO -->
-
-        <div class="topo-produtos">
+        <header class="topo-produtos">
 
             <div>
-
                 <h2>Produtos</h2>
-
-                <p>
-                    Gerencie os produtos cadastrados na DuTech.
-                </p>
-
+                <p>Gerencie os produtos cadastrados na DuTech.</p>
             </div>
-
 
             <a href="/produtos/cadastrar" class="btn-novo">
                 + Novo Produto
             </a>
 
-        </div>
+        </header>
 
-
-
-        <!-- =================================================
-             LISTAGEM DOS PRODUTOS
-        ================================================== -->
+        <!-- LISTAGEM DE PRODUTOS -->
 
         <section class="lista-produtos">
 
-
             {% if produtos %}
-
 
             <div class="produtos-admin-grid">
 
-
                 {% for produto in produtos %}
 
-
-                <!-- CARD DO PRODUTO -->
-
                 <div class="produto-admin-card">
-
 
                     <!-- IMAGEM -->
 
                     <div class="produto-imagem">
 
+                        {% if produto.Imagem %}
                         <img
                             src="{{ url_for('static', filename='uploads/' + produto.Imagem) }}"
                             alt="{{ produto.Nome }}"
                         >
+                        {% else %}
+                        <div class="imagem-indisponivel">
+                            Imagem indisponível
+                        </div>
+                        {% endif %}
 
                     </div>
-
-
 
                     <!-- INFORMAÇÕES -->
 
                     <div class="produto-info">
 
-                        <h3>
-                            {{ produto.Nome }}
-                        </h3>
-
+                        <h3>{{ produto.Nome }}</h3>
 
                         <p class="descricao">
-
                             {{ produto.Descricao }}
-
                         </p>
 
+                        {% if produto.EmPromocao and produto.PrecoPromocional is not none %}
 
-                        <p class="preco">
+                            <span class="selo-promocao">
+                                EM PROMOÇÃO
+                            </span>
 
-                            R$ {{ "%.2f"|format(produto.Preco) }}
+                            <p class="preco-original">
+                                De: R$ {{ "%.2f"|format(produto.Preco) }}
+                            </p>
 
-                        </p>
+                            <p class="preco preco-promocional">
+                                Por: R$ {{ "%.2f"|format(produto.PrecoPromocional) }}
+                            </p>
 
+                        {% else %}
+
+                            <p class="preco">
+                                R$ {{ "%.2f"|format(produto.Preco) }}
+                            </p>
+
+                        {% endif %}
 
                         <p class="estoque">
-
                             <span>Estoque:</span>
                             {{ produto.Estoque }}
-
                         </p>
 
                     </div>
-
-
 
                     <!-- AÇÕES -->
 
                     <div class="acoes-produto">
 
-
                         <a
                             href="/atualizar_produtos/{{ produto.Id }}"
-                            class="btn-editar"
-                        >
+                            class="btn-editar">
                             Editar
                         </a>
-
 
                         <a
                             href="/excluir_produto/{{ produto.Id }}"
                             class="btn-excluir"
-                            onclick="return confirm('Deseja realmente excluir este produto?')"
-                        >
+                            onclick="return confirm('Deseja realmente excluir este produto?')">
                             Excluir
                         </a>
 
+                        {% if produto.EmPromocao %}
+
+                            <form
+                                method="POST"
+                                action="{{ url_for('retirar_promocao', produto_id=produto.Id) }}"
+                                onsubmit="return confirm('Deseja retirar este produto da promoção?')">
+
+                                <button type="submit" class="btn-retirar-promocao">
+                                    Retirar promoção
+                                </button>
+
+                            </form>
+
+                        {% else %}
+
+                            <a
+                                href="{{ url_for('promocao_produto', produto_id=produto.Id) }}"
+                                class="btn-promocao">
+                                Colocar em promoção
+                            </a>
+
+                        {% endif %}
 
                     </div>
 
-
                 </div>
-
 
                 {% endfor %}
 
-
             </div>
 
-
             {% else %}
-
-
-            <!-- CASO NÃO EXISTAM PRODUTOS -->
 
             <div class="sem-produtos">
 
                 <h3>Nenhum produto encontrado</h3>
 
-                <p>
-                    Ainda não existem produtos cadastrados.
-                </p>
+                <p>Ainda não existem produtos disponíveis em estoque.</p>
 
                 <a href="/produtos/cadastrar" class="btn-novo">
                     + Cadastrar Produto
@@ -239,18 +197,13 @@
 
             </div>
 
-
             {% endif %}
-
 
         </section>
 
-
     </main>
-
 
 </div>
 
 </body>
-
 </html>

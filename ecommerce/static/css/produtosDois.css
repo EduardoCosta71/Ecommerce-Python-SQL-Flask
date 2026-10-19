@@ -173,3 +173,42 @@ footer{
     cursor: pointer;
     transition: .3s;
 }
+
+
+/* Preço original riscado */
+.preco-antigo {
+    color: #777;
+    font-size: 14px;
+    text-decoration: line-through;
+    margin: 10px 0 3px;
+}
+
+/* Preço promocional */
+.preco-promocional {
+    color: #dc2626;
+    font-size: 21px;
+    font-weight: 700;
+    margin: 3px 0 12px;
+}
+
+/* Etiqueta de oferta */
+.etiqueta-oferta {
+    display: inline-block;
+    width: fit-content;
+    background-color: #dc2626;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 8px 0;
+}
+
+/* Mensagem quando não existem produtos */
+.sem-produtos {
+    width: 100%;
+    text-align: center;
+    color: #64748b;
+    padding: 40px 20px;
+}
+
